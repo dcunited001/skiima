@@ -5,7 +5,13 @@ module Skiima
 
       desc "Sets up Skiima and configuration YAML files.  Creates migration file."
 
+      def copy_skiima_config
+        copy_file "../../config/skiima.yml", "config/skiima.en.yml"
+      end
 
+      def copy_locale
+        copy_file "../../config/locales/en.yml", "config/locales/skiima.en.yml"
+      end
 
       def notes
         puts <<-END

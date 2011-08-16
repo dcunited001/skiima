@@ -1,6 +1,5 @@
 require 'bundler/gem_tasks'
-
-
+require 'rdoc/task'
 
 
 desc 'Generate documentation for Skiima.'

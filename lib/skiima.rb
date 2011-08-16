@@ -22,6 +22,11 @@ module Skiima
   mattr_accessor :skiima_config
   @@skiima_config = {}
 
+  mattr_accessor :database_config
+  @@database_config = {}
+
+  mattr_accessor :locale
+  @@locale = {}
 end
 
 #require 'rails'
