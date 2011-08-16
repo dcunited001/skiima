@@ -3,11 +3,14 @@ require "skiima/version"
 # REQUIRES HERE
 
 module Skiima
-  autoload :Base, 'skiima/loader_base'
+  autoload :LoaderBase, 'skiima/loader_base'
   autoload :Runner, 'skiima/runner'
 
   module DbAdapter
-    autoload :
+    autoload :Base, 'skiima/db_adapter/base'
+    autoload :Sqlserver, 'skiima/db_adapter/sqlserver'
+    autoload :Mysql, 'skiima/db_adapter/mysql'
+    autoload :Postgresql, 'skiima/db_adapter/postgresql'
   end
 
   mattr_accessor :debug
