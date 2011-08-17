@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["David Conner"]
   s.email       = ["dconner.pro@gmail.com"]
   s.homepage    = "http://github.com/dcunited001/skiima"
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{A SQL object manager for Rails projects}
+  s.description = %q{Skiima helps to manage SQL objects like views and functions}
 
   s.rubyforge_project = "skiima"
 
@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_development_dependency "rspec", "~> 2"
+  s.add_development_dependency "rails", "~> 3"
 end
 

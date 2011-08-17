@@ -1,6 +1,6 @@
 module Skiima
   module Generators
-    class InstallGenerator
+    class InstallGenerator < Rails::Generators::Base
       include Rails::Generators::Migration
 
       desc "Sets up Skiima and configuration YAML files.  Creates migration file."
