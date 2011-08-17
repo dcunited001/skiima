@@ -24,6 +24,10 @@ module Skiima
         migration_template 'migration.rb', 'db/migrate/create_skiima.rb'
       end
 
+      def copy_initializer
+        copy_file 'skiima.rb', 'config/initializers/skiima.rb'
+      end
+
       def some_notes
         puts <<-END
 ==================================================
