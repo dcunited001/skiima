@@ -2,8 +2,11 @@ options:
   sql_scripts: db_adapter/skiima
   depends: depends.yml
   locales: config/locales/skiima.en.yml
-classes:
-  friend:
-  team_member: team_member.rb
+
+# need to describe interface
+#
+#classes:
+#  friend:
+#  team_member: team_member.rb
 
 

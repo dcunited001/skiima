@@ -19,6 +19,9 @@ module Skiima
   mattr_accessor :skiima_config_file
   @@skiima_config_file = 'config/skiima.yml'
 
+  mattr_accessor :database_config_file
+  @@database_config_file = 'config/database.yml'
+
   mattr_accessor :skiima_config
   @@skiima_config = {}
 
