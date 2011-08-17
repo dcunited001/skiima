@@ -1,14 +1,14 @@
 module Skiima
   class LoaderConfig
-    def read_config
+    def self.read_config
 
     end
 
-    def read_dependencies
+    def self.read_dependencies
 
     end
 
-    def read_locale
+    def self.read_locale
 
     end
   end

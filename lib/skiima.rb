@@ -16,11 +16,28 @@ module Skiima
   mattr_accessor :debug
   @@debug = true
 
-  mattr_accessor :skiima_config_file
-  @@skiima_config_file = 'config/skiima.yml'
+  #============================================================
+  # Config locations
+  #============================================================
 
-  mattr_accessor :database_config_file
-  @@database_config_file = 'config/database.yml'
+  mattr_accessor :skiima_location
+  @@skiima_location = 'db/skiima'
+
+  mattr_accessor :skiima_config_location
+  @@skiima_config_location = "#{skiima_location}skiima.yml"
+
+  mattr_accessor :depends_config_location
+  @@depends_config_location = "#{skiima_location}depends.yml"
+
+  mattr_accessor :database_config_location
+  @@database_config_location = 'config/database.yml'
+
+  mattr_accessor :locale_location
+  @@locale_location = 'config/locale'
+
+  #============================================================
+  # Config options
+  #============================================================
 
   mattr_accessor :skiima_config
   @@skiima_config = {}
@@ -29,7 +46,11 @@ module Skiima
   @@database_config = {}
 
   mattr_accessor :locale
-  @@locale = {}
+  @@locale = :en
+
+  def self.setup
+    yield self
+  end
 end
 
 #require 'rails'

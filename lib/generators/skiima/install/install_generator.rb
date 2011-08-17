@@ -5,45 +5,33 @@ module Skiima
     class InstallGenerator < Rails::Generators::Base
       include Rails::Generators::Migration
 
-      SKIIMA_DIR_LOC = 'db/skiima'
-      SKIIMA_DIR_EXISTS = "Skiima directory already exists at #{SKIIMA_DIR_LOC}"
-      SKIIMA_DIR_CREATE = "Creating Skiima Directory at #{SKIIMA_DIR_LOC}"
-      SKIIMA_DIR_ERROR = "Errors Creating Skiima Directory at #{SKIIMA_DIR_LOC}"
-
-      desc "Sets up Skiima and configuration YAML files.  Creates migration file."
-      source_root(File.expand_path('../templates', __FILE__))
-
+      desc "Sets up Skiima and configuration YAML files.  Creates migration file for SQL objects that runs after all other migrations."
+      source_root(File.expand_path('../../templates', __FILE__))
 
       def create_skiima_directory
-        if File.exists?(SKIIMA_DIR_LOC)
-          puts SKIIMA_DIR_EXISTS
-        else
-          begin
-            puts SKIIMA_DIR_CREATE
-            mkdir 'db/skiima'
-          rescue
-            puts SKIIMA_DIR_ERROR
-            puts $!
-          end
-        end
-      end
-
-      def copy_depends_config
-        template "depends.yml", "config/depends.yml"
+        empty_directory Skiima.skiima_location
       end
 
       def copy_skiima_config
-        template "skiima.yml", "config/skiima.yml"
+        template "skiima.yml", File.join(Skiima.skiima_location, 'skiima.yml')
       end
 
       def copy_locale
-        copy_file "../../../../config/locales/en.yml", "config/locales/skiima.en.yml"
+        copy_file "locales/en.yml", File.join(Skiima.locale_location, 'skiima.en.yml')
       end
 
-      def notes
+      def copy_migration
+        migration_template 'migration.rb', 'db/migrate/create_skiima.rb'
+      end
+
+      def some_notes
         puts <<-END
 ==================================================
 Skiima has been succesfully installed!
+
+Next, you need to configure the classes in config/skiima.yml
+    And then run `rails generate skiima:depends`
+    View config/skiima.yml for Exemplia Gratis
 
 Please note that Skiima is in its very early stages.
     Also, this is my first gem.

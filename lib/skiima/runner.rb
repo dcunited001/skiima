@@ -1,20 +1,23 @@
 module Skiima
   class Runner
 
-    # process:
-    #load data from depends.yml
-    #load data from skiima.yml
-    #load data from database.yml
-    #load data from depends.yml
+    attr_accessor :db_adapter
+    db_adapter = DbAdapter::Postgresql.new
 
-    #pick database adapters based on environment and database.yml options
+    def create_sql_objects
+      # database.yml - load the config for the necessary environment
+        #pick database adapters based on environment and database.yml options
+      # skiima.yml - load Skiima options
+      # depends.yml - get the proper dependency load order
 
-    #read dependencies into data structure from depends.yml
+    end
 
+    def drop_sql_objects
+      # database.yml - load the config for the necessary environment
+      # skiima.yml - load Skiima options
+      # depends.yml - get the proper dependency load order (and reverse it)
 
-
-
-
+    end
 
   end
 end
