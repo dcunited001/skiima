@@ -2,7 +2,6 @@
 #  friend:
 #  team_member: team_member.rb
 #
-#
 #   you'll need to describe the classes
 #     that you want skiima to manage here
 #
@@ -26,7 +25,7 @@
 #
 
 options:
-  cant: really think of anything right now
+  load_order: sequential  # future options may include 'intelligent'
 classes:
 
 

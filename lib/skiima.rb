@@ -1,16 +1,15 @@
 require "skiima/version"
 
-# REQUIRES HERE
-
 module Skiima
   autoload :LoaderBase, 'skiima/loader_base'
+  autoload :LoaderConfig, 'skiima/loader_config'
   autoload :Runner, 'skiima/runner'
 
   module DbAdapter
     autoload :Base, 'skiima/db_adapter/base'
-    autoload :Sqlserver, 'skiima/db_adapter/sqlserver'
     autoload :Mysql, 'skiima/db_adapter/mysql'
     autoload :Postgresql, 'skiima/db_adapter/postgresql'
+    autoload :Sqlserver, 'skiima/db_adapter/sqlserver'
   end
 
   mattr_accessor :debug
@@ -39,11 +38,8 @@ module Skiima
   # Config options
   #============================================================
 
-  mattr_accessor :skiima_config
-  @@skiima_config = {}
-
-  mattr_accessor :database_config
-  @@database_config = {}
+  mattr_accessor :load_order
+  @@load_order = :sequential
 
   mattr_accessor :locale
   @@locale = :en

@@ -7,11 +7,6 @@ Skiima.setup do |config|
   #   config.skiima_config_location = 'db/skiima/skiima.yml'
   #   config.depends_config_location = 'db/skiima/depends.yml'
   #   config.database_config_location = 'config/database.yml'
-
-  # ===> Locale Configuration:
   #   config.locale_location = 'config/locale'
-  #   config.locale = :en
-
-
 
 end
