@@ -1,9 +1,12 @@
 require "skiima/version"
 
 module Skiima
-  autoload :LoaderBase, 'skiima/loader_base'
   autoload :LoaderConfig, 'skiima/loader_config'
   autoload :Runner, 'skiima/runner'
+
+  module Loader
+    autoload :Base, 'skiima/loader/base'
+  end
 
   module DbAdapter
     autoload :Base, 'skiima/db_adapter/base'
@@ -28,50 +31,96 @@ module Skiima
   #============================================================
   # Config locations
   #============================================================
-
-  mattr_accessor :skiima_location
-  @@skiima_location = 'db/skiima'
-
-  mattr_accessor :skiima_config_location
-  @@skiima_config_location = "#{skiima_location}skiima.yml"
-
-  mattr_accessor :depends_config_location
-  @@depends_config_location = "#{skiima_location}depends.yml"
-
-  mattr_accessor :database_config_location
-  @@database_config_location = 'config/database.yml'
-
-  mattr_accessor :locale_location
-  @@locale_location = 'config/locale'
+  mattr_accessor :project_root, 'specify/in/config/block'  #must be overridden (need a better way to do this)
+  mattr_accessor :skiima_path, 'db/skiima'
+  mattr_accessor :skiima_config_file, 'skiima.yml'
+  mattr_accessor :depends_config_file, 'depends.yml'
+  mattr_accessor :database_config_path, 'config/database.yml'
+  mattr_accessor :locale_path, 'config/locales'
 
   #============================================================
   # Config options
   #============================================================
+  #not sure of the best way to abstract this for Multiple ORM's
+  #   or whether there's even a need for that
+  #mattr_accessor :orm, :active_record
 
-  mattr_accessor :load_order
-  @@load_order = :sequential
-
-  mattr_accessor :locale
-  @@locale = :en
-
-  mattr_accessor :debug
-  @@debug = false
+  mattr_accessor :load_order, :sequential
+  mattr_accessor :locale, :en
+  mattr_accessor :debug, false
 
   #============================================================
-  # Supported Databases
+  # Supported Databases & Objects
+  #     (can be overridden in config block)
   #============================================================
 
   mattr_accessor :supported_databases
   @@supported_databases = [:mysql, :postgresql, :sqlserver]
 
-  #============================================================
-  # Supported Database Objects
-  #============================================================
-
   mattr_accessor :supported_objects
-  @@supported_objects = {}  #loaded from skiima.yml
+  @@supported_objects = {
+    :mysql => [:table, :view, :index, :function, :trigger],
+    :postgresql => [:table, :view, :index, :function, :rule, :trigger],
+    :sqlserver => [:table, :view, :index, :function, :sp, :trigger]
+  }
 
   def self.setup
     yield self
+  end
+
+  #============================================================
+  # Active Record Models
+  #============================================================
+  #mattr_accessor :model_classes
+  #@@model_classes = []
+
+  #============================================================
+  # Loader Classes
+  #============================================================
+  mattr_accessor :loader_classes, []
+  mattr_accessor :loader_depends, {}
+
+  #============================================================
+  # Accessors for full paths
+  #============================================================
+  def self.skiima_path
+    File.join(project_root, class_variable_get(:@@skiima_path))
+  end
+
+  def self.skiima_config_file
+    File.join(skiima_path, class_variable_get(:@@skiima_config_file))
+  end
+
+  def self.depends_config_file
+    File.join(skiima_path, class_variable_get(:@@depends_config_file))
+  end
+
+  def self.database_config_path
+    File.join(project_root, class_variable_get(:@@database_config_path))
+  end
+
+  def self.locale_path
+    File.join(project_root, class_variable_get(:@@locale_path))
+  end
+
+  def self.locale_file
+    File.join(locale_path, "skiima.#{locale.to_s}.yml")
+  end
+
+  #============================================================
+  # Other accessors
+  #============================================================
+  def supported_object_classes(db_adapter)
+    sql_object_subclasses =
+    @@supported_objects[db_adapter].each do |obj|
+      # here i need to get a list of the actual classes
+    end
+  end
+
+  #============================================================
+  # Error output when debug mode is on
+  #============================================================
+  def self.puts(str)
+    puts str if debug
   end
 end

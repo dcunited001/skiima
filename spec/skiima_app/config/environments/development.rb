@@ -1,4 +1,26 @@
 SkiimaApp::Application.configure do
+  Skiima.setup do |config|
+    config.project_root = Rails.root
+    config.skiima_path = 'db/skiima'
+
+    # ===> Configuration File Locations
+    #   config.skiima_config_file = 'skiima.yml'
+    #   config.depends_config_file = 'depends.yml'
+    #   config.database_config_path = 'config/database.yml'
+    #   config.locale_path = 'config/locale'
+
+    # ===> Supported Databases and Objects
+    #   (must implement custom adapters and db objects)
+    #
+    #   config.supported_databases = [:mysql, :postgresql, :sqlserver]
+    #
+    #   config.supported_objects = {
+    #     :mysql => [:table, :view, :index, :function, :trigger],
+    #     :postgresql => [:table, :view, :index, :function, :rule, :trigger],
+    #     :sqlserver => [:table, :view, :index, :function, :sp, :trigger]
+    #   }
+  end
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on

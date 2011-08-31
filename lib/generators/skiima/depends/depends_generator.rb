@@ -7,7 +7,7 @@ module Skiima
 
       def create_depends_config
         # For now, template
-        template "depends.yml", File.join(Skiima.skiima_location, 'depends.yml')
+        template "depends.yml", File.join(Skiima.skiima_path, 'depends.yml')
       end
 
       def create_depends_files

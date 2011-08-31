@@ -2,6 +2,11 @@ module Skiima
   module SqlObject
     class Base
       attr_accessor :object_name
+      attr_accessor :script_name
+
+      def initialize(options = {})
+
+      end
 
       def get_file_name
         "#{relative_name}_#{@object_name}.sql"

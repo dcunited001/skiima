@@ -26,31 +26,30 @@
 
 options:
   load_order: sequential  # future options may include 'intelligent'
-  debug: true
-classes:
+  #debug: true
 
-supported_objects:
-  mysql:
-    - table
-    - view
-    - function
-    - trigger
-    - index
-  postgresql:
-    - table
-    - view
-    - function
-    - trigger
-    - index
-    - rule
-  sqlserver:
-    - table
-    - view
-    - function
-    - trigger
-    - index
-    - sp
-
+#supported_objects:
+#  mysql:
+#    - table
+#    - view
+#    - function
+#    - trigger
+#    - index
+#  postgresql:
+#    - table
+#    - view
+#    - function
+#    - trigger
+#    - index
+#    - rule
+#  sqlserver:
+#    - table
+#    - view
+#    - function
+#    - trigger
+#    - index
+#    - sp
+#
 
 
 

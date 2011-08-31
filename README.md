@@ -18,7 +18,7 @@ Right now Skiima is configured to test with RSpec, but I'm looking into MiniTest
     * This does several things:
         * Adds the Skiima.rb Initializer to config/initializers
         * Creates the db/skiima folder, where your sql scripts will reside
-        * Creates the db/skiima/skiima.yml file, which contains configuration options
+        * Creates the skiima.yml file, which contains configuration options
         * Adds the en.yml locale file to config/locales/skiima.en.yml
         * And this adds a migration that is scheduled to run last
             * You can also break this up into several migrations if you want

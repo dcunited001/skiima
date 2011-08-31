@@ -9,15 +9,15 @@ module Skiima
       source_root(File.expand_path('../../templates', __FILE__))
 
       def create_skiima_directory
-        empty_directory Skiima.skiima_location
+        empty_directory Skiima.skiima_path
       end
 
       def copy_skiima_config
-        template "skiima.yml", File.join(Skiima.skiima_location, 'skiima.yml')
+        template "skiima.yml", File.join(Skiima.skiima_path, 'skiima.yml')
       end
 
       def copy_locale
-        copy_file "locales/en.yml", File.join(Skiima.locale_location, 'skiima.en.yml')
+        copy_file "locales/en.yml", File.join(Skiima.locale_path, 'skiima.en.yml')
       end
 
       def copy_migration

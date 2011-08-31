@@ -2,9 +2,9 @@
 #
 #
 # Example of default load orders:
-# Friend:
-# TeamMember:
-# TeamMate:
+# friends:
+# team_members:
+# team_mates:
 #
 # Specifying the above, with no children SQL objects
 #   will load your objects in the default order
@@ -15,12 +15,12 @@
 #   configuration folders: ( ????? )
 #
 # Examples of more complicated load orders:
-# Friend:
+# friends:
 #   view_friends:
 #     rule_view_friends_delete:
 #     rule_view_friends_insert:
-# TeamMember:
-# TeamMate:
+# team_members:
+# team_mates:
 #   view_team_mates:
 #   rule_view_team_members_delete:
 #
@@ -34,3 +34,13 @@
 #   - NoSQL (maybe)
 #   - more complicated load orders
 #   - conditional load orders (GTFO!)
+
+friends:
+  view_friends:
+  rule_view_friends_delete:
+  rule_view_friends_insert:
+team_members:
+team_mates:
+  view_team_mates:
+  rule_view_team_mates_insert:
+  rule_view_team_mates_delete:
