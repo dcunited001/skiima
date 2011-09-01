@@ -40,7 +40,7 @@ module Skiima
         #Regexp.new("(#{relative_name.underscore})_([:alnum:]).sql")
         script_name_split = @script_name.split('_', 2)
 
-        data[:object_type] = script_name_split[0]
+        data[:object_type] = script_name_split[0].to_sym
         name = script_name_split[1]
 
         if (name =~ /(.*).sql/)

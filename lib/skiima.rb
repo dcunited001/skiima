@@ -22,6 +22,10 @@ module Skiima
   require 'skiima/sql_object/rule'
   require 'skiima/sql_object/trigger'
 
+  autoload :Dependency, 'skiima/dependency/reader'
+  require 'skiima/dependency/sequential'
+  require 'skiima/dependency/tree'
+
   #not sure why this didn't work.
   #Dir[File.join('skiima', 'db_adapter', '**')].each { |rb| require rb if rb != 'base.rb'}
   #Dir[File.join('skiima', 'loader', '**')].each { |rb| require rb if rb != 'base.rb' }

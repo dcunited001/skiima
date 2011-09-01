@@ -11,8 +11,14 @@ module Skiima
         @object_types_order = options[:object_types_order]
       end
 
-      def get_load_order
+      def get_load_order(sql_objects)
         raise "Implement Dependency::Reader"
+      end
+
+      private
+
+      def self.sort_objects(sql_objects)
+        sql_objects.sort {|a,b| @object_types_order.index(b.object_type) <=> @object_types_order.index(a.object_type) }
       end
     end
   end
