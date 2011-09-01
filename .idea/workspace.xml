@@ -2,26 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2eaded5-c6ce-4f13-b66f-751db215d557" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/skiima/loader/base.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/skiima/railtie.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/skiima/sql_object/index.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/tasks/skiima.rake" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/skiima/loader_base.rb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/skiima.iml" afterPath="$PROJECT_DIR$/.idea/skiima.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/1," />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/2].each_with_keys" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/skiima/dependency/reader.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/skiima/dependency/sequential.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/skiima/dependency/tree.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/skiima/sql_object/function.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/generators/skiima/depends/depends_generator.rb" afterPath="$PROJECT_DIR$/lib/generators/skiima/depends/depends_generator.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/generators/skiima/install/install_generator.rb" afterPath="$PROJECT_DIR$/lib/generators/skiima/install/install_generator.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/generators/skiima/templates/depends.yml" afterPath="$PROJECT_DIR$/lib/generators/skiima/templates/depends.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/generators/skiima/templates/skiima.rb" afterPath="$PROJECT_DIR$/lib/generators/skiima/templates/skiima.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/generators/skiima/templates/skiima.yml" afterPath="$PROJECT_DIR$/lib/generators/skiima/templates/skiima.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima.rb" afterPath="$PROJECT_DIR$/lib/skiima.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/db_adapter/base.rb" afterPath="$PROJECT_DIR$/lib/skiima/db_adapter/base.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/db_adapter/mysql.rb" afterPath="$PROJECT_DIR$/lib/skiima/db_adapter/mysql.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/db_adapter/postgresql.rb" afterPath="$PROJECT_DIR$/lib/skiima/db_adapter/postgresql.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/db_adapter/sqlserver.rb" afterPath="$PROJECT_DIR$/lib/skiima/db_adapter/sqlserver.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/loader/base.rb" afterPath="$PROJECT_DIR$/lib/skiima/loader/base.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/loader_config.rb" afterPath="$PROJECT_DIR$/lib/skiima/loader_config.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/runner.rb" afterPath="$PROJECT_DIR$/lib/skiima/runner.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/sql_object/base.rb" afterPath="$PROJECT_DIR$/lib/skiima/sql_object/base.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/skiima_app/config/environments/development.rb" afterPath="$PROJECT_DIR$/spec/skiima_app/config/environments/development.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/skiima_app/config/environments/production.rb" afterPath="$PROJECT_DIR$/spec/skiima_app/config/environments/production.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/skiima_app/config/environments/test.rb" afterPath="$PROJECT_DIR$/spec/skiima_app/config/environments/test.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/sql_object/index.rb" afterPath="$PROJECT_DIR$/lib/skiima/sql_object/index.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/sql_object/rule.rb" afterPath="$PROJECT_DIR$/lib/skiima/sql_object/rule.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/sql_object/sp.rb" afterPath="$PROJECT_DIR$/lib/skiima/sql_object/sp.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/sql_object/table.rb" afterPath="$PROJECT_DIR$/lib/skiima/sql_object/table.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/sql_object/trigger.rb" afterPath="$PROJECT_DIR$/lib/skiima/sql_object/trigger.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/sql_object/view.rb" afterPath="$PROJECT_DIR$/lib/skiima/sql_object/view.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/skiima/version.rb" afterPath="$PROJECT_DIR$/lib/skiima/version.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/skiima.rake" afterPath="$PROJECT_DIR$/lib/tasks/skiima.rake" />
     </list>
     <ignored path="skiima.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,7 +51,7 @@
             <file leaf-file-name="base.rb" pinned="false" current="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/lib/skiima/db_adapter/base.rb">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="25" column="38" selection-start="464" selection-end="464" vertical-scroll-proportion="0.5795981">
+                  <state line="21" column="6" selection-start="442" selection-end="442" vertical-scroll-proportion="0.47949526">
                     <folding />
                   </state>
                 </provider>
@@ -56,7 +60,7 @@
             <file leaf-file-name="mysql.rb" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/lib/skiima/db_adapter/mysql.rb">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="6" column="11" selection-start="97" selection-end="97" vertical-scroll-proportion="0.0">
+                  <state line="3" column="0" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0">
                     <folding />
                   </state>
                 </provider>
@@ -65,7 +69,7 @@
             <file leaf-file-name="sqlserver.rb" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/lib/skiima/db_adapter/sqlserver.rb">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="4" column="41" selection-start="129" selection-end="129" vertical-scroll-proportion="0.0">
+                  <state line="4" column="0" selection-start="61" selection-end="61" vertical-scroll-proportion="0.0">
                     <folding />
                   </state>
                 </provider>
@@ -74,7 +78,7 @@
             <file leaf-file-name="postgresql.rb" pinned="false" current="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/lib/skiima/db_adapter/postgresql.rb">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state line="4" column="30" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0">
+                  <state line="3" column="0" selection-start="61" selection-end="61" vertical-scroll-proportion="0.0">
                     <folding />
                   </state>
                 </provider>
@@ -91,72 +95,18 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="skiima.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/generators/skiima/templates/skiima.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="3" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="skiima.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/skiima.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="55" selection-start="3945" selection-end="3945" vertical-scroll-proportion="0.5826087">
+            <state line="157" column="38" selection-start="5812" selection-end="6128" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="depends_generator.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/generators/skiima/depends/depends_generator.rb">
+      <file leaf-file-name="reader.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/skiima/dependency/reader.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="49" selection-start="365" selection-end="365" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="install_generator.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/generators/skiima/install/install_generator.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="53" selection-start="649" selection-end="649" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="loader_config.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/skiima/loader_config.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="59" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/skiima/loader/base.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="22" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rule.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/skiima/sql_object/rule.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="44" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/skiima/sql_object/base.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="150" selection-end="150" vertical-scroll-proportion="0.0">
+            <state line="13" column="24" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -165,7 +115,25 @@
       <file leaf-file-name="runner.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/skiima/runner.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="76" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
+            <state line="26" column="48" selection-start="871" selection-end="871" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sequential.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/skiima/dependency/sequential.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="73" selection-start="356" selection-end="356" vertical-scroll-proportion="0.25210086">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="depends.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/generators/skiima/templates/depends.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="32" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -185,22 +153,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/skiima/sql_object/index.rb" />
-        <option value="$PROJECT_DIR$/lib/generators/skiima/depends/depends_generator.rb" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/lib/generators/skiima/install/install_generator.rb" />
-        <option value="$PROJECT_DIR$/spec/skiima_app/config/environments/production.rb" />
-        <option value="$PROJECT_DIR$/spec/skiima_app/config/environments/development.rb" />
-        <option value="$PROJECT_DIR$/spec/skiima_app/config/environments/test.rb" />
-        <option value="$PROJECT_DIR$/lib/generators/skiima/templates/skiima.rb" />
-        <option value="$PROJECT_DIR$/lib/skiima/runner.rb" />
-        <option value="$PROJECT_DIR$/lib/skiima/loader_base.rb" />
-        <option value="$PROJECT_DIR$/lib/generators/skiima/templates/skiima.yml" />
-        <option value="$PROJECT_DIR$/lib/generators/skiima/templates/depends.yml" />
+        <option value="$PROJECT_DIR$/lib/skiima/db_adapter/mysql.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/db_adapter/sqlserver.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/db_adapter/postgresql.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/db_adapter/base.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/sql_object/rule.rb" />
         <option value="$PROJECT_DIR$/lib/skiima/loader_config.rb" />
-        <option value="$PROJECT_DIR$/lib/skiima/sql_object/base.rb" />
-        <option value="$PROJECT_DIR$/lib/skiima/loader/base.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/dependancy/reader.rb" />
         <option value="$PROJECT_DIR$/lib/skiima.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/dependency/reader.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/dependency/tree.rb" />
+        <option value="$PROJECT_DIR$/lib/tasks/skiima.rake" />
+        <option value="$PROJECT_DIR$/lib/skiima/sql_object/base.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/runner.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/dependency/sequential.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/loader/base.rb" />
+        <option value="$PROJECT_DIR$/lib/skiima/version.rb" />
       </list>
     </option>
   </component>
@@ -238,15 +206,9 @@
               <option name="myItemId" value="skiima" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="skiima" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skiima" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -256,50 +218,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="skiima" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skiima" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skiima" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skiima_app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skiima" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skiima" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="skiima_app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -314,6 +232,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skiima" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skiima" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tasks" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -376,6 +312,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="loader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skiima" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skiima" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skiima" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dependency" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skiima" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="skiima" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="generators" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -477,16 +453,16 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32692307" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19426751" sideWeight="0.67147434" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19426751" sideWeight="0.6730769" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32750398" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -535,104 +511,114 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/generators/skiima/templates/depends.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="18" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.79130435">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/generators/skiima/templates/skiima.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="30" selection-start="1000" selection-end="1000" vertical-scroll-proportion="0.3697479">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/db_adapter/postgresql.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="30" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/db_adapter/sqlserver.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="41" selection-start="129" selection-end="129" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/db_adapter/mysql.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="11" selection-start="97" selection-end="97" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/db_adapter/base.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="38" selection-start="464" selection-end="464" vertical-scroll-proportion="0.5795981">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/runner.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="76" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/sql_object/index.rb">
+    <entry file="file://$PROJECT_DIR$/spec/skiima_app/config.ru">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/sql_object/base.rb">
+    <entry file="file://$PROJECT_DIR$/lib/generators/skiima/templates/skiima.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="150" selection-end="150" vertical-scroll-proportion="0.0">
+        <state line="27" column="24" selection-start="831" selection-end="841" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/sql_object/rule.rb">
+    <entry file="file://$PROJECT_DIR$/lib/generators/skiima/depends/depends_generator.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="44" selection-start="621" selection-end="621" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/loader/base.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="22" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/skiima/loader_config.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="59" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
+        <state line="10" column="67" selection-start="402" selection-end="402" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/generators/skiima/install/install_generator.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="53" selection-start="649" selection-end="649" vertical-scroll-proportion="0.0" />
+        <state line="16" column="33" selection-start="458" selection-end="572" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/generators/skiima/depends/depends_generator.rb">
+    <entry file="file://$PROJECT_DIR$/lib/skiima/loader_config.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="49" selection-start="365" selection-end="365" vertical-scroll-proportion="0.0" />
+        <state line="33" column="46" selection-start="837" selection-end="837" vertical-scroll-proportion="-0.0017574693">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/generators/skiima/templates/skiima.rb">
+    <entry file="file://$PROJECT_DIR$/lib/generators/skiima/templates/depends.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="3" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0" />
+        <state line="40" column="32" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/skiima_app/config/database.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tasks/skiima.rake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="23" selection-start="687" selection-end="687" vertical-scroll-proportion="0.5042017">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/skiima/dependency/tree.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="24" selection-start="83" selection-end="83" vertical-scroll-proportion="0.10084034">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/skiima/sql_object/base.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="23" selection-start="521" selection-end="521" vertical-scroll-proportion="0.5042017">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/skiima.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="55" selection-start="3945" selection-end="3945" vertical-scroll-proportion="0.5826087">
+        <state line="157" column="38" selection-start="5812" selection-end="6128" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/skiima/dependency/reader.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="24" selection-start="424" selection-end="424" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/skiima/loader/base.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="23" selection-start="1038" selection-end="1038" vertical-scroll-proportion="0.7058824">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/skiima/runner.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="48" selection-start="871" selection-end="871" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/skiima/version.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="57" selection-start="40" selection-end="40" vertical-scroll-proportion="0.075630255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/skiima/dependency/sequential.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="73" selection-start="356" selection-end="356" vertical-scroll-proportion="0.25210086">
           <folding />
         </state>
       </provider>

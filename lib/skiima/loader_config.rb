@@ -17,8 +17,6 @@ module Skiima
     end
 
     def read_dependencies
-      #models = get_models
-
       yml = YAML::load_file(Skiima.skiima_depends_file)
       table_names = yml.keys
       class_names = table_names.map { |name| name.camelize.singularize }

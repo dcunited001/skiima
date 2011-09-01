@@ -1,7 +1,8 @@
 module Skiima
-  class SqlObject::Index < SqlObject::Base
+  module SqlObject
+    class Index < Base
 
+    end
   end
 end
-
 

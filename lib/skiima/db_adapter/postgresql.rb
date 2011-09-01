@@ -1,8 +1,7 @@
 module Skiima
-  class DbAdapter::Postgresql < DbAdapter::Base
+  module DbAdapter
+    class Postgresql < Base
 
-    def supported_objects
-      super + [:rule, :trigger]
     end
   end
 end

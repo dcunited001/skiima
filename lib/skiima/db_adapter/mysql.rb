@@ -1,10 +1,7 @@
 module Skiima
-  class DbAdapter::Mysql < DbAdapter::Base
+  module DbAdapter
+    class Mysql < Base
 
-
-
-    def supported_objects
-      super
     end
   end
 end

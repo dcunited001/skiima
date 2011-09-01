@@ -1,3 +1,3 @@
 module Skiima
-  VERSION = "0.0.001"
+  VERSION = "0.0.011"
 end

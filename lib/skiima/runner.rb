@@ -1,26 +1,41 @@
 module Skiima
   class Runner
-
+    attr_accessor :config
     attr_accessor :db_adapter
+    attr_accessor :loader_classes
+    attr_accessor :loaders
 
     def initialize(options = {})
-      # Want to eventually get rid of the evals
-      db_adapter = eval("DbAdapter::#{options[:db_adapter].capitalize}.new")
+      Skiima.puts "==[ Reading Configuration ]=="
+      @config = Skiima::LoaderConfig.new
+
+      Skiima.puts "==[ Creating DB Adapter ]=="
+      @db_adapter = DbAdapter::Base.get_adapter_class(options[:db_adapter]).new if options[:db_adapter].to_s
+      @db_adapter ||= DbAdapter::Postgresql.new
+
+      Skiima.puts "==[ Creating Loaders ]=="
+      @loader_classes = get_class_loaders
+      @loaders = @loader_classes.map do |lc|
+        lc.new(
+            :db_adapter => @db_adapter,
+            :depends_config => Skiima.loader_depends[lc.table_name],
+            :load_order => Skiima.load_order)
+      end
     end
 
     def create_sql_objects
-      # database.yml - load the config for the necessary environment
-          # the environment should already be loaded so i shouldn't have to do anything
-            # where is this ino stored?
-          # pick database adapters based on environment and database.yml options
-      # skiima.yml - load Skiima options
-      # depends.yml - get the proper dependency load order
+      Skiima.puts "==[ Connecting to DB ]=="
+
+      Skiima.puts "==[ Creating Objects ]=="
+      @loaders.each { |loader| loader.create }
     end
 
     def drop_sql_objects
-      # database.yml - load the config for the necessary environment
-      # skiima.yml - load Skiima options
-      # depends.yml - get the proper dependency load order (and reverse it)
+      Skiima.puts "==[ Connecting to DB ]=="
+
+      Skiima.puts "==[ Dropping Objects ]=="
+      @loaders.each { |loader| loader.drop }
     end
+
   end
 end

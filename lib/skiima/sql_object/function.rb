@@ -1,6 +1,6 @@
 module Skiima
   module SqlObject
-    class Sp < Base
+    class Function < Base
 
     end
   end

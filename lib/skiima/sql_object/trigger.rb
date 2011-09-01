@@ -1,5 +1,7 @@
 module Skiima
-  class SqlObject::Trigger < SqlObject::Base
+  module SqlObject
+    class Trigger < Base
 
+    end
   end
 end

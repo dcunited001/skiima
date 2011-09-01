@@ -1,8 +1,7 @@
 module Skiima
-  class DbAdapter::Sqlserver < DbAdapter::Base
+  module DbAdapter
+    class Sqlserver < Base
 
-    def supported_objects
-      super + [:sp, :trigger, :constraint]
     end
   end
 end

@@ -1,5 +1,7 @@
 module Skiima
-  class SqlObject::View < SqlObject::Base
+  module SqlObject
+    class View < Base
 
+    end
   end
 end
