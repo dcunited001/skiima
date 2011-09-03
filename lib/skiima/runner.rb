@@ -37,5 +37,6 @@ module Skiima
       @loaders.each { |loader| loader.drop }
     end
 
+    # provide methods options to run specific Loaders
   end
 end

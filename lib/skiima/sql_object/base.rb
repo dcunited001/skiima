@@ -5,6 +5,9 @@ module Skiima
       attr_accessor :object_name
       attr_accessor :script_name
 
+      attr_accessor :create_command
+      attr_accessor :drop_command
+
       def initialize(options = {})
         @script_name = options[:script_name]
 
@@ -13,11 +16,11 @@ module Skiima
         @object_name = obj_data[:object_name]
       end
 
-      def create
+      def create(db_adapter)
         Skiima.puts "  Creating #{object_type.capitalize}: #{object_name.capitalize}"
       end
 
-      def drop
+      def drop(db_adapter)
         Skiima.puts "  Dropping #{object_type.capitalize}: #{object_name.capitalize}"
       end
 
@@ -49,7 +52,6 @@ module Skiima
           raise "Invalid File Extension. Scripts must end in '.sql'"
         end
       end
-
     end
   end
 end

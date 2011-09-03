@@ -18,6 +18,8 @@ gem 'jquery-rails'
 # SKIIMA GEM
 gem 'skiima', :path => '../../'
 
+gem 'pg'
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -31,5 +33,15 @@ gem 'skiima', :path => '../../'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
-  gem 'rspec-rails', '~> 2.6.0'
+
+  gem 'rspec-rails', '2.6.1'
+  gem 'shoulda-matchers'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'webmock', '1.6.2'
+  gem 'vcr'
+  gem 'capybara'
+  gem 'steak'
+  gem 'cucumber'
+  gem 'factory_girl_rails'
 end

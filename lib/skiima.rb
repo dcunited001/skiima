@@ -31,32 +31,6 @@ module Skiima
   #Dir[File.join('skiima', 'loader', '**')].each { |rb| require rb if rb != 'base.rb' }
   #Dir[File.join('skiima', 'sql_object', '**')].each { |rb| require rb if rb != 'base.rb' }
 
-  # This syntax looks alot cooler, but classes are set up wrong
-  #
-  #autoload :LoaderConfig, 'skiima/loader_config'
-  #autoload :Runner, 'skiima/runner'
-  #
-  #module Loader
-  #  autoload :Base, 'skiima/loader/base'
-  #end
-  #
-  #module DbAdapter
-  #  autoload :Base, 'skiima/db_adapter/base'
-  #  autoload :Mysql, 'skiima/db_adapter/mysql'
-  #  autoload :Postgresql, 'skiima/db_adapter/postgresql'
-  #  autoload :Sqlserver, 'skiima/db_adapter/sqlserver'
-  #end
-  #
-  #module SqlObject
-  #  autoload :Base, 'skiima/sql_object/base'
-  #  autoload :Table, 'skiima/sql_object/table'
-  #  autoload :View, 'skiima/sql_object/view'
-  #  autoload :Rule, 'skiima/sql_object/rule'
-  #  autoload :Trigger, 'skiima/sql_object/trigger'
-  #  autoload :Index, 'skiima/sql_object/index'
-  #  autoload :Sp, 'skiima/sql_object/sp'
-  #end
-
   # Dynamically set inheritance in Ruby
   #http://stackoverflow.com/questions/3127069/how-to-dynamically-alter-inheritance-in-ruby
 

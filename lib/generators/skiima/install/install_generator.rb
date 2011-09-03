@@ -28,9 +28,15 @@ module Skiima
         copy_file 'skiima.rb', 'config/initializers/skiima.rb'
       end
 
+      def create_depends_config
+        # For now, template
+        template "depends.yml", File.join(Skiima.skiima_path, 'depends.yml')
+      end
+
       def some_notes
         puts <<-END
 ==================================================
+
 Skiima has been succesfully installed!
 
 Next, you need to configure the classes in config/skiima.yml
@@ -47,6 +53,7 @@ I'd love advice if you have it.
 Peace in the Middle East
   (and also Kashmir),
 David Conner
+
 ==================================================
 END
       end

@@ -11,13 +11,13 @@ module Skiima
         @supported_object_classes = get_supported_object_classes
       end
 
-      def create(sql_object)
-
-      end
-
-      def drop(sql_object)
-
-      end
+      #def create(sql_object)
+      #
+      #end
+      #
+      #def drop(sql_object)
+      #
+      #end
 
       def get_supported_objects
         Skiima.supported_objects[relative_name.to_sym]

@@ -1,6 +1,6 @@
 module Skiima
   class LoaderConfig
-    def initialize
+    def initialize(options = {})
       read_locale
       read_config
       read_dependencies
@@ -14,6 +14,10 @@ module Skiima
 
     def read_config
       yml = YAML::load_file(Skiima.skiima_config_file)
+
+      Skiima.load_order = yml[:load_order].to_sym
+
+      #assign to options
     end
 
     def read_dependencies
@@ -30,6 +34,10 @@ module Skiima
         klass = Class.new Skiima::Loader::Base do
           # any model specific code here
         end
+
+        #check to see if there is a file with the singular table name
+          #if so, require it
+          #otherwise, instantiate the class
 
         Object.const_set klass_name, klass
       end
