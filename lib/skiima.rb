@@ -1,6 +1,10 @@
 require "skiima/version"
+require 'yaml'
+require 'module_helpers'
 
 module Skiima
+  extend ModuleHelpers
+
   require 'skiima/loader_config'
   require 'skiima/runner'
 
@@ -26,6 +30,11 @@ module Skiima
   require 'skiima/dependency/sequential'
   require 'skiima/dependency/tree'
 
+  # copy and paste from Active Support (i don't want active support as a dependency')
+  class << self
+
+  end
+
   #not sure why this didn't work.
   #Dir[File.join('skiima', 'db_adapter', '**')].each { |rb| require rb if rb != 'base.rb'}
   #Dir[File.join('skiima', 'loader', '**')].each { |rb| require rb if rb != 'base.rb' }
@@ -37,41 +46,34 @@ module Skiima
   #============================================================
   # Config locations
   #============================================================
-  mattr_accessor :project_root; @@project_root = 'specify/in/config/block'  #must be overridden (need a better way to do this)
-  mattr_accessor :skiima_path; @@skiima_path = 'db/skiima'
-  mattr_accessor :skiima_config_file; @@skiima_config_file = 'skiima.yml'
-  mattr_accessor :depends_config_file; @@depends_config_file = 'depends.yml'
-  mattr_accessor :database_config_path; @@database_config_file = 'config/database.yml'
-  mattr_accessor :locale_path; @@locale_path = 'config/locales'
+  set_mod_accessors(
+    :project_root => 'specify/in/config/block', #must be overridden (needed for gem to really be rails-agnostic)
+    :skiima_path => 'db/skiima',
+    :skiima_config_file => 'skiima.yml',
+    :depends_config_file => 'depends.yml',
+    :database_config_path => 'config',
+    :database_config_file => 'database.yml',
+    :locale_path => 'config/locales')
 
   #============================================================
   # Config options
   #============================================================
-  #not sure of the best way to abstract this for Multiple ORM's
-  #   or whether there's even a need for that
-  #mattr_accessor :orm, :active_record
-
-  mattr_accessor :load_order; @@load_order = :sequential
-  mattr_accessor :locale; @@locale = :en
-  mattr_accessor :debug; @@debug = false
+  set_mod_accessors(
+    :load_order => :sequential,
+    :locale => :en,
+    :debug => false)
+    #logging => log_level?
 
   #============================================================
-  # Supported Databases & Objects
-  #     (can be overridden in config block)
+  # Supported Databases & Objects (can be overridden in config block)
   #============================================================
-
-  mattr_accessor :supported_databases
-  @@supported_databases = [:mysql, :postgresql, :sqlserver]
-
-  mattr_accessor :supported_objects
-  @@supported_objects = {
-    :mysql => [:table, :view, :index, :function, :trigger],
-    :postgresql => [:table, :view, :index, :function, :rule, :trigger],
-    :sqlserver => [:table, :view, :index, :function, :sp, :trigger]
-  }
-
-  mattr_accessor :supported_dependency_readers
-  @@supported_dependency_readers = [:sequential, :tree]
+  set_mod_accessors(
+    :supported_dependency_readers => [:sequential, :tree],
+    :supported_databases => [:mysql, :postgresql, :sqlserver],
+    :supported_objects => {
+      :mysql => [:table, :view, :index, :function, :trigger],
+      :postgresql => [:table, :view, :index, :function, :rule, :trigger],
+      :sqlserver => [:table, :view, :index, :function, :sp, :trigger] } )
 
   def self.setup
     yield self
@@ -80,72 +82,59 @@ module Skiima
   #============================================================
   # Active Record Models
   #============================================================
-  #mattr_accessor :model_classes
+  #mod_attr_accessor :model_classes
   #@@model_classes = []
 
   #============================================================
   # Loader Classes
   #============================================================
-  mattr_accessor :loader_classes; @@loader_classes = []
-  mattr_accessor :loader_depends; @@loader_depends = {}
+  set_mod_accessors :loader_classes => [], :loader_depends => {}
 
   #============================================================
   # Accessors for full paths
   #============================================================
-  def self.skiima_path
-    File.join(project_root, class_variable_get(:@@skiima_path))
-  end
 
-  def self.skiima_config_file
-    File.join(skiima_path, class_variable_get(:@@skiima_config_file))
-  end
+  class << self
+    define_method(:skiima_path)           { File.join(project_root, class_variable_get(:@@skiima_path)) }
+    define_method(:skiima_config_file)    { File.join(skiima_path, class_variable_get(:@@skiima_config_file)) }
+    define_method(:depends_config_file)   { File.join(skiima_path, class_variable_get(:@@depends_config_file)) }
+    define_method(:database_config_path)  { File.join(project_root, class_variable_get(:@@database_config_path)) }
+    define_method(:database_config_file)  { File.join(database_config_path, class_variable_get(:@@database_config_file)) }
+    define_method(:locale_path)           { File.join(project_root, class_variable_get(:@@locale_path)) }
+    define_method(:locale_file)           { File.join(locale_path, "skiima.#{locale.to_s}.yml") }
 
-  def self.depends_config_file
-    File.join(skiima_path, class_variable_get(:@@depends_config_file))
-  end
-
-  def self.database_config_path
-    File.join(project_root, class_variable_get(:@@database_config_path))
-  end
-
-  def self.locale_path
-    File.join(project_root, class_variable_get(:@@locale_path))
-  end
-
-  def self.locale_file
-    File.join(locale_path, "skiima.#{locale.to_s}.yml")
-  end
-
-  #============================================================
-  # Other Methods
-  #============================================================
-  def self.get_all_subclasses(subclasses)
-    #for now, i'm not going to worry about recursion
-    subclasses += subclasses.each_with_object(Array.new) do |klass, sk|
-      puts "#{klass.name}: #{klass.subclasses.any?}"
-      sk += get_all_subclasses(klass.subclasses) if klass.subclasses
+    #============================================================
+    # Other Methods
+    #============================================================
+    def get_all_subclasses(subclasses)
+      #for now, i'm not going to worry about recursion
+      subclasses += subclasses.each_with_object(Array.new) do |klass, sk|
+        puts "#{klass.name}: #{klass.subclasses.any?}"
+        sk += get_all_subclasses(klass.subclasses) if klass.subclasses
+      end
     end
-  end
 
-  def self.supported_object_classes(db_adapter_sym)
-    sql_object_subclasses = Skiima::SqlObject::Base.subclasses
-    sql_object_subclasses.each_with_object(Array.new) do |klass, supported_classes|
-      klass_sym = klass.relative_name.underscore.to_sym
-      supported_classes[klass_sym] = klass if @@supported_objects[db_adapter_sym].include? (klass_sym)
+    def supported_object_classes(db_adapter_sym)
+      sql_object_subclasses = Skiima::SqlObject::Base.subclasses
+      sql_object_subclasses.each_with_object(Array.new) do |klass, supported_classes|
+        klass_sym = klass.relative_name.underscore.to_sym
+        supported_classes[klass_sym] = klass if @@supported_objects[db_adapter_sym].include? (klass_sym)
+      end
     end
-  end
 
-  def self.supported_dependency_reader_classes
-    Skiima::Dependency::Reader.subclasses.each_with_object(Array.new) do |klass, supported_classes|
-      klass_sym = klass.relative_name.underscore.to_sym
-      supported_classes[klass_sym] = klass if @@supported_dependency_readers.include? (klass_sym)
+    def supported_dependency_reader_classes
+      Skiima::Dependency::Reader.subclasses.each_with_object(Array.new) do |klass, supported_classes|
+        klass_sym = klass.relative_name.underscore.to_sym
+        supported_classes[klass_sym] = klass if @@supported_dependency_readers.include? (klass_sym)
+      end
     end
-  end
 
-  #============================================================
-  # Error output when debug mode is on
-  #============================================================
-  def self.puts(str)
-    puts str if debug
+    #============================================================
+    # Error output when debug mode is on
+    #============================================================
+    def self.puts(str)
+      puts str if debug
+    end
+
   end
 end
