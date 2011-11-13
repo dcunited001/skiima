@@ -13,14 +13,8 @@ module Skiima
         config.project_root = File.dirname(__FILE__)
         config.skiima_path = 'config'
         config.database_config_path = 'config'
-
-        # ===> Configuration File Locations
-        #   config.skiima_config_file = 'skiima.yml'
-        #   config.depends_config_file = 'depends.yml'
-        #   config.database_config_path = 'config/database.yml'
-        #
-        #   config.locale_path = 'config/locale'
-        #   config.locale = :en
+        config.locale_path = 'config'
+        config.locale = :en
       end
     end
 
@@ -29,14 +23,19 @@ module Skiima
       current_path = File.dirname(__FILE__)
       skiima_config = File.join(current_path, 'config')
       skiima_yml_file = File.join(skiima_config, 'skiima.yml')
+      locale_path = File.join(skiima_config)
+      locale_file = File.join(locale_path, 'skiima.en.yml')
 
       db_config = File.join(current_path, 'config')
       db_config_file = File.join(db_config, 'database.yml')
 
       assert_equal(Skiima.project_root, current_path)
       assert_equal(Skiima.skiima_path, skiima_config)
+      assert_equal(Skiima.skiima_config_file, skiima_yml_file)
       assert_equal(Skiima.database_config_path, db_config)
       assert_equal(Skiima.database_config_file, db_config_file)
+      assert_equal(Skiima.locale_path, locale_path)
+      assert_equal(Skiima.locale_file, locale_file)
     end
 
   end
