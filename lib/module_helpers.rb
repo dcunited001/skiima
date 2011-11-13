@@ -1,3 +1,5 @@
+# copy and paste from Active Support
+#   (i don't want active support as a dependency')
 module ModuleHelpers
   def mod_attr_reader(*syms)
     syms.each do |sym|

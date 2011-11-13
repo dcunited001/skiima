@@ -18,7 +18,7 @@ module Skiima
       private
 
       def self.sort_objects(sql_objects)
-        sql_objects.sort {|a,b| @object_types_order.index(b.object_type) <=> @object_types_order.index(a.object_type) }
+        sql_objects.sort {|a,b| @object_types_order.index(b.object_type) <=> @object_types_order.index(a.object_type)}
       end
     end
   end

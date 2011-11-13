@@ -1,0 +1,12 @@
+en:
+  messages:
+    create:
+      start: Creating objects for @class
+      error: Encountered errors creating @class objects:
+      no_error: All @class objects created successfully!
+      delimiter: =================================
+    drop:
+      start: Dropping objects for @class
+      error: Encountered errors dropping @class objects:
+      no_error: All @class objects dropped successfully!
+      delimiter: =================================

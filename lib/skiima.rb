@@ -30,11 +30,6 @@ module Skiima
   require 'skiima/dependency/sequential'
   require 'skiima/dependency/tree'
 
-  # copy and paste from Active Support (i don't want active support as a dependency')
-  class << self
-
-  end
-
   #not sure why this didn't work.
   #Dir[File.join('skiima', 'db_adapter', '**')].each { |rb| require rb if rb != 'base.rb'}
   #Dir[File.join('skiima', 'loader', '**')].each { |rb| require rb if rb != 'base.rb' }
