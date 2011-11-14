@@ -26,7 +26,7 @@
 
 options:
   load_order: sequential  # future options may include 'intelligent'
-  #debug: true
+  debug: true
 
 #supported_objects:
 #  mysql:

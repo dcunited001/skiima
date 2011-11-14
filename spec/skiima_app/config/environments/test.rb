@@ -4,8 +4,8 @@ SkiimaApp::Application.configure do
     config.skiima_path = 'db/skiima'
 
     # ===> Configuration File Locations
-    #   config.skiima_config_file = 'skiima.yml'
-    #   config.depends_config_file = 'depends.yml'
+    #   config.config_file = 'skiima.yml'
+    #   config.depends_file = 'depends.yml'
     #   config.database_config_path = 'config/database.yml'
     #   config.locale_path = 'config/locale'
 

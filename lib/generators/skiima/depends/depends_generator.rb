@@ -21,7 +21,7 @@ module Skiima
         # configured_reader_class = Skiima.supported_dependency_reader_classes[yml[:load_order]] if options[:load_order]
 
         depends = Skiima.loader_depends
-        depends.keys.each {|table_name|
+        depends.keys.each { |table_name|
           dependent_objects = depends[table_name]
 
           empty_directory File.join(Skiima.skiima_path, table_name)
