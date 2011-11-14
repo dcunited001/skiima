@@ -5,5 +5,3 @@ friends:
 team_members:
 team_mates:
   view_team_mates:
-  rule_view_team_mates_insert:
-  rule_view_team_mates_delete:
