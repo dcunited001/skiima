@@ -1,5 +1,10 @@
 require "skiima/version"
 require 'yaml'
+
+#tried to avoid using active_support,
+#   but i rely too much on naming conventions
+require 'active_support/deprecation'
+require 'active_support/dependencies'
 require 'module_helpers'
 
 module Skiima
@@ -42,12 +47,12 @@ module Skiima
   # Config locations
   #============================================================
   set_mod_accessors(
-    :project_root => 'specify/in/config/block', #must be overridden (needed for gem to really be rails-agnostic)
-    :skiima_path => 'db/skiima',
-    :skiima_config_file => 'skiima.yml',
-    :depends_config_file => 'depends.yml',
-    :database_config_path => 'config',
+    :project_root => 'specify/in/config/block', #must be overridden for now (want gem to really be rails-agnostic)
+    :project_config_path => 'config',
+    :config_file => 'skiima.yml',
     :database_config_file => 'database.yml',
+    :skiima_path => 'db/skiima',
+    :depends_file => 'depends.yml',
     :locale_path => 'config/locales')
 
   #============================================================
@@ -70,10 +75,6 @@ module Skiima
       :postgresql => [:table, :view, :index, :function, :rule, :trigger],
       :sqlserver => [:table, :view, :index, :function, :sp, :trigger] } )
 
-  def self.setup
-    yield self
-  end
-
   #============================================================
   # Active Record Models
   #============================================================
@@ -90,11 +91,15 @@ module Skiima
   #============================================================
 
   class << self
+    def setup
+      yield self
+    end
+
+    define_method(:project_config_path)   { File.join(project_root, class_variable_get(:@@project_config_path)) }
+    define_method(:config_file)           { File.join(project_config_path, class_variable_get(:@@config_file)) }
+    define_method(:database_config_file)  { File.join(project_config_path, class_variable_get(:@@database_config_file)) }
     define_method(:skiima_path)           { File.join(project_root, class_variable_get(:@@skiima_path)) }
-    define_method(:skiima_config_file)    { File.join(skiima_path, class_variable_get(:@@skiima_config_file)) }
-    define_method(:depends_config_file)   { File.join(skiima_path, class_variable_get(:@@depends_config_file)) }
-    define_method(:database_config_path)  { File.join(project_root, class_variable_get(:@@database_config_path)) }
-    define_method(:database_config_file)  { File.join(database_config_path, class_variable_get(:@@database_config_file)) }
+    define_method(:depends_file)   { File.join(skiima_path, class_variable_get(:@@depends_file)) }
     define_method(:locale_path)           { File.join(project_root, class_variable_get(:@@locale_path)) }
     define_method(:locale_file)           { File.join(locale_path, "skiima.#{locale.to_s}.yml") }
 
@@ -127,9 +132,8 @@ module Skiima
     #============================================================
     # Error output when debug mode is on
     #============================================================
-    def self.puts(str)
+    def puts(str)
       puts str if debug
     end
-
   end
 end
