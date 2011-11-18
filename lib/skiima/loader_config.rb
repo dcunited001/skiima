@@ -21,7 +21,7 @@ module Skiima
     def read_dependencies(file)
       yml = YAML::load_file(file)
 
-      table_names = yml["models"].keys
+      table_names = yml.keys
       class_names = table_names.map { |name| name.camelize.singularize }
 
       @loader_depends = get_dependencies(yml)
@@ -29,8 +29,16 @@ module Skiima
     end
 
     def get_dependencies(depends_yml)
-      table_names = depends_yml.keys
-      table_names.each_with_object(Hash.new) { |name,hash| hash[name] = depends_yml[name].keys }
+      dependencies = {}
+      depends_yml.each_pair do |table, objects|
+        if depends_yml[table]
+          dependencies[table] = (depends_yml[table].is_a?(Hash) ? depends_yml[table] : { depends_yml[table] => nil })
+        else
+          dependencies[table] = {}
+        end
+      end
+
+      raise dependencies.inspect
     end
 
     def get_loader_classes(class_names)
@@ -44,28 +52,5 @@ module Skiima
         end
       end
     end
-
-    #def get_models
-    #  ActiveRecord::Base.send(:subclasses).each_with_object(Hash.new) { |m,models| models[m.name.underscore.pluralize] = m }
-    #end
   end
 end
-
-#  def load_classes(yml_classes)
-#    models = get_models
-#    Skiima.classes = yml_classes.keys.map do |c|
-#      if models.has_key? c
-#        models[c]
-#      else
-#        raise "#{c.camelize.singularize} is not a valid model."
-#      end
-#    end
-#
-#    yml_classes.keys.each { |c| ArchiveData.archive_attributes[c] = classes[c] }
-#  end
-#
-#  def get_models
-#    Dir[Rails.root.join('app', 'models', '**')].each { |model| require model }
-#    models = {}
-#    ActiveRecord::Base.send(:subclasses).each { |m| models[m.name.underscore.pluralize] = m }
-#  end

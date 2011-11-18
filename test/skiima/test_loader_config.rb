@@ -2,6 +2,7 @@ require File.expand_path('../../test_helper', __FILE__)
 
 class TestLoaderConfig < Skiima::Test
   def setup
+    super
     @loader_config = Skiima::LoaderConfig.new(
       :locale => Skiima.locale_file,
       :config => Skiima.config_file,
