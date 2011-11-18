@@ -10,6 +10,7 @@ require 'module_helpers'
 module Skiima
   extend ModuleHelpers
 
+  require 'skiima/base'
   require 'skiima/loader_config'
   require 'skiima/runner'
 
@@ -99,7 +100,7 @@ module Skiima
     define_method(:config_file)           { File.join(project_config_path, class_variable_get(:@@config_file)) }
     define_method(:database_config_file)  { File.join(project_config_path, class_variable_get(:@@database_config_file)) }
     define_method(:skiima_path)           { File.join(project_root, class_variable_get(:@@skiima_path)) }
-    define_method(:depends_file)   { File.join(skiima_path, class_variable_get(:@@depends_file)) }
+    define_method(:depends_file)          { File.join(skiima_path, class_variable_get(:@@depends_file)) }
     define_method(:locale_path)           { File.join(project_root, class_variable_get(:@@locale_path)) }
     define_method(:locale_file)           { File.join(locale_path, "skiima.#{locale.to_s}.yml") }
 
