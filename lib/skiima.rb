@@ -1,6 +1,8 @@
 # encoding: utf-8
-require "skiima/version"
+require 'skiima/version'
+
 require 'yaml'
+require 'fast_gettext'
 
 #tried to avoid using active_support,
 #   but i rely too much on naming conventions
@@ -8,7 +10,11 @@ require 'active_support/deprecation'
 require 'active_support/dependencies'
 require 'module_helpers'
 
+# include FastGettext unless it already is
+include FastGettext unless ::Object.included_modules.include?(FastGettext)
+
 module Skiima
+  include FastGettext::Translation
   extend ModuleHelpers
 
   require 'skiima/base'
@@ -89,6 +95,7 @@ module Skiima
 
   class << self
     def setup
+      set_translation_repository
       yield self
     end
 
@@ -156,8 +163,30 @@ module Skiima
     #============================================================
     # Error output when debug mode is on
     #============================================================
+    # TODO: add debug option
+    # TODO: add debug levels
+    # TODO: replace this puts method with dout
     def puts(str)
       puts str if debug
     end
+
+    def message(*args)
+      locale = args.last.is_a?(Symbol) ? args.pop : default_locale
+
+      lookup = args.join('.')
+      Skiima._(lookup)
+    end
+
+    def default_locale
+      ::Skiima.locale
+    end
+
+    def set_translation_repository
+      FastGettext.add_text_domain('skiima', :path => File.join(File.dirname(__FILE__), 'skiima', 'locales'), :type => :yaml)
+      Skiima.text_domain = 'skiima'
+      Skiima.locale = locale.to_s
+    end
   end
+
 end
+

@@ -4,16 +4,11 @@ module Skiima
     attr_accessor :messages, :config
 
     def initialize(opts = {})
-      read_config(opts[:config] || Skiima.locale_file)
-      read_locale(opts[:locale] || Skiima.config_file)
+      read_config(opts[:config] || Skiima.config_file)
       #read_dependencies(opts[:depends] || Skiima.depends_file)
     end
 
     private
-
-    def read_locale(file)
-      @messages = YAML::load_file(file)
-    end
 
     def read_config(file)
       @config = YAML::load_file(file) || {}

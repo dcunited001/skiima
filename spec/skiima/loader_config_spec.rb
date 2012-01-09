@@ -5,17 +5,10 @@ describe Skiima::LoaderConfig do
   subject { Skiima::LoaderConfig }
 
   before do
-    @loader_config = Skiima::LoaderConfig.new(
-      :locale => Skiima.locale_file,
-      :config => Skiima.config_file,
-      :depends => Skiima.depends_file)
+    @loader_config = Skiima::LoaderConfig.new
   end
 
-  it 'sets the locale' do
-
-  end
-
-  it 'sets the config' do
+  it 'sets the config options' do
 
   end
 
