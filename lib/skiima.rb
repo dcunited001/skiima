@@ -88,10 +88,6 @@ module Skiima
   #============================================================
   set_mod_accessors :loader_classes => [], :loader_depends => {}
 
-  #============================================================
-  # Accessors for full paths
-  #============================================================
-
   class << self
     def setup
       yield self
@@ -101,13 +97,44 @@ module Skiima
       Skiima::Base.new(opts)
     end
 
-    define_method(:project_config_path)   { File.join(project_root, class_variable_get(:@@project_config_path)) }
-    define_method(:config_file)           { File.join(project_config_path, class_variable_get(:@@config_file)) }
-    define_method(:database_config_file)  { File.join(project_config_path, class_variable_get(:@@database_config_file)) }
-    define_method(:skiima_path)           { File.join(project_root, class_variable_get(:@@skiima_path)) }
-    define_method(:depends_file)          { File.join(skiima_path, class_variable_get(:@@depends_file)) }
-    define_method(:locale_path)           { File.join(project_root, class_variable_get(:@@locale_path)) }
-    define_method(:locale_file)           { File.join(locale_path, "skiima.#{locale.to_s}.yml") }
+    #============================================================
+    # Class Variable Accessors for Module
+    #============================================================
+    def get_path(path, get_relative_path = true, absolute_path = nil)
+      (get_relative_path && path) || (File.join(absolute_path, path))
+    end
+
+    def project_root(get_relative = false)
+      @@project_root
+    end
+
+    def project_config_path(get_relative = false)
+      get_path(@@project_config_path, get_relative, project_root)
+    end
+
+    def config_file(get_relative = false)
+      get_path(@@config_file, get_relative, project_config_path)
+    end
+
+    def database_config_file(get_relative = false)
+      get_path(@@database_config_file, get_relative, project_config_path)
+    end
+
+    def skiima_path(get_relative = false)
+      get_path(@@skiima_path, get_relative, project_root)
+    end
+
+    def depends_file(get_relative = false)
+      get_path(@@depends_file, get_relative, skiima_path)
+    end
+
+    def locale_path(get_relative = false)
+      get_path(@@locale_path, get_relative, project_root)
+    end
+
+    def locale_file(get_relative = false)
+      get_path("skiima.#{locale.to_s}.yml", get_relative, locale_path)
+    end
 
     #============================================================
     # Other Methods
