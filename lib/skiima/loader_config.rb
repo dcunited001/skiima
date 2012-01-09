@@ -4,9 +4,9 @@ module Skiima
     attr_accessor :messages, :config
 
     def initialize(opts = {})
-      read_config(opts[:config])
-      read_locale(opts[:locale])
-      read_dependencies(opts[:depends])
+      read_config(opts[:config] || Skiima.locale_file)
+      read_locale(opts[:locale] || Skiima.config_file)
+      #read_dependencies(opts[:depends] || Skiima.depends_file)
     end
 
     private
@@ -38,8 +38,6 @@ module Skiima
           dependencies[table] = {}
         end
       end
-
-      raise dependencies.inspect
     end
 
     def get_loader_classes(class_names)
