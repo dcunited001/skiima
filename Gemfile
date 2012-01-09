@@ -8,6 +8,7 @@ group :development do
   gem 'guard'
   gem 'guard-minitest'
   gem 'pry'
+  gem 'rake'
 end
 
 if Config::CONFIG['target_os'] =~ /darwin/i
