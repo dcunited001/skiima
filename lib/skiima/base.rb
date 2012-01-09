@@ -19,8 +19,7 @@ module Skiima
     attr_accessor *Skiima.instance_options
 
     def initialize(options = {})
-      Skiima.instance_options.each { |opt| instance_variable_set(opt, Skiima.send(opt)) }
+      Skiima.instance_options.each { |opt| instance_variable_set("@#{opt.to_s}", Skiima.send(opt)) }
     end
-
   end
 end
