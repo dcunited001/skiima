@@ -54,8 +54,7 @@ module Skiima
     :config_file => 'skiima.yml',
     :database_config_file => 'database.yml',
     :skiima_path => 'db/skiima',
-    :depends_file => 'depends.yml',
-    :locale_path => 'config/locales')
+    :depends_file => 'depends.yml')
 
   #============================================================
   # Config options
@@ -126,14 +125,6 @@ module Skiima
 
     def depends_file(get_relative = false)
       get_path(@@depends_file, get_relative, skiima_path)
-    end
-
-    def locale_path(get_relative = false)
-      get_path(@@locale_path, get_relative, project_root)
-    end
-
-    def locale_file(get_relative = false)
-      get_path("skiima.#{locale.to_s}.yml", get_relative, locale_path)
     end
 
     #============================================================

@@ -3,6 +3,8 @@ module Skiima
 
   class << self
     # the set of options passed down to the instance of Skiima::Base
+    #     this is defined here because i still need to change
+    #     the order in which these files are loaded
     def instance_options
       path_options + config_options
     end
@@ -13,13 +15,11 @@ module Skiima
         :config_file,
         :database_config_file,
         :skiima_path,
-        :depends_file,
-        :locale_path ]
+        :depends_file ]
     end
 
     def config_options
       [ :load_order,
-        :locale,
         :debug ]
     end
   end
@@ -28,6 +28,8 @@ module Skiima
     attr_accessor *Skiima.instance_options
 
     def initialize(options = {})
+      set_locale(options[:locale] || Skiima.locale)
+
       Skiima.path_options.each do |opt|
         instance_variable_set("@#{opt.to_s}", (options[opt] || Skiima.send(opt.to_s, true)))
       end
@@ -37,6 +39,9 @@ module Skiima
       end
     end
 
+    #============================================================
+    # Accessors
+    #============================================================
     def project_root(get_relative = false)
       @project_root
     end
@@ -61,12 +66,11 @@ module Skiima
       Skiima.get_path(@depends_file, get_relative, skiima_path)
     end
 
-    def locale_path(get_relative = false)
-      Skiima.get_path(@locale_path, get_relative, project_root)
-    end
+    private
 
-    def locale_file(get_relative = false)
-      Skiima.get_path("skiima.#{locale.to_s}.yml", get_relative, locale_path)
+    def set_locale(locale)
+      FastGettext.text_domain = 'skiima'
+      FastGettext.locale = locale.to_s
     end
   end
 end

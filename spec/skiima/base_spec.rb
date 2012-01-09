@@ -15,12 +15,8 @@ describe Skiima::Base do
     end
 
     it "allows module options to be overridden per instance" do
-      ski_too = Skiima.new(
-        :database_config_file => 'postgresql.yml',
-        :locale => :jp)
-
+      ski_too = Skiima.new(:database_config_file => 'postgresql.yml')
       ski_too.database_config_file.must_equal File.join(SKIIMA_ROOT, 'config', 'postgresql.yml')
-      ski_too.locale_file.must_equal File.join(SKIIMA_ROOT, 'config', 'skiima.jp.yml')
     end
   end
 end
