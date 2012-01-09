@@ -1,4 +1,4 @@
-
+# encoding: utf-8
 module Skiima
   module Generators
     class DependsGenerator < Rails::Generators::Base

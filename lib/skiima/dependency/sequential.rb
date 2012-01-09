@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Skiima
   module Dependency
     class Sequential < Reader

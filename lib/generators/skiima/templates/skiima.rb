@@ -1,7 +1,5 @@
-#you can use this hook to configure options for skiima module
-
+# encoding: utf-8
 Skiima.setup do |config|
-
   config.skiima_path = 'db/skiima'
 
   # ===> Configuration File Locations

@@ -1,5 +1,4 @@
-
-
+# encoding: utf-8
 namespace :skiima do
   desc "migrates database, then runs all skiima migrations"
   task :migrate => [:environment, 'db:migrate'] do

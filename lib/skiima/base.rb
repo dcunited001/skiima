@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Skiima
   # the set of options passed down to the instance of Skiima::Base
   def self.instance_options

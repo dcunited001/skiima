@@ -1,5 +1,4 @@
-# copy and paste from Active Support
-#   (i don't want active support as a dependency')
+# encoding: utf-8
 module ModuleHelpers
   def set_mod_accessors(hash)
     hash.each_pair do |k,v|

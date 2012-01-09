@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Skiima
   class Runner
     attr_accessor :config

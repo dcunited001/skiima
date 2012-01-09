@@ -1,3 +1,4 @@
+# encoding: utf-8
 class CreateSkiima < ActiveRecord::Migration
   def self.up
     Skiima::Runner.create_sql_objects
