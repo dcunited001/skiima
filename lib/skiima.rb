@@ -97,6 +97,10 @@ module Skiima
       yield self
     end
 
+    def new(opts = {})
+      Skiima::Base.new(opts)
+    end
+
     define_method(:project_config_path)   { File.join(project_root, class_variable_get(:@@project_config_path)) }
     define_method(:config_file)           { File.join(project_config_path, class_variable_get(:@@config_file)) }
     define_method(:database_config_file)  { File.join(project_config_path, class_variable_get(:@@database_config_file)) }
