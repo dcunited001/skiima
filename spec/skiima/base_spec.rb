@@ -14,10 +14,13 @@ describe Skiima::Base do
       subject.skiima_path.must_equal skiima_path
     end
 
-    it "allows options to be overridden" do
-      #ski_too = Skiima.new()
+    it "allows module options to be overridden per instance" do
+      ski_too = Skiima.new(
+        :database_config_file => 'postgresql.yml',
+        :locale => :jp)
 
-      #test that config options are correctly overridden
+      ski_too.database_config_file.must_equal File.join(SKIIMA_ROOT, 'config', 'postgresql.yml')
+      ski_too.locale_file.must_equal File.join(SKIIMA_ROOT, 'config', 'skiima.jp.yml')
     end
   end
 end
