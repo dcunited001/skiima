@@ -13,6 +13,8 @@ require "pry"
 
 require "skiima"
 
+SKIIMA_ROOT = File.dirname(__FILE__)
+
 Skiima.setup do |config|
   config.project_root = File.dirname(__FILE__)
   config.project_config_path = 'config'
