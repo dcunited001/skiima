@@ -23,7 +23,9 @@ Gem::Specification.new do |s|
   #   but i rely too much on camelize and esp singularize
   s.add_dependency "active_support", '~> 3'
 
-  s.add_development_dependency "minitest"
-  s.add_development_dependency "rspec", "~> 2"
+  s.add_development_dependency "bundler", '>= 1.0.21'
+  s.add_development_dependency "minitest", '~> 2.9.1'
+  s.add_development_dependency "minitest-matchers", '~> 1.1.3'
+  s.add_development_dependency "mocha", '~> 0.10.0'
 end
 
