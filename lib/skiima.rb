@@ -18,7 +18,7 @@ module Skiima
   extend ModuleHelpers
 
   require 'skiima/base'
-  require 'skiima/loader_config'
+  require 'skiima/exceptions'
   require 'skiima/runner'
 
   #there's got to be a better way to load these files
@@ -52,22 +52,28 @@ module Skiima
   #http://stackoverflow.com/questions/3127069/how-to-dynamically-alter-inheritance-in-ruby
 
   #============================================================
-  # Config locations
+  # Base Config Paths (Can only override with config block)
   #============================================================
   set_mod_accessors(
     :project_root => 'specify/in/config/block', #must be overridden for now (want gem to really be rails-agnostic)
     :project_config_path => 'config',
-    :config_file => 'skiima.yml',
+    :config_file => 'skiima.yml')
+
+  #============================================================
+  # Config Paths (Can override in skiima.yml)
+  #============================================================
+  set_mod_accessors(
     :database_config_file => 'database.yml',
     :skiima_path => 'db/skiima',
     :depends_file => 'depends.yml')
 
   #============================================================
-  # Config options
+  # Config options (Can override in )
   #============================================================
   set_mod_accessors(
     :load_order => 'sequential',
     :locale => 'en',
+    :logging_out => '$stdout',
     :logging_level => '3')
 
   #============================================================
@@ -111,30 +117,6 @@ module Skiima
       (get_relative_path && path) || (File.join(absolute_path, path))
     end
 
-    def project_root(get_relative = false)
-      @@project_root
-    end
-
-    def project_config_path(get_relative = false)
-      get_path(@@project_config_path, get_relative, project_root)
-    end
-
-    def config_file(get_relative = false)
-      get_path(@@config_file, get_relative, project_config_path)
-    end
-
-    def database_config_file(get_relative = false)
-      get_path(@@database_config_file, get_relative, project_config_path)
-    end
-
-    def skiima_path(get_relative = false)
-      get_path(@@skiima_path, get_relative, project_root)
-    end
-
-    def depends_file(get_relative = false)
-      get_path(@@depends_file, get_relative, skiima_path)
-    end
-
     #============================================================
     # Other Methods
     #============================================================
@@ -164,9 +146,6 @@ module Skiima
     #============================================================
     # Error output when debug mode is on
     #============================================================
-    # TODO: add debug option
-    # TODO: add debug levels
-    # TODO: replace this puts method with dout
     def puts(str)
       puts str if debug
     end

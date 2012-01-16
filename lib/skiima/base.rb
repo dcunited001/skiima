@@ -25,22 +25,31 @@ module Skiima
   end
 
   class Base
-    attr_accessor *Skiima.instance_options
+    attr_accessor :project_root, :project_config_path, :config_file
+    attr_accessor :database_config_file, :skiima_path, :depends_file
+    attr_accessor :load_order, :logging_out, :logging_level
 
     def initialize(options = {})
       set_locale(options[:locale] || Skiima.locale)
 
-      Skiima.path_options.each do |opt|
-        instance_variable_set("@#{opt.to_s}", (options[opt] || Skiima.send(opt.to_s, true)))
-      end
+      @project_root = options[:project_root] || Skiima.project_root
+      @project_config_path = options[:project_config_path] || Skiima.project_config_path
+      @config_file = options[:config_file] || Skiima.config_file
 
-      Skiima.config_options.each do |opt|
-        instance_variable_set("@#{opt.to_s}", (options[opt] || Skiima.send(opt.to_s)))
-      end
+      config_yml = read_config_file(self.config_file)
+      @database_config_file = options[:database_config_file] || config_yml[:database_config_file] || Skiima.database_config_file
+      @skiima_path = options[:skiima_path] || config_yml['skiima_path'] || Skiima.skiima_path
+      @depends_file = options[:depends_file] || config_yml['depends_file'] || Skiima.depends_file
+
+      @load_order = options[:load_order] || config_yml['load_order'] || Skiima.load_order
+      @logging_out = options[:logging_out] || config_yml['logging_out'] || Skiima.logging_out
+      @logging_level = options[:logging_level] || config_yml['logging_level'] || Skiima.logging_level
+
+      @depends_config = read_depends_file(self.depends_file)
     end
 
     #============================================================
-    # Accessors
+    # Path Accessors
     #============================================================
     def project_root(get_relative = false)
       @project_root
@@ -71,6 +80,32 @@ module Skiima
     def set_locale(locale)
       FastGettext.text_domain = 'skiima'
       FastGettext.locale = locale.to_s
+    end
+
+    #============================================================
+    # Reading Config Files
+    #============================================================
+
+    def read_config_file(file)
+      begin
+        YAML::load_file(file) || {}
+      rescue => ex
+        # I know I can override Errno::XYZ,
+        #   but my goal here is to provide
+        #   a friendly error message
+        raise MissingFileException, "Could not open Skiima Config: #{file}!"
+      end
+    end
+
+    def read_depends_file(file)
+      begin
+        YAML::load_file(file) || {}
+      rescue => ex
+        # I know I can override Errno::XYZ,
+        #   but my goal here is to provide
+        #   a friendly error message
+        raise MissingFileException, "Could not open Dependencies Config: #{file}!"
+      end
     end
   end
 end
