@@ -30,3 +30,30 @@ Gem::Specification.new do |s|
   s.add_development_dependency "mocha", '~> 0.10.0'
 end
 
+# configuration interface
+# TODO: replace Skiima.project_path, project_config_path, config_file with {base_path}
+
+# logging
+# TODO: replace Skiima.puts
+# TODO: redirect logging to file
+# TODO: redirect logging to $errout
+
+# active support dependencies:
+# TODO: replace mattr_accessor
+# TODO: camelize (avoid namespace clash)
+# TODO: underscore (avoid namespace clash)
+
+# active record dependencies:
+# TODO: replace(avoid) execute_sql (replace with libraries?)
+# TODO: conditionally load sql dependencies
+
+# dependencies
+# TODO: parse tablenames dependencies hash
+# TODO: create a list of class names from dependencies hash
+
+# thor tasks
+# TODO: thor task to load all sets
+# TODO: thor task to load specific sets
+# TODO: delegate rake tasks to thor (how?)
+
+
