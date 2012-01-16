@@ -5,26 +5,18 @@ describe Skiima do
 
   describe "Module Configuration Options" do
     it 'should set the proper module defaults' do
-      project_config_path = File.join(SKIIMA_ROOT, 'config')
-      skiima_yml_file = File.join(project_config_path, 'skiima.yml')
-      db_config_file = File.join(project_config_path, 'database.yml')
-
-      skiima_path = File.join(SKIIMA_ROOT, 'db/skiima')
-      depends_file = File.join(skiima_path, 'depends.yml')
-
       Skiima.project_root.must_equal SKIIMA_ROOT
-      Skiima.project_config_path.must_equal project_config_path
-      Skiima.config_file.must_equal skiima_yml_file
-      Skiima.database_config_file.must_equal db_config_file
-
-      Skiima.skiima_path.must_equal skiima_path
-      Skiima.depends_file.must_equal depends_file
+      Skiima.project_config_path.must_equal 'config'
+      Skiima.config_file.must_equal 'skiima.yml'
+      Skiima.database_config_file.must_equal 'database.yml'
+      Skiima.skiima_path.must_equal 'db/skiima'
+      Skiima.depends_file.must_equal 'depends.yml'
     end
 
     it 'does not override module defaults with skiima.yml options' do
       Skiima.logging_level.must_equal '3'
+      Skiima.logging_out.must_equal '$stdout'
     end
-
   end
 
   describe "#message" do

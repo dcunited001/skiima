@@ -1,2 +1,3 @@
-load_order: sequential 
+load_order: sequential
+logging_out: $stdout
 logging_level: 9
