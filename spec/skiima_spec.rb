@@ -20,6 +20,11 @@ describe Skiima do
       Skiima.skiima_path.must_equal skiima_path
       Skiima.depends_file.must_equal depends_file
     end
+
+    it 'does not override module defaults with skiima.yml options' do
+      Skiima.logging_level.must_equal '3'
+    end
+
   end
 
   describe "#message" do

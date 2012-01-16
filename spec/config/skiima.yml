@@ -1,3 +1,2 @@
-options:
-  load_order: sequential  # future options may include 'intelligent'
-  debug: true
+load_order: sequential 
+logging_level: 9

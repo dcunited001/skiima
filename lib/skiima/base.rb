@@ -20,7 +20,7 @@ module Skiima
 
     def config_options
       [ :load_order,
-        :debug ]
+        :logging_level ]
     end
   end
 

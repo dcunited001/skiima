@@ -66,10 +66,9 @@ module Skiima
   # Config options
   #============================================================
   set_mod_accessors(
-    :load_order => :sequential,
-    :locale => :en,
-    :debug => false)
-    #logging => log_level?
+    :load_order => 'sequential',
+    :locale => 'en',
+    :logging_level => '3')
 
   #============================================================
   # Supported Databases & Objects (can be overridden in config block)
@@ -87,6 +86,8 @@ module Skiima
   #============================================================
   #mod_attr_accessor :model_classes
   #@@model_classes = []
+  #
+  # i would like to remove active record completely
 
   #============================================================
   # Loader Classes
