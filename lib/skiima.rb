@@ -19,7 +19,6 @@ module Skiima
   extend ModuleHelpers
 
   require 'skiima/base'
-  require 'skiima/logger'
   require 'skiima/exceptions'
   require 'skiima/runner'
 
