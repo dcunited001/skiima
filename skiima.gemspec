@@ -34,7 +34,7 @@ end
 # TODO: replace Skiima.project_path, project_config_path, config_file with {base_path}
 
 # logging
-# TODO: implement standard ruby logger
+# TODO: add logger messages
 
 # active support dependencies:
 # TODO: camelize (avoid namespace clash)
@@ -45,11 +45,11 @@ end
 # TODO: conditionally load sql dependencies
 
 # dependencies
-# TODO: parse tablenames dependencies hash
 # TODO: create a list of class names from dependencies hash
 # TODO: create base sql objects from depends.yml, without knowing if they are valid
 # TODO: get sql objects class to change itself into the appropriate subclass, post facto
-# TODO: change depends.yml structure to allow for separate dependency structures per adapter 
+# TODO: change depends.yml structure to allow for separate dependency structures per adapter
+# TODO: change depends.yml structure to accommodate multiple sql provider versions
 
 # thor tasks
 # TODO: thor task to load all sets
