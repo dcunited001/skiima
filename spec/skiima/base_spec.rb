@@ -4,14 +4,14 @@ require 'spec_helper'
 describe Skiima::Base do
   subject { Skiima::Base.new }
 
-  describe "#read_config" do
+  describe "#read_config_file" do
     let(:config_file) { File.join(SKIIMA_ROOT, 'config/skiima.yml') }
     let(:empty_config_file) { File.join(SKIIMA_ROOT, 'config/empty_skiima.yml') }
     let(:no_config_file) { File.join(SKIIMA_ROOT, 'db/skiima/not_there.yml') }
 
     it 'sets the config options' do
       config = subject.send(:read_config_file, config_file)
-      config['load_order'].must_equal 'sequential'
+      config['load_order'].must_equal 'Sequential'
       config['logging_out'].must_equal '$stdout'
       config['logging_level'].wont_be_nil
     end
@@ -23,31 +23,6 @@ describe Skiima::Base do
 
     it 'raises exception if config file can not be found' do
       proc { subject.send(:read_config_file, no_config_file) }.must_raise(Skiima::MissingFileException)
-    end
-  end
-
-  describe "#read_options" do
-    let(:depends_file) { File.join(SKIIMA_ROOT, 'db/skiima/depends.yml') }
-    let(:empty_depends_file) { File.join(SKIIMA_ROOT, 'db/skiima/empty_depends.yml') }
-    let(:no_depends_file) { File.join(SKIIMA_ROOT, 'db/skiima/not_there.yml') }
-
-    it 'sets an ordered array for each set of sql objects' do
-      depends = subject.send(:read_depends_file, depends_file)
-      depends['friends'].keys.must_include('view_friends', 'rule_view_friends_delete')
-    end
-
-    it 'sets an empty array if there are no sql objects for a set' do
-      empty_depends_set = subject.send(:read_depends_file, depends_file)
-      empty_depends_set['team_members'].must_be_nil
-    end
-
-    it 'returns an empty hash if there are no sets of sql objects' do
-      empty_depends = subject.send(:read_depends_file, empty_depends_file)
-      empty_depends.must_equal({})
-    end
-
-    it 'raises exception if depends file can not be found' do
-      proc { subject.send(:read_depends_file, no_depends_file) }.must_raise(Skiima::MissingFileException)
     end
   end
 
@@ -66,29 +41,43 @@ describe Skiima::Base do
     end
 
     it "overrides module defaults with options hash" do
-      ski_too = Skiima.new(:database_config_file => 'postgresql.yml')
+      ski_too = Skiima::Base.new(:database_config_file => 'postgresql.yml')
       ski_too.database_config_file.must_equal File.join(SKIIMA_ROOT, 'config', 'postgresql.yml')
     end
 
     it "overrides module defaults with skiima.yml" do
-      subject.logging_level.must_equal 9
+      subject.logger.level.must_equal ::Logger::DEBUG
+    end
+  end
+
+  describe "Logger: " do
+    it "creates a logger with the correct options" do
+      subject.logger.class.must_equal ::Logger
+    end
+  end
+
+  describe "Implementation: " do
+    let(:groups) { groups = %w(friend team_member) }
+    let(:scripts) do 
+      scripts = %w(view_friends rule_view_friends_delete rule_view_friends_insert).map {|s| Skiima::Dependency::Script.new('friend', s)} 
+    end
+
+    it "should take a list of strings and run their SQL up scripts for them" do
+      subject.expects(:execute_dependency_reader).with(groups).returns(scripts)
+      subject.expects(:execute_loader).with(:up, scripts).returns('Great Success!!')
+      subject.up(*groups)
+    end
+
+    it "should take a list of strings and run their SQL down scripts for them" do
+      subject.expects(:execute_dependency_reader).with(groups).returns(scripts)
+      subject.expects(:execute_loader).with(:down, scripts).returns('Great Success!!')
+      subject.down('friend', 'team_member')
+    end
+
+    describe "Errors: " do
+      it "should return a group not found error when a class/string can't be found in depends.yml" do
+        proc { subject.up('friendz', 'team_memberz') }.must_raise(Skiima::SqlGroupNotFound)
+      end
     end
   end
 end
-
-
-
-
-
-
-__END__
-
-
-      #
-      #Skiima.project_root.must_equal SKIIMA_ROOT
-      #Skiima.project_config_path.must_equal project_config_path
-      #Skiima.config_file.must_equal skiima_yml_file
-      #Skiima.database_config_file.must_equal db_config_file
-      #
-      #Skiima.skiima_path.must_equal skiima_path
-      #Skiima.depends_file.must_equal depends_file

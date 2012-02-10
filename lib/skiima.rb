@@ -2,6 +2,7 @@
 require 'skiima/version'
 
 require 'yaml'
+require 'logger'
 require 'fast_gettext'
 
 #tried to avoid using active_support,
@@ -18,6 +19,7 @@ module Skiima
   extend ModuleHelpers
 
   require 'skiima/base'
+  require 'skiima/logger'
   require 'skiima/exceptions'
   require 'skiima/runner'
 
@@ -40,6 +42,7 @@ module Skiima
   require 'skiima/sql_object/trigger'
 
   autoload :Dependency, 'skiima/dependency/reader'
+  require 'skiima/dependency/script'
   require 'skiima/dependency/sequential'
   require 'skiima/dependency/tree'
 
@@ -107,7 +110,20 @@ module Skiima
     end
 
     def new(opts = {})
-      Skiima::Base.new(opts)
+      #Skiima::Base.new(opts)
+    end
+
+    #============================================================
+    # Implementation methods
+    #============================================================
+    def up(*args)
+      opts = args.last.is_a?(Hash) ? args.pop : {}
+      Skiima.new(opts).up(*args)
+    end
+
+    def down(*args)
+      opts = args.last.is_a?(Hash) ? args.pop : {}
+      Skiima.new(opts).down(*args)
     end
 
     #============================================================
@@ -146,9 +162,9 @@ module Skiima
     #============================================================
     # Error output when debug mode is on
     #============================================================
-    def puts(str)
-      puts str if debug
-    end
+    #def puts(level, str)
+    #  puts str if level >= logging_level
+    #end
 
     def message(*args)
       locale = args.last.is_a?(Symbol) ? args.pop : default_locale
@@ -167,6 +183,4 @@ module Skiima
       Skiima.locale = locale.to_s
     end
   end
-
 end
-

@@ -1,28 +1,4 @@
-#classes:
-#  friend:
-#  team_member: team_member.rb
-#
-#   you'll need to describe the classes
-#     that you want skiima to manage here
-#
-#   if you want the default behavior of skiima
-#     add the class name in lower case (n.b. friend)
-#
-#   if for some reason, you want to override
-#     the behavior of Skiima::LoaderBase for
-#     a particular class, specify the file name
-#     which needs to be the same as the class name
-#     (n.b. team_member)  doing so allows you
-#     to write what ever behavior you want
-#     for the Skiima::LoaderBase create and drop methods
-#
-#   also, please note that skiima.yml is used
-#     to generate depends.yml, where you can
-#     specify the load order
-#
-#   don't worry, you can run `rails g skiima:depends`
-#     more than once without overwriting your files
-#
+# any options you specify here will override those specified in the Skiima.rb config block
 
 options:
   load_order: sequential  # future options may include 'intelligent'
