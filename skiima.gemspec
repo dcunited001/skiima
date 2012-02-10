@@ -34,12 +34,9 @@ end
 # TODO: replace Skiima.project_path, project_config_path, config_file with {base_path}
 
 # logging
-# TODO: replace Skiima.puts
-# TODO: redirect logging to file
-# TODO: redirect logging to $errout
+# TODO: implement standard ruby logger
 
 # active support dependencies:
-# TODO: replace mattr_accessor
 # TODO: camelize (avoid namespace clash)
 # TODO: underscore (avoid namespace clash)
 
@@ -50,6 +47,9 @@ end
 # dependencies
 # TODO: parse tablenames dependencies hash
 # TODO: create a list of class names from dependencies hash
+# TODO: create base sql objects from depends.yml, without knowing if they are valid
+# TODO: get sql objects class to change itself into the appropriate subclass, post facto
+# TODO: change depends.yml structure to allow for separate dependency structures per adapter 
 
 # thor tasks
 # TODO: thor task to load all sets
