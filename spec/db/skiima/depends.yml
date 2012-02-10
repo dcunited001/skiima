@@ -1,7 +1,7 @@
 friends:
-  view_friends:
-  rule_view_friends_delete:
-  rule_view_friends_insert:
+  - view_friends
+  - rule_view_friends_delete
+  - rule_view_friends_insert
 team_members:
 team_mates:
-  view_team_mates:
+  - view_team_mates

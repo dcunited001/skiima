@@ -16,3 +16,5 @@ pkg/*
 Desktop DB
 Desktop DF
 
+## Spec Logging
+spec/test.log

@@ -4,7 +4,6 @@
 module ModuleHelpers
   def set_mod_accessors(hash)
     hash.each_pair do |k,v|
-      #mattr_accessor(k)
       add_module_attr_reader(k)
       add_module_attr_writer(k)
       class_variable_set("@@#{k.to_s}", v)
