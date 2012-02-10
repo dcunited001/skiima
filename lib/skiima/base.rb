@@ -93,18 +93,7 @@ module Skiima
         # I know I can override Errno::XYZ,
         #   but my goal here is to provide
         #   a friendly error message
-        raise MissingFileException, "Could not open Skiima Config: #{file}!"
-      end
-    end
-
-    def read_depends_file(file)
-      begin
-        YAML::load_file(file) || {}
-      rescue => ex
-        # I know I can override Errno::XYZ,
-        #   but my goal here is to provide
-        #   a friendly error message
-        raise MissingFileException, "Could not open Dependencies Config: #{file}!"
+        raise MissingFileException, "Could not open Skiima Config! #{file}"
       end
     end
   end
