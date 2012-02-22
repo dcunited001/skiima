@@ -28,9 +28,6 @@ module Skiima
   require 'skiima/db_adapter/postgresql'
   require 'skiima/db_adapter/sqlserver'
 
-  autoload :Loader, 'skiima/loader/base'
-  # require 'blah'  # no implementations yet
-
   autoload :SqlObject, 'skiima/sql_object/base'
   require 'skiima/sql_object/table'
   require 'skiima/sql_object/index'
@@ -40,10 +37,8 @@ module Skiima
   require 'skiima/sql_object/rule'
   require 'skiima/sql_object/trigger'
 
-  autoload :Dependency, 'skiima/dependency/reader'
-  require 'skiima/dependency/script'
-  require 'skiima/dependency/sequential'
-  require 'skiima/dependency/tree'
+  autoload :Loader, 'skiima/loader'
+  autoload :Dependency, 'skiima/dependency'
 
   #not sure why this didn't work.
   #Dir[File.join('skiima', 'db_adapter', '**')].each { |rb| require rb if rb != 'base.rb'}
