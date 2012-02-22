@@ -44,6 +44,12 @@ end
 # TODO: replace(avoid) execute_sql (replace with libraries?)
 # TODO: conditionally load sql dependencies
 
+# sql objects:
+# whats the best way to manage different formats for different providers
+# a means of stating which objects are supported for each provider.
+# a means of extending the supported objects for each provider.
+# a means of changing formats per version of database
+
 # dependencies
 # TODO: create a list of class names from dependencies hash
 # TODO: create base sql objects from depends.yml, without knowing if they are valid
@@ -55,5 +61,3 @@ end
 # TODO: thor task to load all sets
 # TODO: thor task to load specific sets
 # TODO: delegate rake tasks to thor (how?)
-
-

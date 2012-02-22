@@ -22,11 +22,9 @@ module Skiima
   require 'skiima/exceptions'
   require 'skiima/runner'
 
-  #there's got to be a better way to load these files
-  autoload :DbAdapter, 'skiima/db_adapter/base'
-  require 'skiima/db_adapter/mysql'
-  require 'skiima/db_adapter/postgresql'
-  require 'skiima/db_adapter/sqlserver'
+  autoload :DbAdapter, 'skiima/db_adapter'
+  autoload :Loader, 'skiima/loader'
+  autoload :Dependency, 'skiima/dependency'
 
   autoload :SqlObject, 'skiima/sql_object/base'
   require 'skiima/sql_object/table'
@@ -37,8 +35,6 @@ module Skiima
   require 'skiima/sql_object/rule'
   require 'skiima/sql_object/trigger'
 
-  autoload :Loader, 'skiima/loader'
-  autoload :Dependency, 'skiima/dependency'
 
   #not sure why this didn't work.
   #Dir[File.join('skiima', 'db_adapter', '**')].each { |rb| require rb if rb != 'base.rb'}
