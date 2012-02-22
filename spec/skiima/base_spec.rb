@@ -12,7 +12,7 @@ describe Skiima::Base do
     it 'sets the config options' do
       config = subject.send(:read_config_file, config_file)
       config['load_order'].must_equal 'Sequential'
-      config['logging_out'].must_equal '$stdout'
+      config['logging_out'].must_equal 'STDOUT'
       config['logging_level'].wont_be_nil
     end
 
