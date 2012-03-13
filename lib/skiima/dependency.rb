@@ -11,11 +11,13 @@ module Skiima
 
     class Reader
       attr_accessor :sql_scripts
-      attr_accessor :depends_config
+      attr_accessor :depends_config, :adapter, :version
       attr_accessor :object_types
 
       def initialize(options = {})
         @depends_config = read_depends_file(options[:depends_file])
+        @adapter = options[:adapter]
+        @version = options[:version] || :current
         @object_types = options[:object_types] || get_object_types(options[:adapter])
       end
 
@@ -28,18 +30,11 @@ module Skiima
       end
 
       def get_object_types(adapter)
-
+        
       end
 
       def read_depends_file(file)
-        begin
-          YAML::load_file(file) || {}
-        rescue => ex
-          # I know I can override Errno::XYZ,
-          #   but my goal here is to provide
-          #   a friendly error message
-          raise MissingFileException, "Could not open Dependencies Config! #{file}"
-        end
+        Skiima.read_yaml_or_throw(file,  MissingFileException, "Could not open Dependencies Config! #{file}")
       end
     end
 

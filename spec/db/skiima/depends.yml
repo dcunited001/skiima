@@ -1,7 +1,18 @@
+---
 friends:
-  - view_friends
-  - rule_view_friends_delete
-  - rule_view_friends_insert
+  mysql:
+    current:
+      - view.friends
+  postgresql:
+    current:
+      - view.friends
+      - rule.view_friends_delete
+      - rule.view_friends_insert
 team_members:
 team_mates:
-  - view_team_mates
+  mysql:
+    current:
+      - view.team_mates
+  postgresql:
+    current:
+      - view.team_mates

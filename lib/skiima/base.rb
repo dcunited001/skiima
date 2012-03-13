@@ -4,7 +4,8 @@ module Skiima
     attr_accessor :project_root, :project_config_path, :config_file
     attr_accessor :database_config_file, :skiima_path, :depends_file
     attr_accessor :depends_reader, :logger
-    attr_accessor :load_order 
+    attr_accessor :load_order
+    attr_accessor :db_config
 
     def initialize(options = {})
       set_locale(options[:locale] || Skiima.locale)
@@ -13,14 +14,16 @@ module Skiima
       @project_config_path = options[:project_config_path] || Skiima.project_config_path
       @config_file = options[:config_file] || Skiima.config_file
 
-      config_yml = read_config_file(self.config_file)
+      config_yml = read_config(self.config_file)
       @database_config_file = options[:database_config_file] || config_yml[:database_config_file] || Skiima.database_config_file
-      @skiima_path = options[:skiima_path] || config_yml['skiima_path'] || Skiima.skiima_path
-      @depends_file = options[:depends_file] || config_yml['depends_file'] || Skiima.depends_file
-      @load_order = options[:load_order] || config_yml['load_order'] || Skiima.load_order
+      @skiima_path = options[:skiima_path] || config_yml[:skiima_path] || Skiima.skiima_path
+      @depends_file = options[:depends_file] || config_yml[:depends_file] || Skiima.depends_file
+      @load_order = options[:load_order] || config_yml[:load_order] || Skiima.load_order
+
+      @database_config = read_database_config(self.database_config_file)
       
-      logging_level = options[:logging_level] || config_yml['logging_level'] || Skiima.logging_level
-      logging_out = options[:logging_out] || config_yml['logging_out'] || Skiima.logging_out
+      logging_level = options[:logging_level] || config_yml[:logging_level] || Skiima.logging_level
+      logging_out = options[:logging_out] || config_yml[:logging_out] || Skiima.logging_out
 
       @logger = ::Logger.new(get_logger_out(logging_out))
       @logger.level = get_logger_level(logging_level)
@@ -103,20 +106,20 @@ module Skiima
     end
 
     def get_logger_out(str)
-      case
-        when (str =~ /STDOUT/i) then ::STDOUT
-        when (str =~ /STDERR/i) then ::STDERR
+      case str
+        when /STDOUT/i then ::STDOUT
+        when /STDERR/i then ::STDERR
         else File.join(project_root, str)
       end
     end
 
     def get_logger_level(str)
-      case
-        when (str == '4' or str =~ /fatal/i) then ::Logger::FATAL
-        when (str == '3' or str =~ /error/i) then ::Logger::ERROR
-        when (str == '2' or str =~ /warn/i) then ::Logger::WARN
-        when (str == '1' or str =~ /info/i) then ::Logger::INFO
-        when (str == '0' or str =~ /debug/i) then ::Logger::DEBUG
+      case str
+        when '4', /fatal/i then ::Logger::FATAL
+        when '3', /error/i then ::Logger::ERROR
+        when '2', /warn/i  then ::Logger::WARN
+        when '1', /info/i  then ::Logger::INFO
+        when '0', /debug/i then ::Logger::DEBUG
         else ::Logger::ERROR
       end
     end
@@ -125,15 +128,12 @@ module Skiima
     # Reading Config Files
     #============================================================
 
-    def read_config_file(file)
-      begin
-        YAML::load_file(file) || {}
-      rescue => ex
-        # I know I can override Errno::XYZ,
-        #   but my goal here is to provide
-        #   a friendly error message
-        raise MissingFileException, "Could not open Skiima Config! #{file}"
-      end
+    def read_config(file)
+      Skiima.read_yaml_or_throw(file, MissingFileException, "Could not open Skiima Config! #{file}")
+    end
+
+    def read_database_config(file)
+      Skiima.read_yaml_or_throw(file, MissingFileException, "Could not open Database Config! #{file}")
     end
   end
 end

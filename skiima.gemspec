@@ -41,10 +41,14 @@ end
 # TODO: underscore (avoid namespace clash)
 
 # active record dependencies:
-# TODO: replace(avoid) execute_sql (replace with libraries?)
 # TODO: conditionally load sql dependencies
+# TODO: create loader class or loader method (See ActiveRecord::Base::ConnectionSpecification::Resolver)
+# TODO: implement Postgresql adapter
+# TODO: find best place for 
 
 # sql objects:
+# change sql file formatting to include versioning
+# how to obtain database version over connection?
 # whats the best way to manage different formats for different providers
 # a means of stating which objects are supported for each provider.
 # a means of extending the supported objects for each provider.

@@ -10,19 +10,19 @@ describe Skiima::Base do
     let(:no_config_file) { File.join(SKIIMA_ROOT, 'db/skiima/not_there.yml') }
 
     it 'sets the config options' do
-      config = subject.send(:read_config_file, config_file)
-      config['load_order'].must_equal 'Sequential'
-      config['logging_out'].must_equal 'STDOUT'
-      config['logging_level'].wont_be_nil
+      config = subject.send(:read_config, config_file)
+      config[:load_order].must_equal 'Sequential'
+      config[:logging_out].must_equal 'STDOUT'
+      config[:logging_level].wont_be_nil
     end
 
     it 'returns an empty hash if config file is empty' do
-      empty_config = subject.send(:read_config_file, empty_config_file)
+      empty_config = subject.send(:read_config, empty_config_file)
       empty_config.must_equal({})
     end
 
     it 'raises exception if config file can not be found' do
-      proc { subject.send(:read_config_file, no_config_file) }.must_raise(Skiima::MissingFileException)
+      proc { subject.send(:read_config, no_config_file) }.must_raise(Skiima::MissingFileException)
     end
   end
 

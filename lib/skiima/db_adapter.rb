@@ -4,11 +4,10 @@ module Skiima
     class Base
       attr_accessor :supported_objects
       attr_accessor :supported_object_classes
+      attr_accessor :current_connection
 
-      def initialize(options = {})
-        @supported_objects = options[:supported_objects]
-        @supported_objects ||= get_supported_objects
-
+      def initialize(opts = {})
+        @supported_objects = (opts.delete(:supported_objects) || get_supported_objects)
         @supported_object_classes = get_supported_object_classes
       end
 
@@ -35,19 +34,15 @@ module Skiima
       #needed to get the class name
       #   of classes that inherit
       #   from SqlLoaderBase
-      def self.relative_name
-        name.to_s.split('::').last
-      end
+      # def self.relative_name
+      #   name.to_s.split('::').last
+      # end
 
-      def self.get_adapter_class(db_adapter_sym)
-        self.subclasses.each do |sc|
-          return sc if sc.relative_name.underscore == db_adapter_sym.to_s
-        end
-      end
+      # def self.get_adapter_class(db_adapter_sym)
+      #   self.subclasses.each do |sc|
+      #     return sc if sc.relative_name.underscore == db_adapter_sym.to_s
+      #   end
+      # end
     end
-
-    class Mysql < Base; end
-    class Postgresql < Base; end
-    class Sqlserver < Base; end
   end
 end

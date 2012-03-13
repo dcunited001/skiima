@@ -25,7 +25,6 @@ module Skiima
   autoload :DbAdapter, 'skiima/db_adapter'
   autoload :Loader, 'skiima/loader'
   autoload :Dependency, 'skiima/dependency'
-
   autoload :SqlObject, 'skiima/sql_object/base'
   require 'skiima/sql_object/table'
   require 'skiima/sql_object/index'
@@ -43,6 +42,7 @@ module Skiima
 
   # Dynamically set inheritance in Ruby
   #http://stackoverflow.com/questions/3127069/how-to-dynamically-alter-inheritance-in-ruby
+
 
   #============================================================
   # Base Config Paths (Can only override with config block)
@@ -147,6 +147,16 @@ module Skiima
         klass_sym = klass.relative_name.underscore.to_sym
         supported_classes[klass_sym] = klass if @@supported_dependency_readers.include? (klass_sym)
       end
+    end
+
+    def read_yaml_or_throw(file, errclass, errmsg)
+      yaml = begin
+        YAML::load_file(file) || {}
+      rescue => ex
+        raise errclass, errmsg
+      end
+
+      Skiima.symbolize_keys(yaml)
     end
 
     #============================================================
