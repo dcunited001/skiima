@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
 
   # i've tried to remove this dependancy,
   #   but i rely too much on camelize and esp singularize
-  s.add_dependency "active_support", '~> 3'
   s.add_dependency "fast_gettext", '~> 0.6.0'
 
   s.add_development_dependency "bundler", '>= 1.0.21'
