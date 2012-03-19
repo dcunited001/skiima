@@ -10,7 +10,7 @@ Skiima is a work in progress with the following goals:
 
 I was working on another project and added some cool features that relied on postgres views, rules, etc.  And basically, I needed a place to put these scripts and a way to execute them in a specified order.  
 
-There are alot of cool tricks you use in ActiveRecord with sql objects other than tables.  Not to mention there are performance benefits with the right schema.  Not everything needs to happen at the application layer.
+There are alot of cool tricks to use in ActiveRecord with sql objects other than tables.  Not to mention there are performance benefits with the right schema.  Not everything needs to happen at the application layer.
 
 If you have any questions about how things work, look at the tests.  If you have any suggestions, don't hesitate to contact me.
 

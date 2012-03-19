@@ -19,8 +19,6 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  # i've tried to remove this dependancy,
-  #   but i rely too much on camelize and esp singularize
   s.add_dependency "fast_gettext", '~> 0.6.0'
   s.add_dependency "erubis", '~> 2.7.0'
 
@@ -30,38 +28,19 @@ Gem::Specification.new do |s|
   s.add_development_dependency "mocha", '~> 0.10.0'
 end
 
-# configuration interface
-# TODO: replace Skiima.project_path, project_config_path, config_file with {base_path}
+# Logging
+# TODO: add logging messages
+# TODO: convert to i18n messages
 
-# logging
-# TODO: add logger messages
+# Mysql Adapter
+# TODO: add base mysql adapter
+# TODO: add mysql adapter
+# TODO: add mysql2 adapter
 
-# active support dependencies:
-# TODO: camelize (avoid namespace clash)
-# TODO: underscore (avoid namespace clash)
+# Refactor:
+# 
 
-# active record dependencies:
-# TODO: conditionally load sql dependencies
-# TODO: create loader class or loader method (See ActiveRecord::Base::ConnectionSpecification::Resolver)
-# TODO: implement Postgresql adapter
-# TODO: find best place for 
-
-# sql objects:
-# change sql file formatting to include versioning
-# how to obtain database version over connection?
-# whats the best way to manage different formats for different providers
-# a means of stating which objects are supported for each provider.
-# a means of extending the supported objects for each provider.
-# a means of changing formats per version of database
-
-# dependencies
-# TODO: create a list of class names from dependencies hash
-# TODO: create base sql objects from depends.yml, without knowing if they are valid
-# TODO: get sql objects class to change itself into the appropriate subclass, post facto
-# TODO: change depends.yml structure to allow for separate dependency structures per adapter
-# TODO: change depends.yml structure to accommodate multiple sql provider versions
-
-# thor tasks
+# Thor tasks
 # TODO: thor task to load all sets
 # TODO: thor task to load specific sets
 # TODO: delegate rake tasks to thor (how?)
