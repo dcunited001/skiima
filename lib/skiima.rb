@@ -4,6 +4,7 @@ require 'skiima/version'
 require 'yaml'
 require 'logger'
 require 'fast_gettext'
+require 'erubis'
 
 require 'skiima_helpers'
 
@@ -121,7 +122,9 @@ module Skiima
 
     def read_yaml_or_throw(file, errclass, errmsg)
       yaml = begin
-        YAML::load_file(file) || {}
+        input = File.read(file)
+        eruby = Erubis::Eruby.new(input)
+        YAML::load(eruby.result(binding())) || {}
       rescue => ex
         raise errclass, errmsg
       end
