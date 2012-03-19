@@ -1,0 +1,20 @@
+---
+en:
+  simple: easy
+  date:
+    relative: "%{relative_time} ago"
+
+  messages:
+    errors:
+      open_db_yaml: Could not open Skiima Database Config!
+      open_depends_yaml: Could not open Skiima Depends Config!
+    create:
+      start: Creating objects for @class
+      error: Encountered errors creating @class objects -
+      no_error: All @class objects created successfully!
+      delimiter: =================================
+    drop:
+      start: Dropping objects for @class
+      error: Encountered errors dropping @class objects -
+      no_error: All @class objects dropped successfully!
+      delimiter: =================================

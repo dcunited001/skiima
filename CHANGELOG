@@ -2,3 +2,7 @@
 
 * Determining the layout for modules, classes and tasks
 
+** PRERELEASE 0.0.010
+
+* Major changes to interface.  Added version subgroup.  Removed skiima.yml.  Removed ActiveRecord.
+* Added support for Postgres: databases, schemas, tables, indexes, views, rules.

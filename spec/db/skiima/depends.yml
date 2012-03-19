@@ -1,0 +1,49 @@
+---
+init_test_db:
+  mysql:
+    current:
+      - database.skiima_test
+  postgresql:
+    current:
+      - database.skiima_test
+test_table:
+  mysql:
+    current:
+      - table.test_table
+  postgresql:
+    current:
+      - table.test_table
+test_index:
+  mysql:
+    current:
+      - index.test_index.test_table
+  postgresql:
+    current:
+      - index.test_index.test_table
+test_schema:
+  mysql:
+    current:
+      - schema.test_schema
+  postgresql:
+    current:
+      - schema.test_schema
+test_view:
+  mysql:
+    current:
+      - view.test_view
+  postgresql:
+    current:
+      - view.test_view
+test_rule:
+  postgresql:
+    current:
+      - rule.test_rule.test_view
+blank_group:
+  mysql:
+  postgresql:
+only_pg:
+  mysql:
+  postgresql:
+    current:
+      - table.only_pg
+      - view.pg_only

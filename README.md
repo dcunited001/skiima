@@ -1,1 +1,69 @@
-### Nucular option.
+Skiima: an ORM-Agnostic, Rails-Independent alternative to migrations.
+------------------------
+
+#### Goals:
+Skiima is a work in progress with the following goals:
+
+* Provide a better way to integrate views and functions into Ruby applications.
+* Embeddable in gems to create DB independent extensions.
+* Avoid any unnecessary dependencies or complexity.
+
+I was working on another project and added some cool features that relied on postgres views, rules, etc.  And basically, I needed a place to put these scripts and a way to execute them in a specified order.  
+
+There are alot of cool tricks you use in ActiveRecord with sql objects other than tables.  Not to mention there are performance benefits with the right schema.  Not everything needs to happen at the application layer.
+
+If you have any questions about how things work, look at the tests.  If you have any suggestions, don't hesitate to contact me.
+
+As of now, Skiima only works with Postgres and with a limited number of objects.  Mysql will be added shortly.
+
+#### Interface:
+##### Config Files
+Skiima reads two yaml files: database.yml and depends.yml.  
+
+- By default, `database.yml` goes in your `APP_ROOT/config directory`.
+- And similarly, `depends.yml` goes in `APP_ROOT/db/skiima`.
+
+##### Groups
+Skiima allows you to create groups of sql scripts to be executed during migrations.  Each group of sql scripts requires its own folder inside `db/skiima`.
+
+##### Adapter and Version
+Since different databases have different capabilities and object types, you can trigger different scripts to run per adapter.  Furthermore, you can execute different scripts for different versions of a database.  You can also use this version tag if you want to package different sets of functionality.
+
+##### Depends.yml Format
+In the `depends.yml` configuration, add lines for each script in the format.
+
+* `type.name.attr1.attr2`
+
+`attr1` and `attr2` allow you to define the target SQL object and other attributes that need to be passed on a per type basis.  This is only used when Skiima drops your objects without a matching 'drop' script.
+
+##### Filename Format
+Inside each group folder, create sql files with the following format.  These need to match the `depends.yml` configuration.  
+
+* `type.name.adapter.version.sql`
+* `type.name.adapter.version.drop.sql` to override the default drop behavior.
+
+##### Interpolation in Scripts
+You can interpolate variables in your SQL Scripts and then pass in values at runtime with the `:vars` hash.  The default character to use for interpolation is `&`, but this can be changed in the Module initialization.  There are default vars that are substituted, such as `&database`.
+
+##### Module Initialization
+If you're using Rails, you can add a Skiima.setup block in an intializer file to set defaults.  There are other ways to integrate Skiima into your project as well.
+
+    Skiima.setup do |config|
+      config.root_path = Rails.root # changing
+      config.config_path = 'config'
+      config.scripts_path = 'db/skiima'
+      config.locale = :en
+    end
+
+##### Finally, in your Migrations
+Skiima reads the specified groups from depends.yml and compiles a list of scripts to run.  If you're using Rails, substitute `:development` with `Rails.env`
+
+    def up
+      Skiima.up(:development, :group_one, :group_n, :vars => {:var_one => 'db_name'})
+    end
+    
+    def down
+      Skiima.down(:development, :group_one, :group_n, :vars => {:var_one => 'db_name'})
+    end
+
+#### yes, i know i am shamelessly biting activerecord code.  
