@@ -153,6 +153,7 @@ module Skiima
   #DbAdapterExceptions
   class AdapterNotSpecified < BaseException; end
   class LoadError < BaseException; end
+  class StatementInvalid < BaseException; end
 
   class Loader
     attr_accessor :config, :logger
@@ -160,9 +161,11 @@ module Skiima
     attr_accessor :scripts
 
     def initialize(env, opts = {})
+      db_config = Skiima.symbolize_keys(opts[:db] || {})
+
       self.config = Skiima.config.merge(opts)
       create_logger
-      @db = Skiima.symbolize_keys(Skiima.read_db_yaml(full_database_path)[env])
+      @db = Skiima.symbolize_keys(Skiima.read_db_yaml(full_database_path)[env].merge(db_config))
       make_connection
       @depends = Skiima.read_depends_yaml(full_depends_path)
     end
