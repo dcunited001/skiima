@@ -14,7 +14,23 @@ There are alot of cool tricks to use in ActiveRecord with sql objects other than
 
 If you have any questions about how things work, look at the tests.  If you have any suggestions, don't hesitate to contact me.
 
-As of now, Skiima only works with Postgres and with a limited number of objects.  Mysql will be added shortly.
+#### Supported Databases:
+##### Postgres
+
+- Schemas
+- Tables
+- Indexes
+- Views
+- Rules
+
+##### Mysql
+
+- Tables
+- Views
+
+##### Mysql2
+
+- Adapter soon
 
 #### Interface:
 ##### Config Files
