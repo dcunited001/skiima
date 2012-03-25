@@ -199,16 +199,16 @@ module Skiima
       # Executes an SQL statement, returning a PGresult object on success
       # or raising a PGError exception otherwise.
       def execute(sql, name = nil)
-        Skiima.log_message(@logger, "Executing SQL Statement #{name}")
-        Skiima.log_message(@logger, sql)
-        @connection.async_exec(sql)
+        log(sql, name) do
+          @connection.async_exec(sql)
+        end
       end
 
       # Queries the database and returns the results in an Array-like object
       def query(sql, name = nil) #:nodoc:
-        Skiima.log_message(@logger, "Executing SQL Query #{name}")
-        Skiima.log_message(@logger, sql)
-        result_as_array @connection.async_exec(sql)
+        log(sql, name) do
+          result_as_array @connection.async_exec(sql)
+        end
       end
 
       # create a 2D array representing the result set
@@ -360,6 +360,18 @@ module Skiima
 
       def get_timezone
         execute('SHOW TIME ZONE', 'SCHEMA').first["TimeZone"]
+      end
+
+      def translate_exception(e, message)
+        e
+        # case exception.message
+        # when /duplicate key value violates unique constraint/
+        #   RecordNotUnique.new(message, exception)
+        # when /violates foreign key constraint/
+        #   InvalidForeignKey.new(message, exception)
+        # else
+        #   super
+        # end
       end
 
       private 

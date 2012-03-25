@@ -139,12 +139,11 @@ module Skiima
       protected 
 
       def log(sql, name = "SQL", binds = [])
-        @instrumenter.instrument(
-          "sql.active_record",
-          :sql           => sql,
-          :name          => name,
-          :connection_id => object_id,
-          :binds         => binds) { yield }
+        @logger.debug("Executing SQL Statement: #{name}")
+        @logger.debug(sql)
+        result = yield
+        @logger.debug("SUCCESS!")
+        result
       rescue Exception => e
         message = "#{e.class.name}: #{e.message}: #{sql}"
         @logger.debug message if @logger
@@ -155,7 +154,7 @@ module Skiima
 
       def translate_exception(e, message)
         # override in derived class
-        ActiveRecord::StatementInvalid.new(message)
+        raise "override in derived class"
       end
 
     end
@@ -180,7 +179,7 @@ module Skiima
         begin
           require "skiima/db_adapters/#{db[:adapter]}_adapter"
         rescue => e
-          raise LoadError, "Please install the #{db[:adapter]} adapter: `gem install activerecord-#{db[:adapter]}-adapter` (#{e.message})", e.backtrace
+          raise LoadError, "Adapter does not exist: #{db[:adapter]} - (#{e.message})", e.backtrace
         end
       end
     end

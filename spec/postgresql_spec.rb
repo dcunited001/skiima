@@ -12,7 +12,7 @@ describe "Postgresql: " do
       end
     end
 
-    it "should get the timestamp" do
+    it "should get the timezone" do
       ensure_closed(ski) do |s|
         s.connection.local_tz.must_be_instance_of String
       end
@@ -20,7 +20,9 @@ describe "Postgresql: " do
   end
 
   describe "Create/Drop Databases: " do
-    
+    it "should be able to create and drop databases" do
+      skip # permissions
+    end
   end
 
   describe "Create/Drop Table: " do
@@ -37,7 +39,7 @@ describe "Postgresql: " do
     end
 
     it "should handle multiple schemas in a database" do
-
+      skip # pending
     end
   end
 
@@ -112,6 +114,10 @@ describe "Postgresql: " do
         end
       end
     end
+  end
+
+  describe "Create/Drop Users" do
+
   end
 end
 
