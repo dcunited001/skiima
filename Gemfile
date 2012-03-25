@@ -11,7 +11,7 @@ group :development do
   gem 'rake'
 
   gem 'pg'
-  # gem 'mysql'
+  gem 'mysql'
   # gem 'mysql2'
 end
 
