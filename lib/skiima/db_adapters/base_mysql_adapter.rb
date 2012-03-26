@@ -108,6 +108,10 @@ module Skiima
         execute("RELEASE SAVEPOINT #{current_savepoint_name}")
       end
 
+      def supported_objects
+        [:database, :table, :view, :index]
+      end
+
       def tables(name = nil, database = nil, like = nil)
         sql = "SHOW FULL TABLES "
         sql << "IN #{database} " if database
@@ -130,8 +134,15 @@ module Skiima
         end
       end
 
-      def supported_objects
-        [:database, :table, :view, :index]
+      def indexes(name = nil, database = nil, table = nil)
+        sql = "SHOW INDEX "
+        sql << "IN #{table} "
+        sql << "IN #{database} " if database
+        sql << "WHERE key_name = '#{name}'" if name
+
+        execute_and_free(sql, 'SCHEMA') do |result|
+          result.collect { |field| field[2] }
+        end
       end
 
       def database_exists?(name)
@@ -168,6 +179,25 @@ module Skiima
         views(nil, schema, view).any?
       end
 
+      def index_exists?(name, opts = {})
+        target = opts[:attr] ? opts[:attr][0] : nil
+        raise "requires target object" unless target
+
+        return false unless table_exists?(target) #mysql blows up when table doesn't exist
+        return false unless name
+        return true if indexes(name, nil, target).any?
+
+        name           = name.to_s
+        schema, target = name.split('.', 2)
+
+        unless target # A table was provided without a schema
+          target  = schema
+          schema = nil
+        end
+
+        indexes(name, schema, target).any?
+      end
+
       def drop_database(name, opts = {})
         "DROP DATABASE IF EXISTS #{name}"
       end
@@ -178,6 +208,13 @@ module Skiima
 
       def drop_view(name, opts = {})
         "DROP VIEW IF EXISTS #{name}"
+      end
+
+      def drop_index(name, opts = {})
+        target = opts[:attr].first if opts[:attr]
+        raise "requires target object" unless target
+
+        "DROP INDEX #{name} ON #{target}"
       end
 
       def current_database

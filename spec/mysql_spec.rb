@@ -51,4 +51,20 @@ describe "Mysql: " do
     end
   end
 
+  describe "Create/Drop Index: " do
+    it 'should be able to create and drop indexes' do
+      ensure_closed(ski) do |s|
+        s.connection.table_exists?('test_table').must_equal false
+        s.connection.index_exists?('test_index', :attr => ['test_table']).must_equal false
+
+        s.up(:test_table, :test_index)
+        s.connection.table_exists?('test_table').must_equal true
+        s.connection.index_exists?('test_index', :attr => ['test_table']).must_equal true
+
+        s.down(:test_table, :test_index)
+        s.connection.table_exists?('test_table').must_equal false
+        s.connection.index_exists?('test_index', :attr => ['test_table']).must_equal false
+      end
+    end
+  end
 end
