@@ -22,15 +22,6 @@ describe Skiima::Dependency::Script do
     end
   end
 
-  describe "#adapter" do
-    it 'should return mysql if using a mysql/mysql2 adapter' do
-      subject.adapter = 'mysql'
-      subject.adapter.must_equal 'mysql'
-      subject.adapter = 'mysql2'
-      subject.adapter.must_equal 'mysql'
-    end
-  end
-
   describe "#filename" do
     it 'should return the filename' do
       subject.filename.must_equal "#{subject.type}.#{subject.name}.#{adapter}.#{version}.sql"
@@ -71,6 +62,15 @@ describe Skiima::Dependency::Reader do
   describe "#initialize" do
     it 'should default the version to current' do
       subject.version.must_equal :current
+    end
+  end
+
+  describe "#adapter" do
+    it 'should return mysql if using a mysql/mysql2 adapter' do
+      subject.adapter = 'mysql'
+      subject.adapter.must_equal :mysql
+      subject.adapter = 'mysql2'
+      subject.adapter.must_equal :mysql
     end
   end
 

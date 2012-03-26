@@ -17,6 +17,10 @@ module Skiima
         @quoted_column_names, @quoted_table_names = {}, {}
       end
 
+      def version
+        @version ||= @connection.info[:version].scan(/^(\d+)\.(\d+)\.(\d+)/).flatten.map { |v| v.to_i }
+      end
+
       def adapter_name #:nodoc:
         self.class::ADAPTER_NAME
       end
@@ -50,6 +54,13 @@ module Skiima
         ensure
           update("SET FOREIGN_KEY_CHECKS = #{old}")
         end
+      end
+
+      # MysqlAdapter has to free a result after using it, so we use this method to write
+      # stuff in a abstract way without concerning ourselves about whether it needs to be
+      # explicitly freed or not.
+      def execute_and_free(sql, name = nil) #:nodoc:
+        yield execute(sql, name)
       end
 
       # Executes the SQL statement in the context of this connection.
@@ -121,6 +132,10 @@ module Skiima
 
       def supported_objects
         [:database, :table, :view, :index]
+      end
+
+      def database_exists?(name)
+        #stub
       end
 
       def table_exists?(name)

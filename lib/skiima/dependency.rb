@@ -10,15 +10,8 @@ module Skiima
         set_attr(scriptname)
       end
 
-      def adapter
-        case @adapter.to_s
-        when 'mysql', 'mysql2' then 'mysql'
-        else @adapter
-        end
-      end
-
       def filename
-        @filename = [@type,@name,@adapter,@version,'sql'].join('.')
+        @filename = [@type,@name,@adapter.to_s,@version,'sql'].join('.')
       end
 
       def read_content(direction, root)
@@ -56,6 +49,13 @@ module Skiima
       def initialize(depends, adapter, opts = {})
         @depends, @adapter = depends, adapter.to_sym
         @version = opts[:version] || :current
+      end
+
+      def adapter
+        case @adapter.to_s
+        when 'mysql', 'mysql2' then :mysql
+        else @adapter
+        end
       end
 
       def get_group(g)

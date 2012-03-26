@@ -1,9 +1,9 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe "Mysql: " do
+describe "Mysql2: " do
   let(:db_config) { {} }
-  let(:ski) { Skiima.new(:mysql_test) }
+  let(:ski) { Skiima.new(:mysql2_test) }
 
   describe "Connection Setup: " do
     it "should get the version" do
@@ -16,10 +16,14 @@ describe "Mysql: " do
       db_config.merge!(:encoding => 'utf-8')
       skip
     end
+
+    it "can set a different timezone" do
+      skip
+    end
   end
 
   describe "Create/Drop Database: " do
-
+    
   end  
 
   describe "Create/Drop Tables: " do
@@ -50,5 +54,4 @@ describe "Mysql: " do
       end
     end
   end
-
 end

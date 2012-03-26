@@ -12,7 +12,7 @@ group :development do
 
   gem 'pg'
   gem 'mysql'
-  # gem 'mysql2'
+  gem 'mysql2'
 end
 
 if Config::CONFIG['target_os'] =~ /darwin/i
