@@ -217,6 +217,25 @@ module Skiima
         "DROP INDEX #{name} ON #{target}"
       end
 
+      def column_definitions(table_name)
+        # "SHOW FULL FIELDS FROM #{quote_table_name(table_name)}"
+      end
+
+      def column_names(table_name)
+        sql = "SHOW FULL FIELDS FROM #{quote_table_name(table_name)}"
+        execute_and_free(sql, 'SCHEMA') do |result|
+          result.collect { |field| field.first }
+        end
+      end
+
+      def quote_column_name(name) #:nodoc:
+        @quoted_column_names[name] ||= "`#{name.to_s.gsub('`', '``')}`"
+      end
+
+      def quote_table_name(name) #:nodoc:
+        @quoted_table_names[name] ||= quote_column_name(name).gsub('.', '`.`')
+      end
+
       def current_database
         select_value 'SELECT DATABASE() as db'
       end

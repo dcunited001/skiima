@@ -22,10 +22,29 @@ module Skiima
   end
 
   module DbAdapters
+
     class PostgresqlAdapter < Base
       attr_accessor :version, :local_tz
 
       ADAPTER_NAME = 'PostgreSQL'
+
+      NATIVE_DATABASE_TYPES = {
+        :primary_key => "serial primary key",
+        :string      => { :name => "character varying", :limit => 255 },
+        :text        => { :name => "text" },
+        :integer     => { :name => "integer" },
+        :float       => { :name => "float" },
+        :decimal     => { :name => "decimal" },
+        :datetime    => { :name => "timestamp" },
+        :timestamp   => { :name => "timestamp" },
+        :time        => { :name => "time" },
+        :date        => { :name => "date" },
+        :binary      => { :name => "bytea" },
+        :boolean     => { :name => "boolean" },
+        :xml         => { :name => "xml" },
+        :tsvector    => { :name => "tsvector" }
+      }
+
       MONEY_COLUMN_TYPE_OID = 790 # The internal PostgreSQL identifier of the money data type.
       BYTEA_COLUMN_TYPE_OID = 17 # The internal PostgreSQL identifier of the BYTEA data type.
 
@@ -194,6 +213,87 @@ module Skiima
 
       def drop_index(name, opts = {})
         "DROP INDEX IF EXISTS #{name}"
+      end
+
+      class PgColumn
+        attr_accessor :name, :deafult, :type, :null
+        def initialize(name, default = nil, type = nil, null = true)
+          @name, @default, @type, @null = name, default, type, null
+        end
+
+        def to_s
+          # to be implemented
+        end
+      end
+
+      # Returns the list of a table's column names, data types, and default values.
+      #
+      # The underlying query is roughly:
+      #  SELECT column.name, column.type, default.value
+      #    FROM column LEFT JOIN default
+      #      ON column.table_id = default.table_id
+      #     AND column.num = default.column_num
+      #   WHERE column.table_id = get_table_id('table_name')
+      #     AND column.num > 0
+      #     AND NOT column.is_dropped
+      #   ORDER BY column.num
+      #
+      # If the table name is not prefixed with a schema, the database will
+      # take the first match from the schema search path.
+      #
+      # Query implementation notes:
+      #  - format_type includes the column size constraint, e.g. varchar(50)
+      #  - ::regclass is a function that gives the id for a table name
+      def column_definitions(table_name) #:nodoc:
+        query(<<-SQL, 'SCHEMA')
+          SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+            FROM pg_attribute a LEFT JOIN pg_attrdef d
+              ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+           WHERE a.attrelid = '#{quote_table_name(table_name)}'::regclass
+             AND a.attnum > 0 AND NOT a.attisdropped
+           ORDER BY a.attnum
+        SQL
+      end
+
+      def column_names(table_name)
+        cols = column_definitions(table_name).map do |c|
+          PgColumn.new(c[0], c[1], c[2], c[3])
+        end
+        cols.map(&:name)
+      end
+
+      # Checks the following cases:
+      #
+      # - table_name
+      # - "table.name"
+      # - schema_name.table_name
+      # - schema_name."table.name"
+      # - "schema.name".table_name
+      # - "schema.name"."table.name"
+      def quote_table_name(name)
+        schema, name_part = extract_pg_identifier_from_name(name.to_s)
+
+        unless name_part
+          quote_column_name(schema)
+        else
+          table_name, name_part = extract_pg_identifier_from_name(name_part)
+          "#{quote_column_name(schema)}.#{quote_column_name(table_name)}"
+        end
+      end
+
+      # Quotes column names for use in SQL queries.
+      def quote_column_name(name) #:nodoc:
+        PGconn.quote_ident(name.to_s)
+      end
+
+      def extract_pg_identifier_from_name(name)
+        match_data = name.start_with?('"') ? name.match(/\"([^\"]+)\"/) : name.match(/([^\.]+)/)
+
+        if match_data
+          rest = name[match_data[0].length, name.length]
+          rest = rest[1, rest.length] if rest.start_with? "."
+          [match_data[1], (rest.length > 0 ? rest : nil)]
+        end
       end
 
       # Executes an SQL statement, returning a PGresult object on success
