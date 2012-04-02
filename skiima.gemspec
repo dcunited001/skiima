@@ -26,21 +26,28 @@ Gem::Specification.new do |s|
   s.add_development_dependency "minitest", '~> 2.9.1'
   s.add_development_dependency "minitest-matchers", '~> 1.1.3'
   s.add_development_dependency "mocha", '~> 0.10.0'
+  
 end
 
 # Logging
 # TODO: add logging messages
 # TODO: convert to i18n messages
 
-# Mysql Adapter
-# TODO: add base mysql adapter
-# TODO: add mysql adapter
-# TODO: add mysql2 adapter
+# SQL Objects
+# add functions
+# add procs
+# add triggers
+
+# Adapters
+# SQL Server Adapter
+
+# Skiima Options
+# add a way to just return a list of scripts to be executed
 
 # Refactor:
-# 
+# reorganize modules
 
-# Thor tasks
+# Thor tasks ??
 # TODO: thor task to load all sets
 # TODO: thor task to load specific sets
 # TODO: delegate rake tasks to thor (how?)
