@@ -22,15 +22,17 @@ If you have any questions about how things work, look at the tests.  If you have
 - Indexes
 - Views
 - Rules
+- Triggers(soon)
+- Functions(soon)
 
-##### Mysql
+##### Mysql/Mysql2
 
 - Tables
 - Views
-
-##### Mysql2
-
-- Adapter soon
+- Indexes
+- Triggers(soon)
+- Functions(soon)
+- Procs(soon)
 
 #### Interface:
 ##### Config Files
