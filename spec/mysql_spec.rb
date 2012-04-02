@@ -23,7 +23,7 @@ describe "Mysql: " do
   end  
 
   describe "Create/Drop Tables: " do
-    it 'should be able to create and drop tables' do
+    it 'should create and drop tables' do
       ensure_closed(ski) do |s|
         s.connection.table_exists?('test_table').must_equal false
         s.up(:test_table)
@@ -35,7 +35,7 @@ describe "Mysql: " do
   end
 
   describe "Create/Drop View: " do
-    it 'should be able to create and drop views' do
+    it 'should create and drop views' do
       ensure_closed(ski) do |s|
         s.connection.table_exists?('test_table').must_equal false
         s.connection.view_exists?('test_view').must_equal false
@@ -52,7 +52,7 @@ describe "Mysql: " do
   end
 
   describe "Create/Drop Index: " do
-    it 'should be able to create and drop indexes' do
+    it 'should create and drop indexes' do
       ensure_closed(ski) do |s|
         s.connection.table_exists?('test_table').must_equal false
         s.connection.index_exists?('test_index', :attr => ['test_table']).must_equal false
@@ -67,4 +67,17 @@ describe "Mysql: " do
       end
     end
   end
+
+  describe "Column Names: " do
+      it "should get a list of column names from a table" do
+        ensure_closed(ski) do |s|
+          s.connection.table_exists?('test_column_names').must_equal false
+          s.up(:test_column_names)
+
+          s.connection.column_names('test_column_names').must_include 'id', 'first_name'
+          s.down(:test_column_names)
+          # { s.connection.column_names('test_column_names') }.must_raise Error
+        end
+      end
+    end
 end

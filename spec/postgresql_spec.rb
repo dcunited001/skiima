@@ -20,13 +20,13 @@ describe "Postgresql: " do
   end
 
   describe "Create/Drop Databases: " do
-    it "should be able to create and drop databases" do
+    it "should create and drop databases" do
       skip # permissions
     end
   end
 
   describe "Create/Drop Table: " do
-    it "should be able to create and drop a table" do
+    it "should create and drop a table" do
       ensure_closed(ski) do |skiima|
         within_transaction(skiima) do |s|
           s.connection.table_exists?('test_table').must_equal false
@@ -45,7 +45,7 @@ describe "Postgresql: " do
 
   describe "Create/Drop Schema: " do
     #schema's cant be rolled back
-    it "should be able to create and drop schemas" do
+    it "should create and drop schemas" do
       ensure_closed(ski) do |s|
         s.connection.schema_exists?('test_schema').must_equal false
         s.up(:test_schema)
@@ -57,7 +57,7 @@ describe "Postgresql: " do
   end
 
   describe "Create/Drop View: " do
-    it "should be able to create and drop views" do
+    it "should create and drop views" do
       ensure_closed(ski) do |skiima|
         within_transaction(skiima) do |s|
           s.connection.table_exists?('test_table').must_equal false
@@ -76,7 +76,7 @@ describe "Postgresql: " do
   end
 
   describe "Create/Drop Rules: " do
-    it "should be able to create and drop rules" do
+    it "should create and drop rules" do
       ensure_closed(ski) do |skiima|
         within_transaction(skiima) do |s|
           s.connection.table_exists?('test_table').must_equal false
@@ -98,7 +98,7 @@ describe "Postgresql: " do
   end
 
   describe "Create/Drop Indexes: " do
-    it "should be able to create and drop indexes" do
+    it "should create and drop indexes" do
       ensure_closed(ski) do |skiima|
         within_transaction(skiima) do |s|
           s.connection.table_exists?('test_table').must_equal false
@@ -116,8 +116,23 @@ describe "Postgresql: " do
     end
   end
 
-  describe "Create/Drop Users" do
+  describe "Create/Drop Users: " do
+    
+  end
 
+  describe "Column Names: " do
+    it "should get a list of column names from a table" do
+      ensure_closed(ski) do |skiima|
+        within_transaction(skiima) do |s|
+          s.connection.table_exists?('test_column_names').must_equal false
+          s.up(:test_column_names)
+
+          s.connection.column_names('test_column_names').must_include 'id', 'first_name'
+          s.down(:test_column_names)
+          # { s.connection.column_names('test_column_names') }.must_raise Error
+        end
+      end  
+    end
   end
 end
 

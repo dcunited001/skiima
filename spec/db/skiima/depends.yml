@@ -13,6 +13,13 @@ test_table:
   postgresql:
     current:
       - table.test_table
+test_column_names:
+  mysql:
+    current:
+      - table.test_column_names
+  postgresql:
+    current:
+      - table.test_column_names
 test_index:
   mysql:
     current:
