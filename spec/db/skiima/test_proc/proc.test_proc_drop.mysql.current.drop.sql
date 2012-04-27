@@ -1,0 +1,1 @@
+DROP PROCEDURE IF EXISTS `test_proc_drop`;

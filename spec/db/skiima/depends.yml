@@ -45,6 +45,11 @@ test_rule:
   postgresql:
     current:
       - rule.test_rule.test_view
+test_proc:
+  mysql:
+    current:
+      - proc.test_proc.test_proc
+      - proc.test_proc.test_proc_drop
 blank_group:
   mysql:
   postgresql:

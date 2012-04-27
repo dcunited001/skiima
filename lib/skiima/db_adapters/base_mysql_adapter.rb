@@ -145,6 +145,20 @@ module Skiima
         end
       end
 
+      "select routine_schema, routine_name, routine_type from routines;"
+
+      def procs(name = nil, database = nil, like = nil)
+        sql = "SELECT r.routine_name "
+        sql << "FROM information_schema.routines r "
+        sql << "WHERE r.routine_type = 'PROCEDURE' "
+        sql << "AND r.routine_name LIKE '#{like}' " if like
+        sql << "AND r.routine_schema = #{database} " if database
+
+        execute_and_free(sql, 'SCHEMA') do |result|
+          result.collect { |field| field.first }
+        end
+      end
+
       def database_exists?(name)
         #stub
       end
@@ -196,6 +210,21 @@ module Skiima
         end
 
         indexes(name, schema, target).any?
+      end
+
+      def proc_exists?(name, opts = {})
+        return false unless name
+        return true if procs(nil, nil, name).any?
+
+        name = name.to_s
+        schema, proc = name.split('.', 2)
+        
+        unless proc # A table was provided without a schema
+          proc  = schema
+          schema = nil
+        end
+
+        procs(name, schema, proc).any?
       end
 
       def drop_database(name, opts = {})

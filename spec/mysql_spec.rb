@@ -69,15 +69,32 @@ describe "Mysql: " do
   end
 
   describe "Column Names: " do
-      it "should get a list of column names from a table" do
-        ensure_closed(ski) do |s|
-          s.connection.table_exists?('test_column_names').must_equal false
-          s.up(:test_column_names)
+    it "should get a list of column names from a table" do
+      ensure_closed(ski) do |s|
+        s.connection.table_exists?('test_column_names').must_equal false
+        s.up(:test_column_names)
 
-          s.connection.column_names('test_column_names').must_include 'id', 'first_name'
-          s.down(:test_column_names)
-          # { s.connection.column_names('test_column_names') }.must_raise Error
-        end
+        s.connection.column_names('test_column_names').must_include 'id', 'first_name'
+        s.down(:test_column_names)
+        # { s.connection.column_names('test_column_names') }.must_raise Error
       end
     end
+  end
+
+  describe "Create/Drop Procs: " do
+    it "should create and drop procs, with or without a drop script" do
+      ensure_closed(ski) do |s|
+        s.connection.proc_exists?('test_proc').must_equal false
+        s.connection.proc_exists?('test_proc_drop').must_equal false
+
+        s.up(:test_proc)
+        s.connection.proc_exists?('test_proc').must_equal true
+        s.connection.proc_exists?('test_proc_drop').must_equal true
+
+        s.down(:test_proc)
+        s.connection.proc_exists?('test_proc').must_equal false
+        s.connection.proc_exists?('test_proc_drop').must_equal false
+      end
+    end
+  end
 end
