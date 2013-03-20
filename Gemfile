@@ -5,14 +5,14 @@ source "http://rubygems.org"
 gemspec
 
 group :development do
-  gem 'guard'
-  gem 'guard-minitest'
+  gem 'guard', '~> 1.6.2'
+  gem 'guard-minitest', '~> 0.5.0'
   gem 'pry'
   gem 'rake'
 
-  gem 'pg'
-  gem 'mysql'
-  gem 'mysql2'
+  gem 'pg', '~> 0.14.1'
+  gem 'mysql', '~> 2.9.1'
+  gem 'mysql2', '~> 0.3.11'
 end
 
 if Config::CONFIG['target_os'] =~ /darwin/i
