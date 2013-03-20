@@ -5,6 +5,7 @@ require "skiima/version"
 Gem::Specification.new do |s|
   s.name        = "skiima"
   s.version     = Skiima::VERSION
+
   s.authors     = ["David Conner"]
   s.email       = ["dconner.pro@gmail.com"]
   s.homepage    = "http://github.com/dcunited001/skiima"
@@ -22,11 +23,10 @@ Gem::Specification.new do |s|
   s.add_dependency "fast_gettext", '~> 0.6.0'
   s.add_dependency "erubis", '~> 2.7.0'
 
-  s.add_development_dependency "bundler", '>= 1.0.21'
-  s.add_development_dependency "minitest", '~> 2.9.1'
-  s.add_development_dependency "minitest-matchers", '~> 1.1.3'
-  s.add_development_dependency "mocha", '~> 0.10.0'
-  
+  s.add_development_dependency "bundler", '>= 1.3.3'
+  s.add_development_dependency "minitest", '~> 4.6.2'
+  s.add_development_dependency "minitest-matchers", '~> 1.2.0'
+  s.add_development_dependency "mocha", '~> 0.13.2'
 end
 
 # Logging
