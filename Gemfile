@@ -10,6 +10,7 @@ group :development do
   gem 'pry'
   gem 'rake'
 
+  gem 'foreman', '~> 0.62.0'
   gem 'pg', '~> 0.14.1'
   gem 'mysql', '~> 2.9.1'
   gem 'mysql2', '~> 0.3.11'

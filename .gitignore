@@ -5,6 +5,7 @@
 Gemfile.lock
 pkg/*
 .guard_history
+Procfile
 
 ## Rubymine
 .idea/*
