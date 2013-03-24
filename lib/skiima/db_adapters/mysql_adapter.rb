@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'skiima/db_adapters/base_mysql_adapter'
 
-gem 'mysql', '~> 2.8.1'
+gem 'mysql', '~> 2.9.1'
 require 'mysql'
 
 class Mysql
