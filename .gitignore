@@ -21,3 +21,6 @@ Desktop DF
 
 ## Spec Logging
 spec/test.log
+
+## Config
+spec/config/database.yml
