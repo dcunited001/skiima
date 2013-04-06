@@ -1,6 +1,38 @@
 Skiima: an ORM-Agnostic, Rails-Independent alternative to migrations.
 ------------------------
 
+## 0.2.000 Updates:
+
+- Added a modified OpenStruct to manage configuration
+- Moved most classes to separate files
+
+## 0.2.001 Planned:
+
+- Resolve remaining test failures
+- Resolve remaining test failure
+
+## 0.2.010 Planned:
+
+- OrmWrapper class (module?)
+- Implement OrmWrapper for ActiveRecord
+- rewrite DbAdapter Base Class
+- rewrite DbAdapter files to require ActiveRecord adapters as needed
+- Make DbAdapters modular for both Data Provider and ORM Adapter
+
+## 0.2.011 Planned:
+
+- Add Appraisal to test Skiima with separate bundles
+- Fix Travis CI Config
+- Add Coveralls?
+- Add Gemnasium?
+
+## 0.3 Planned:
+
+- DataMapper Support
+- Sequel Support
+- Mongo Support?
+- Manage config's for other data providers? (Redis/etc)
+
 #### Goals:
 Skiima is a work in progress with the following goals:
 
