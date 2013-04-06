@@ -170,10 +170,6 @@ module Skiima
       end
 
       def execute(sql, name = nil)
-        # this is nauseating.  i can't believe it's an issue to run multiple statements
-        # tried using OPTION_MULTI_STATEMENTS_ON, but ruby segfaulted.  womp womp.
-        # my workaround is messy for now
-
         # relying on formatting inside the file is precisely what i wanted to avoid...
         results = sql.split(/^--={4,}/).map do |spider_monkey|
           super(spider_monkey)

@@ -299,6 +299,7 @@ module Skiima
       # Executes an SQL statement, returning a PGresult object on success
       # or raising a PGError exception otherwise.
       def execute(sql, name = nil)
+        # split on --==== (like in mysql_adapter?)
         log(sql, name) do
           @connection.async_exec(sql)
         end
