@@ -3,7 +3,7 @@ require 'spec_helper'
 require 'skiima/db_adapters/mysql_adapter'
 
 describe "Skiima::DbAdapters::MysqlAdapter" do
-  let(:db) { Skiima.read_db_yaml(Skiima.full_database_path)[:mysql_test] }
+  let(:db) { Skiima.read_db_yml(Skiima.full_database_path)[:mysql_test] }
   let(:mysql_params) { [db[:host], db[:username], db[:password], db[:database], db[:port], db[:socket], Mysql::CLIENT_MULTI_RESULTS] }
   let(:mysql_adapter) { Skiima::DbAdapters::MysqlAdapter.new(Mysql.init, nil, mysql_params, db) }
 

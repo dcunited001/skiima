@@ -3,7 +3,7 @@ require 'spec_helper'
 require 'skiima/db_adapters/postgresql_adapter'
 
 describe "Skiima::DbAdapters::PostgresqlAdapter" do
-  let(:db) { Skiima.read_db_yaml(Skiima.full_database_path)[:test] }
+  let(:db) { Skiima.read_db_yml(Skiima.full_database_path)[:test] }
   let(:pg_params) { [db[:host], db[:port], nil, nil, db[:database], db[:username], db[:password]] }
   let(:pg_adapter) { Skiima::DbAdapters::PostgresqlAdapter.new(nil, nil, pg_params, db) }
 

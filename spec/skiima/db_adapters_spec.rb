@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe Skiima::DbAdapters::Resolver do
-  let(:db) { Skiima.read_db_yaml(Skiima.full_database_path)[:test] }
+  let(:db) { Skiima.read_db_yml(Skiima.full_database_path)[:test] }
 
   it "should force an adapter to be specified" do
     proc{ Skiima::DbAdapters::Resolver.new({}) }.must_raise(Skiima::AdapterNotSpecified)
