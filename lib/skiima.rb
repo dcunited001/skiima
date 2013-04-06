@@ -11,6 +11,7 @@ require 'forwardable'
 require 'pry'
 
 require 'skiima/config'
+require 'skiima/config/struct'
 require 'skiima/i18n'
 require 'skiima/logger'
 require 'skiima/loader'

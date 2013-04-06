@@ -3,7 +3,7 @@ module Skiima
   module Config
 
     def config
-      @config ||= (Skiima::Struct.new(defaults.to_hash))
+      @config ||= (Skiima::Config::Struct.new(defaults.to_hash))
     end
 
     def config=(struct)
