@@ -26,12 +26,12 @@ end
 def ensure_closed(s, &block)
   yield s
 ensure
-  s.connector.adapter.close
+  s.connector.disconnect!
 end
 
 def within_transaction(s, &block)
-  s.connector.adapter.begin_db_transaction
+  s.connector.begin_db_transaction
   yield s
 ensure
-  s.connector.adapter.rollback_db_transaction
+  s.connector.rollback_db_transaction
 end

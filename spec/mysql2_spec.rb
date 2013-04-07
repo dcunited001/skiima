@@ -5,10 +5,10 @@ describe "Mysql2: " do
   let(:db_config) { {} }
   let(:ski) { Skiima.new(:mysql2_test) }
 
-  describe "Connection Setup: " do
+  describe "connector Setup: " do
     it "should get the version" do
       ensure_closed(ski) do |s|
-        s.connection.version.must_be_instance_of Array
+        s.connector.version.must_be_instance_of Array
       end
     end
 
@@ -29,11 +29,11 @@ describe "Mysql2: " do
   describe "Create/Drop Tables: " do
     it 'should be able to create and drop tables' do
       ensure_closed(ski) do |s|
-        s.connection.table_exists?('test_table').must_equal false
+        s.connector.table_exists?('test_table').must_equal false
         s.up(:test_table)
-        s.connection.table_exists?('test_table').must_equal true
+        s.connector.table_exists?('test_table').must_equal true
         s.down(:test_table)
-        s.connection.table_exists?('test_table').must_equal false
+        s.connector.table_exists?('test_table').must_equal false
       end
     end
   end
@@ -41,16 +41,16 @@ describe "Mysql2: " do
   describe "Create/Drop View: " do
     it 'should be able to create and drop views' do
       ensure_closed(ski) do |s|
-        s.connection.table_exists?('test_table').must_equal false
-        s.connection.view_exists?('test_view').must_equal false
+        s.connector.table_exists?('test_table').must_equal false
+        s.connector.view_exists?('test_view').must_equal false
 
         s.up(:test_table, :test_view)
-        s.connection.table_exists?('test_table').must_equal true
-        s.connection.view_exists?('test_view').must_equal true
+        s.connector.table_exists?('test_table').must_equal true
+        s.connector.view_exists?('test_view').must_equal true
 
         s.down(:test_table, :test_view)
-        s.connection.table_exists?('test_table').must_equal false
-        s.connection.view_exists?('test_view').must_equal false
+        s.connector.table_exists?('test_table').must_equal false
+        s.connector.view_exists?('test_view').must_equal false
       end
     end
   end
