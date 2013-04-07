@@ -158,30 +158,5 @@ module Skiima
       end
 
     end
-
-    class Resolver
-      attr_accessor :db, :adapter_method
-
-      def initialize(db_config)
-        @db = Skiima.symbolize_keys(db_config)
-        adapter_specified?
-        load_adapter
-        @adapter_method = "#{db[:adapter]}_connection"
-      end
-
-      private
-
-      def adapter_specified?
-        raise(AdapterNotSpecified, "database configuration does not specify adapter") unless db.key?(:adapter)
-      end
-
-      def load_adapter
-        begin
-          require "skiima/db_adapters/#{db[:adapter]}_adapter"
-        rescue => e
-          raise LoadError, "Adapter does not exist: #{db[:adapter]} - (#{e.message})", e.backtrace
-        end
-      end
-    end
   end
 end
