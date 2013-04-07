@@ -10,6 +10,8 @@ require "minitest/pride"
 require "mocha"
 require "pry"
 
+Bundler.require(:active_record)
+
 require "skiima"
 
 SKIIMA_ROOT = File.dirname(__FILE__)
@@ -24,12 +26,12 @@ end
 def ensure_closed(s, &block)
   yield s
 ensure
-  s.connection.close
+  s.connector.adapter.close
 end
 
 def within_transaction(s, &block)
-  s.connection.begin_db_transaction
+  s.connector.adapter.begin_db_transaction
   yield s
 ensure
-  s.connection.rollback_db_transaction
+  s.connector.adapter.rollback_db_transaction
 end
