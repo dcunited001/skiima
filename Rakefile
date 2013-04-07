@@ -36,11 +36,11 @@ namespace :db do
         # Skiima.up(env, :init_test_db, vars: vars)
 
         ski = Skiima.new(env, vars: vars)
-        ski.connection.execute("DROP DATABASE IF EXISTS #{database};")
-        ski.connection.execute("DROP ROLE IF EXISTS #{vars[:testuser]};")
-        ski.connection.execute("CREATE DATABASE #{database};")
-        ski.connection.execute("CREATE ROLE #{vars[:testuser]} WITH PASSWORD '#{vars[:testpass]}' LOGIN;")
-        ski.connection.execute("GRANT ALL PRIVILEGES ON DATABASE #{database} TO #{vars[:testuser]};")
+        ski.connector.execute("DROP DATABASE IF EXISTS #{database};")
+        ski.connector.execute("DROP ROLE IF EXISTS #{vars[:testuser]};")
+        ski.connector.execute("CREATE DATABASE #{database};")
+        ski.connector.execute("CREATE ROLE #{vars[:testuser]} WITH PASSWORD '#{vars[:testpass]}' LOGIN;")
+        ski.connector.execute("GRANT ALL PRIVILEGES ON DATABASE #{database} TO #{vars[:testuser]};")
       end
 
       task :mysql do
@@ -57,11 +57,11 @@ namespace :db do
         vars = { testuser: 'skiima', testpass: 'test'}
 
         ski = Skiima.new(env, vars: vars)
-        ski.connection.execute("DROP DATABASE IF EXISTS #{database};")
-        ski.connection.execute("DROP USER '#{vars[:testuser]}'@'localhost';")
-        ski.connection.execute("CREATE DATABASE #{database};")
-        ski.connection.execute("CREATE USER '#{vars[:testuser]}'@'localhost' IDENTIFIED BY '#{vars[:testpass]}';")
-        ski.connection.execute("GRANT ALL PRIVILEGES ON #{database}.* TO '#{vars[:testuser]}'@'localhost';")
+        ski.connector.execute("DROP DATABASE IF EXISTS #{database};")
+        ski.connector.execute("DROP USER '#{vars[:testuser]}'@'localhost';")
+        ski.connector.execute("CREATE DATABASE #{database};")
+        ski.connector.execute("CREATE USER '#{vars[:testuser]}'@'localhost' IDENTIFIED BY '#{vars[:testpass]}';")
+        ski.connector.execute("GRANT ALL PRIVILEGES ON #{database}.* TO '#{vars[:testuser]}'@'localhost';")
       end
 
     end
