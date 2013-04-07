@@ -49,7 +49,7 @@ describe Skiima::Loader do
 
 
   describe "#config" do
-    before(:each) { Skiima::Loader.any_instance.expects(:make_connection).returns(true) }
+    before(:each) { Skiima::Loader.any_instance.expects(:create_connector).returns(true) }
     let(:config_path) { 'config' }
     let(:db_yml) { 'database.yml' }
 
@@ -65,14 +65,14 @@ describe Skiima::Loader do
     end
   end
 
-  describe "Logger: " do
-    before(:each) { Skiima::Loader.any_instance.expects(:make_connection).returns(true) }
-
-    it "creates a logger with the correct options" do
-      #subject.logger.class.must_equal ::Logger
-      subject.logger.class.must_equal Skiima::Logger
-    end
-  end
+  #describe "Logger: " do
+  #  before(:each) { Skiima::Loader.any_instance.expects(:create_connector).returns(true) }
+  #
+  #  it "creates a logger with the correct options" do
+  #    #subject.logger.class.must_equal ::Logger
+  #    subject.logger.class.must_equal Skiima::Logger
+  #  end
+  #end
 
   # describe "Implementation: " do
   #   let(:groups) { groups = %w(friend team_member) }
