@@ -16,6 +16,11 @@ group :development do
   gem 'mysql2', '~> 0.3.11'
 end
 
+group :active_record do
+  gem 'activerecord', '>= 3.2', '< 4.1'
+  gem 'activesupport', '>= 3.2', '< 4.1'
+end
+
 if Config::CONFIG['target_os'] =~ /darwin/i
   gem 'rb-fsevent', '>= 0.3.2'
   gem 'growl',      '~> 1.0.3'
