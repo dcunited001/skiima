@@ -2,26 +2,47 @@
 require 'spec_helper'
 
 describe Skiima::Db::Resolver do
-  let(:db) { Skiima.read_db_yml(Skiima.full_database_path)[:test] }
+  let(:yml) { Skiima.read_db_yml(Skiima.full_database_path) }
+  let(:db) { yml[:postgresql_test] }
+  subject { Skiima::Db::Resolver.new(db) }
 
-  it "should force an adapter to be specified" do
-    proc{ Skiima::Db::Resolver.new({}) }.must_raise(Skiima::AdapterNotSpecified)
+  describe "#initialize" do
+    it "should load the ORM module" do
+      subject.orm_module.must_equal 'active_record'
+    end
+
+    it "should load the DB Connector" do
+      subject.connector_klass.must_equal Skiima::Db::Connector::ActiveRecord::PostgresqlConnector
+    end
   end
 
-  it "should raise an error when there is not a valid adapter defined" do
-    db[:adapter] = 'undefsql'
-    proc{ Skiima::Db::Resolver.new(db) }.must_raise(LoadError)
+  describe "AdapterNotSpecified" do
+    let(:db) { Hash.new }
+    it "should force an adapter to be specified" do
+      proc{ subject }.must_raise(Skiima::AdapterNotSpecified)
+    end
   end
 
-  it "should load the adapter class" do
-    # bad test for ordering
-    # proc { Skiima::DbAdapters::PostgresqlAdapter }.must_raise(NameError)
-
-    Skiima::Db::Resolver.new(db)
-    Skiima::Db::PostgresqlAdapter.must_be_instance_of Class
+  describe "LoadError: ORM not defined" do
+    let(:db) { yml[:postgresql_test].merge(adapter: 'undef') }
+    it "should raise an error when there is not a valid adapter defined" do
+      proc{ subject }.must_raise(LoadError)
+    end
   end
 
-  it "should set the adapter method" do
-    Skiima::Db::Resolver.new(db).adapter_method.must_equal "postgresql_connection"
+  describe "LoadError: Adapter not defined" do
+    let(:db) { yml[:postgresql_test].merge(orm: 'undef') }
+    it "should raise an error when there is not a valid orm defined" do
+      proc{ subject }.must_raise(LoadError)
+    end
   end
 end
+
+  # test this?
+  #it "should load the adapter class" do
+  #  # bad test for ordering
+  #  # proc { Skiima::DbAdapters::PostgresqlAdapter }.must_raise(NameError)
+  #
+  #  Skiima::Db::Resolver.new(db)
+  #  Skiima::Db::PostgresqlAdapter.must_be_instance_of Class
+  #end
