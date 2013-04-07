@@ -4,7 +4,7 @@ module Skiima
     include Skiima::Config
 
     attr_accessor :env, :vars, :reader
-    attr_accessor :depends, :db, :connection
+    attr_accessor :dependencies, :db, :connection
     attr_accessor :direction
     attr_accessor :scripts
     attr_accessor :logger
@@ -75,7 +75,7 @@ module Skiima
     end
 
     def create_dependency_reader
-      @reader = Skiima::Dependency::Reader.new(depends, db['adapter'], config)
+      @reader = Skiima::Dependency::Reader.new(dependencies, db['adapter'], config)
     end
 
     def interpolation_vars
@@ -95,7 +95,7 @@ module Skiima
     end
 
     def get_dependency_config
-      @depends = read_depends_yml(full_depends_path)
+      @dependencies = read_dependencies_yml(full_dependencies_path)
     end
 
     def create_logger

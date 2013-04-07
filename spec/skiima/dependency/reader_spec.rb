@@ -3,9 +3,9 @@ require 'spec_helper'
 
 describe Skiima::Dependency::Reader do
   let(:groups) { [:init_test_db, :test_table] }
-  let(:depends) { Skiima.read_depends_yml(Skiima.full_depends_path) }
+  let(:dependencies) { Skiima.read_dependencies_yml(Skiima.full_dependencies_path) }
   let(:adapter) { :postgresql }
-  subject { Skiima::Dependency::Reader.new(depends, adapter) }
+  subject { Skiima::Dependency::Reader.new(dependencies, adapter) }
 
   describe "#initialize" do
     it 'should default the version to current' do
@@ -30,11 +30,11 @@ describe Skiima::Dependency::Reader do
     end
 
     it 'should return a blank list when the groups, adapter or version have no entries' do
-      reader = Skiima::Dependency::Reader.new(depends, adapter)
+      reader = Skiima::Dependency::Reader.new(dependencies, adapter)
       scripts = reader.get_load_order(:blank_group)
       scripts.count.must_equal 0
 
-      reader = Skiima::Dependency::Reader.new(depends, :postgresql)
+      reader = Skiima::Dependency::Reader.new(dependencies, :postgresql)
       scripts = reader.get_load_order(:only_pg)
       scripts.first.name.must_equal('only_pg')
     end

@@ -18,7 +18,7 @@ describe Skiima do
       Skiima.config_path.must_equal 'config'
       Skiima.database_yml.must_equal 'database.yml'
       Skiima.scripts_path.must_equal 'db/skiima'
-      Skiima.depends_yml.must_equal 'depends.yml'
+      Skiima.dependencies_yml.must_equal 'dependencies.yml'
     end
 
     it "must return a config struct with the defaults for the Skiima module"
@@ -64,7 +64,7 @@ describe Skiima do
   #   end
 
   #   describe "Errors: " do
-  #     it "should return a group not found error when a class/string can't be found in depends.yml" do
+  #     it "should return a group not found error when a class/string can't be found in dependencies.yml" do
 
   #     end
   #   end

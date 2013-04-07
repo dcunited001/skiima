@@ -42,7 +42,7 @@ module Skiima
       config_path: 'config',
       database_yml: 'database.yml',
       scripts_path: 'db/skiima',
-      depends_yml: 'depends.yml',
+      dependencies_yml: 'dependencies.yml',
       interpolator: '&',
       locale: 'en',
       logging_out: 'STDOUT',

@@ -18,8 +18,8 @@ module Skiima
       File.join(root, config, db)
     end
 
-    def full_depends_path(root = self.root_path, config = self.scripts_path, depends = self.depends_yml)
-      File.join(root, config, depends)
+    def full_dependencies_path(root = self.root_path, config = self.scripts_path, dependencies = self.dependencies_yml)
+      File.join(root, config, dependencies)
     end
 
     def read_sql_file(folder, file)
@@ -30,8 +30,8 @@ module Skiima
       symbolize_keys(read_yml_or_throw(file, MissingFileException, "#{Skiima.msg('errors.open_db_yml')} #{file}"))
     end
 
-    def read_depends_yml(file)
-      symbolize_keys(read_yml_or_throw(file, MissingFileException, "#{Skiima.msg('errors.open_depends_yml')} #{file}"))
+    def read_dependencies_yml(file)
+      symbolize_keys(read_yml_or_throw(file, MissingFileException, "#{Skiima.msg('errors.open_dependencies_yml')} #{file}"))
     end
 
     def read_yml_or_throw(file, errclass, errmsg)

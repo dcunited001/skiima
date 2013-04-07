@@ -93,7 +93,7 @@ describe Skiima::Loader do
   #   end
 
   #   describe "Errors: " do
-  #     it "should return a group not found error when a class/string can't be found in depends.yml" do
+  #     it "should return a group not found error when a class/string can't be found in dependencies.yml" do
   #       proc { subject.up('friendz', 'team_memberz') }.must_raise(Skiima::SqlGroupNotFound)
   #     end
   #   end

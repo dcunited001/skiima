@@ -3,10 +3,10 @@ module Skiima
 
     class Reader
       attr_accessor :scripts
-      attr_accessor :depends, :adapter, :version
+      attr_accessor :dependencies, :adapter, :version
 
-      def initialize(depends, adapter, opts = {})
-        @depends, @adapter = depends, adapter.to_sym
+      def initialize(dependencies, adapter, opts = {})
+        @dependencies, @adapter = dependencies, adapter.to_sym
         @version = opts[:version] || :current
       end
 
@@ -18,8 +18,8 @@ module Skiima
       end
 
       def get_group(g)
-        raise Skiima::SqlGroupNotFound unless depends.has_key?(g)
-        depends[g]
+        raise Skiima::SqlGroupNotFound unless dependencies.has_key?(g)
+        dependencies[g]
       end
 
       def get_adapter(grp)

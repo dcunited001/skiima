@@ -7,7 +7,7 @@ en:
   messages:
     errors:
       open_db_yml: Could not open Skiima Database Config!
-      open_depends_yml: Could not open Skiima Depends Config!
+      open_dependencies_yml: Could not open Skiima Dependencies Config!
     create:
       start: Creating objects for @class
       error: Encountered errors creating @class objects -
