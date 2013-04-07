@@ -28,61 +28,61 @@ module Skiima
   extend Skiima::LoggerHelpers
 
   class << self
-
-    def setup
-      yield config
-      set_translation_repository
-    end
-
-    def defaults
-      { root_path: 'specify/in/config/block',
-        config_path: 'config',
-        database_yml: 'database.yml',
-        scripts_path: 'db/skiima',
-        depends_yml: 'depends.yml',
-        interpolator: '&',
-        locale: 'en',
-        logging_out: 'STDOUT',
-        logging_level: '3' }
-    end
-
-    def new(env, opts = {})
-      Skiima::Loader.new(env, opts)
-    end
-
-    def up(env, *args)
-      opts = args.last.is_a?(Hash) ? args.pop : {}
-      ski = Skiima::Loader.new(env, opts).up(*args, opts)
-    ensure
-      ski.connection.close if ski && ski.connection
-    end
-
-    def down(env, *args)
-      opts = args.last.is_a?(Hash) ? args.pop : {}
-      ski = Skiima::Loader.new(env, opts).down(*args, opts)
-    ensure
-      ski.connection.close if ski && ski.connection
-    end
-
-    def exe_with_connection(db, &block)
-      resolver = Skiima::DbAdapters::Resolver.new db
-      connection = nil
-
-      begin 
-        connection = self.send(resolver.adapter_method, db)
-        yield connection
-      rescue => ex
-        puts "Oh Noes!!"
-      ensure
-        connection.close
-      end
-    end
-
-    def method_missing(method, *args, &block)
-      config.respond_to?(method) ? config.send(method, *args) : super
-    end
-
+    extend Forwardable
+    delegate new: Skiima::Loader
   end
+
+  def self.setup
+    yield config
+    set_translation_repository
+  end
+
+  def self.defaults
+    { root_path: 'specify/in/config/block',
+      config_path: 'config',
+      database_yml: 'database.yml',
+      scripts_path: 'db/skiima',
+      depends_yml: 'depends.yml',
+      interpolator: '&',
+      locale: 'en',
+      logging_out: 'STDOUT',
+      logging_level: '3' }
+  end
+
+  def self.up(env, *args)
+    opts = args.last.is_a?(Hash) ? args.pop : {}
+    ski = Skiima::Loader.new(env, opts).up(*args, opts)
+  ensure
+    ski.connection.close if ski && ski.connection
+  end
+
+  def self.down(env, *args)
+    opts = args.last.is_a?(Hash) ? args.pop : {}
+    ski = Skiima::Loader.new(env, opts).down(*args, opts)
+  ensure
+    ski.connection.close if ski && ski.connection
+  end
+
+  def self.exe_with_connection(db, &block)
+    resolver = Skiima::DbAdapters::Resolver.new db
+    connection = nil
+
+    begin
+      connection = self.send(resolver.adapter_method, db)
+      yield connection
+    rescue => ex
+      puts "Oh Noes!!"
+    ensure
+      connection.close
+    end
+  end
+
+  private
+
+  def self.method_missing(method, *args, &block)
+    config.respond_to?(method) ? config.send(method, *args) : super
+  end
+
 end
 
 module Skiima

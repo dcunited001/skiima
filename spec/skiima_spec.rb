@@ -2,14 +2,44 @@
 require 'spec_helper'
 
 describe Skiima do
-  describe "Module Configuration Options" do
-    it "should set the proper module defaults" do
+  subject { Skiima }
+
+  it { subject.must_respond_to :config }
+  it { subject.must_respond_to :defaults }
+
+  describe "#setup" do
+    it "must set the properties in the config block"
+    it "must set the translation repository"
+  end
+
+  describe "#defaults" do
+    it "must set the following as module defaults" do
       Skiima.root_path.must_equal SKIIMA_ROOT
       Skiima.config_path.must_equal 'config'
       Skiima.database_yml.must_equal 'database.yml'
       Skiima.scripts_path.must_equal 'db/skiima'
       Skiima.depends_yml.must_equal 'depends.yml'
     end
+
+    it "must return a config struct with the defaults for the Skiima module"
+  end
+
+  describe "#new" do
+    it "delegates to Skiima::Loader"
+  end
+
+  describe "#up" do
+    it "parses the options correctly"
+    it "delegates to a new instance of Skiima::Loader"
+  end
+
+  describe "#down" do
+    it "parses the options correctly"
+    it "delegates to a new instance of Skiima::Loader"
+  end
+
+  describe "#exe_with_connection" do
+    it "deprecates?"
   end
 
   describe "#message" do
