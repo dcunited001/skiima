@@ -1,13 +1,16 @@
 # encoding: utf-8
 module Skiima
   class Loader
+    extend Forwardable
     include Skiima::Config
 
     attr_accessor :env, :vars, :reader, :resolver
-    attr_accessor :dependencies, :db, :connection
+    attr_accessor :dependencies, :db, :connector
     attr_accessor :direction
     attr_accessor :scripts
     attr_accessor :logger
+
+    delegate connection: :connector
 
     def defaults
       Skiima.config
@@ -19,7 +22,8 @@ module Skiima
       get_config(opts)
       set_vars
       create_logger
-      make_connection
+      create_resolver
+      create_connector
       get_dependency_config
       create_dependency_reader
     end
@@ -37,11 +41,11 @@ module Skiima
     end
 
     def create_resolver
-      @resolver = Skiima::Db::Resolver.new(@db)
+      @resolver = Skiima::Db::Resolver.new(db)
     end
 
-    def create_connection
-      @connection = resolver.create_connection(logger, db)
+    def create_connector
+      @connector = resolver.create_connector(db, logger)
     end
 
     def log_message(msg)
@@ -68,13 +72,13 @@ module Skiima
     def interpolate_each_script
       scripts.each do |s|
         s.read_content(direction, full_scripts_path)
-        s.content ||= connection.drop(s.type, s.name, {:attr => s.attr}.merge(config.to_hash)) if direction == :down
+        s.content ||= connector.drop(s.type, s.name, {:attr => s.attr}.merge(config.to_hash)) if direction == :down
         s.interpolate_sql(interpolator, interpolation_vars)
       end
     end
 
     def execute_each_script
-      scripts.each {|s| connection.execute(s.sql)}
+      scripts.each {|s| connector.execute(s.sql)}
     end
 
     def create_dependency_reader
