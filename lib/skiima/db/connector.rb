@@ -5,31 +5,28 @@ module Skiima
     module Connector
       class Base
         extend Forwardable
-        class << self; extend Forwardable; end
 
-        attr_accessor :config, :version, :orm
+        class << self
+          extend Forwardable
+
+          def create_connector(config, logger = nil, opts = {})
+            pool = config['pool']
+            adapter = create_adapter(config, logger, pool)
+            new(adapter, logger, config)
+          end
+        end
+
+        attr_accessor :config, :orm
         attr_accessor :logger, :adapter
 
-        delegate [:adapter_name, :connection,
-                  :supported_objects,
-                  :supports_ddl_transactions?,
-                  :drop, :active?, :object_exists?,
-                  :reconnect!, :disconnect!, :close,
-                  :reset!, :verify!, :raw_connection] => :adapter
-                  # also include: :transaction_joinable=,
-                  # :increment_open_transactions, :decrement_open_transactions,
-                  # :create_savepoint, :rollback_to_savepoint
-                  # :release_savepoint, :current_savepoint_name
+        alias_method :klass, :class
+        delegate helpers_module: :klass
 
         def initialize(adapter, logger, config = {})
-          @adapter = adapter
-          @logger = logger
+          @adapter, @logger = adapter, logger
 
           set_config(config)
-          set_version
-
-          #initialize
-          #return, and resolver loads instance with methods
+          include_helpers_on_adapter
         end
 
         private
@@ -38,8 +35,8 @@ module Skiima
           @config = opts
         end
 
-        def set_version
-          @version = config[:version] || default_version
+        def include_helpers_on_adapter
+          adapter.singleton_class.class_eval "include #{helpers_module.to_s}"
         end
       end
     end
