@@ -15,6 +15,8 @@ require 'skiima/config/struct'
 require 'skiima/i18n'
 require 'skiima/logger'
 require 'skiima/loader'
+require 'skiima/db/resolver'
+require 'skiima/db/connector'
 require 'skiima/db_adapters'
 require 'skiima/dependency/script'
 require 'skiima/dependency/reader'
@@ -64,7 +66,7 @@ module Skiima
   end
 
   def self.exe_with_connection(db, &block)
-    resolver = Skiima::DbAdapters::Resolver.new db
+    resolver = Skiima::Db::Resolver.new db
     connection = nil
 
     begin

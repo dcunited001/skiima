@@ -13,6 +13,10 @@ module Skiima
         load_db_connector
       end
 
+      def create_connection
+
+      end
+
       private
 
       def set_adapter_method

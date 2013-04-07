@@ -3,7 +3,7 @@ module Skiima
   class Loader
     include Skiima::Config
 
-    attr_accessor :env, :vars, :reader
+    attr_accessor :env, :vars, :reader, :resolver
     attr_accessor :dependencies, :db, :connection
     attr_accessor :direction
     attr_accessor :scripts
@@ -36,9 +36,12 @@ module Skiima
       read_and_execute(*args)
     end
 
-    def make_connection
-      resolver = Skiima::DbAdapters::Resolver.new(@db)
-      @connection = Skiima.send(resolver.adapter_method, logger, db)
+    def create_resolver
+      @resolver = Skiima::Db::Resolver.new(@db)
+    end
+
+    def create_connection
+      @connection = resolver.create_connection(logger, db)
     end
 
     def log_message(msg)
