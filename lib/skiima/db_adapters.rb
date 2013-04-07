@@ -23,18 +23,6 @@ module Skiima
         false
       end
 
-      def supported_objects
-        [] # this should be overridden by concrete adapters
-      end
-
-      def drop(type, name, opts = {})
-        send("drop_#{type}", name, opts) if supported_objects.include? type.to_sym
-      end
-
-      def object_exists?(type, name, opts = {})
-        send("#{type}_exists?", name, opts) if supported_objects.include? type.to_sym
-      end
-
       # Does this adapter support savepoints? PostgreSQL and MySQL do,
       # SQLite < 3.6.8 does not.
       def supports_savepoints?
