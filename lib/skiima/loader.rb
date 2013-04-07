@@ -53,6 +53,8 @@ module Skiima
       Skiima.log_message(logger, msg)
     end
 
+    private
+
     def interpolation_vars
       { :database => db['database'] }.merge(config[:vars] || {})
     end
@@ -60,8 +62,6 @@ module Skiima
     def method_missing(method, *args, &block)
       config.respond_to?(method) ? config.send(method, *args) : super
     end
-
-    private
 
     def get_config(opts)
       @config = config.merge(opts)

@@ -2,7 +2,49 @@
 require 'spec_helper'
 
 describe Skiima::Loader do
-  subject { Skiima::Loader.new(:test) }
+  subject { Skiima::Loader.new(:postgresql_test) }
+
+  it { subject.must_respond_to :env }
+  it { subject.must_respond_to :db }
+  it { subject.must_respond_to :connection }
+  it { subject.must_respond_to :scripts }
+  it { subject.must_respond_to :logger }
+  it { subject.must_respond_to :config }
+  it { subject.must_respond_to :defaults }
+
+  describe "#default" do
+    it "must return a config struct with the defaults set for this Skiima::Loader"
+    it "must return a config struct with the defaults descended from Skiima module"
+  end
+
+  describe "#config" do
+
+  end
+
+  describe "#new" do
+    it "must set vars if they are passed in"
+  end
+
+  describe "#up" do
+
+  end
+
+  describe "#down" do
+
+  end
+
+  describe "#interpolation_vars" do
+
+  end
+
+  describe "#log_message" do
+
+  end
+
+  describe "#make_connection" do
+
+  end
+
 
   describe "#config" do
     before(:each) { Skiima::Loader.any_instance.expects(:make_connection).returns(true) }
