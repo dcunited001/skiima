@@ -3,7 +3,9 @@ module Skiima
   class Loader
     include Skiima::Config
 
-    attr_accessor :env, :db, :connection
+    attr_accessor :env, :vars, :reader
+    attr_accessor :depends, :db, :connection
+    attr_accessor :direction
     attr_accessor :scripts
     attr_accessor :logger
 
@@ -13,35 +15,25 @@ module Skiima
 
     def initialize(env, opts = {})
       @env = env
-      db_config = opts.delete('db') || {}
+      merge_db_config(opts.delete('db') || {})
       get_config(opts)
+      set_vars
       create_logger
-      merge_db_config(db_config)
       make_connection
       get_dependency_config
+      create_dependency_reader
     end
 
     def up(*args)
+      @direction = :up
       opts = args.last.is_a?(Hash) ? args.pop : {}
-      reader = Skiima::Dependency::Reader.new(@depends, @db['adapter'], opts)
-      scripts = reader.get_load_order(*args)
-      scripts.each do |s|
-        s.read_content(:up, full_scripts_path)
-        s.interpolate_sql(interpolator, interpolation_vars)
-      end
-      scripts.each {|s| connection.execute(s.sql)}
+      read_and_execute(*args)
     end
 
     def down(*args)
+      @direction = :down
       opts = args.last.is_a?(Hash) ? args.pop : {}
-      reader = Skiima::Dependency::Reader.new(@depends, @db['adapter'], opts)
-      scripts = reader.get_load_order(*args).reverse
-      scripts.each do |s|
-        s.read_content(:down, full_scripts_path)
-        s.content ||= connection.drop(s.type, s.name, {:attr => s.attr}.merge(opts))
-        s.interpolate_sql(interpolator, interpolation_vars)
-      end
-      scripts.each {|s| connection.execute(s.sql)}
+      read_and_execute(*args)
     end
 
     def make_connection
@@ -53,7 +45,38 @@ module Skiima
       Skiima.log_message(logger, msg)
     end
 
+    def read_and_execute(*scripts)
+      read_scripts *scripts
+      interpolate_each_script
+      execute_each_script
+    end
+
     private
+
+    def set_vars
+      @vars = config[:vars] || {}
+    end
+
+    def read_scripts(*args)
+      @scripts = reader.get_load_order(*args)
+      @scripts.reverse! if direction == :down
+    end
+
+    def interpolate_each_script
+      scripts.each do |s|
+        s.read_content(direction, full_scripts_path)
+        s.content ||= connection.drop(s.type, s.name, {:attr => s.attr}.merge(config.to_hash)) if direction == :down
+        s.interpolate_sql(interpolator, interpolation_vars)
+      end
+    end
+
+    def execute_each_script
+      scripts.each {|s| connection.execute(s.sql)}
+    end
+
+    def create_dependency_reader
+      @reader = Skiima::Dependency::Reader.new(depends, db['adapter'], config)
+    end
 
     def interpolation_vars
       { :database => db['database'] }.merge(config[:vars] || {})

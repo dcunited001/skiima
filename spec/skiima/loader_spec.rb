@@ -14,7 +14,9 @@ describe Skiima::Loader do
 
   describe "#default" do
     it "must return a config struct with the defaults set for this Skiima::Loader"
-    it "must return a config struct with the defaults descended from Skiima module"
+    it "must return a config struct with the defaults descended from Skiima module" do
+      #Skiima.stub(:defaults)
+    end
   end
 
   describe "#config" do
