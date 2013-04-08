@@ -6,18 +6,16 @@ Skiima: an ORM-Agnostic, Rails-Independent alternative to migrations.
 - Added a modified OpenStruct to manage configuration
 - Moved most classes to separate files
 
-## 0.2.001 Planned:
+## 0.2.010 Updates:
 
-- Resolve remaining test failures
-- Resolve remaining test failure
-
-## 0.2.010 Planned:
-
-- OrmWrapper class (module?)
-- Implement OrmWrapper for ActiveRecord
-- rewrite DbAdapter Base Class
-- rewrite DbAdapter files to require ActiveRecord adapters as needed
-- Make DbAdapters modular for both Data Provider and ORM Adapter
+- Add Skiima::Db::Connector
+- Update Skiima::Db::Resolver
+- Add ActiveRecord::BaseConnector
+- Add PosgresqlConnector
+- Add Postresql Helpers
+- Add MysqlConnector
+- Add Mysql2Connector
+- Add Mysql Helpers
 
 ## 0.2.011 Planned:
 
