@@ -54,14 +54,14 @@ module Skiima
     opts = args.last.is_a?(Hash) ? args.pop : {}
     ski = Skiima::Loader.new(env, opts).up(*args, opts)
   ensure
-    ski.connection.close if ski && ski.connection
+    ski.connector.disconnect! if ski && ski.connector
   end
 
   def self.down(env, *args)
     opts = args.last.is_a?(Hash) ? args.pop : {}
     ski = Skiima::Loader.new(env, opts).down(*args, opts)
   ensure
-    ski.connection.close if ski && ski.connection
+    ski.connector.disconnect! if ski && ski.connector
   end
 
   def self.exe_with_connection(db, &block)
