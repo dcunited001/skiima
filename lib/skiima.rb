@@ -17,7 +17,6 @@ require 'skiima/logger'
 require 'skiima/loader'
 require 'skiima/db/resolver'
 require 'skiima/db/connector'
-require 'skiima/db_adapters'
 require 'skiima/dependency/script'
 require 'skiima/dependency/reader'
 
