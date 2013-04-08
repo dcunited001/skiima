@@ -2,7 +2,8 @@ module Skiima
   module Db
     module Helpers
       module Postgresql
-        attr_accessor :local_tz, :version
+        attr_accessor :local_tz
+        #attr_accessor :version
 
         # skiima
         def supported_objects

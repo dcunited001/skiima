@@ -2,7 +2,7 @@ module Skiima
   module Db
     module Helpers
       module Mysql
-        #attr_accessor :local_tz, :version
+        #attr_accessor :version
 
         def supported_objects
           [:database, :table, :view, :index, :proc]
