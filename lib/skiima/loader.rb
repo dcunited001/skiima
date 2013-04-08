@@ -32,12 +32,14 @@ module Skiima
       @direction = :up
       opts = args.last.is_a?(Hash) ? args.pop : {}
       read_and_execute(*args)
+      self
     end
 
     def down(*args)
       @direction = :down
       opts = args.last.is_a?(Hash) ? args.pop : {}
       read_and_execute(*args)
+      self
     end
 
     def create_resolver
