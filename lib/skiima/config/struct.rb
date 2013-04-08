@@ -8,7 +8,7 @@ module Skiima
       end
 
       def new_ostruct_member(name)
-        name = name.to_sym
+        name = convert_key(name)
         unless self.respond_to?(name)
           self.instance_eval <<EOS
     def #{name.to_s}
@@ -29,25 +29,22 @@ EOS
       end
 
       def method_missing(mid, *args, &block)
-        mname = mid.id2name
-        len = args.length
-        if mname.chomp!('=') && (mid != :[]=)
-          if len != 1
-            raise ArgumentError, "wrong number of arguments (#{len} for 1)", caller(1)
-          end
+        mname, len = mid.id2name, args.length
+
+        case
+        when (mname.chomp!('=') && (mid != :[]=))
+          raise_argument_error(len, caller(1)) if len != 1
           modifiable[new_ostruct_member(mname)] = args[0]
-        elsif len == 0 && (mid != :[])
-          if block_given?
-            cs = self.class.new(Hash.new).ostruct_eval(&block)
-            modifiable[new_ostruct_member(mname)] = cs
-          else
-            @table[mid]
-          end
-        elsif len == 1 && (mid != :[])
+        when (len == 0 && (mid != :[]) && block_given?)
+          cs = self.class.new(Hash.new).ostruct_eval(&block)
+          modifiable[new_ostruct_member(mname)] = cs
+        when (len == 0 && mid != :[])
+          @table[mid]
+        when (len == 1 && mid != :[])
           modifiable[new_ostruct_member(mname)] = args[0]
-        else
-          raise NoMethodError, "undefined method `#{mid}' for #{self}", caller(1)
+        else raise_no_method_error(mid, caller(1))
         end
+
       end
 
       def [](key)
@@ -72,7 +69,17 @@ EOS
       end
 
       def convert_key(key)
-        key.kind_of? Symbol ? key : (key.to_sym rescue key)
+        key.kind_of?(Symbol) ? key : (key.to_sym rescue key)
+      end
+
+      private
+
+      def raise_argument_error(len, caller)
+        raise ArgumentError, "wrong number of arguments (#{len} for 1)", caller
+      end
+
+      def raise_no_method_error(mid, caller)
+        raise NoMethodError, "undefined method `#{mid}' for #{self}", caller
       end
     end
 
