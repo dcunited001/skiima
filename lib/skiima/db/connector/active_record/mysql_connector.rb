@@ -35,45 +35,45 @@ module Skiima
   end
 end
 
-# encoding: utf-8
-require 'skiima/db_adapters/base_mysql_adapter'
-
-gem 'mysql', '~> 2.9.1'
-require 'mysql'
-
-class Mysql
-  class Time
-    ###
-    # This monkey patch is for test_additional_columns_from_join_table
-    def to_date
-      Date.new(year, month, day)
-    end
-  end
-  class Stmt; include Enumerable end
-  class Result; include Enumerable end
-end
-
-module Skiima
-  # Establishes a connection to the database that's used by all Active Record objects.
-  def self.mysql_connection(logger, config) # :nodoc:
-    config = Skiima.symbolize_keys(config)
-    host     = config[:host]
-    port     = config[:port]
-    socket   = config[:socket]
-    username = config[:username] ? config[:username].to_s : 'root'
-    password = config[:password].to_s
-    database = config[:database]
-
-    mysql = Mysql.init
-    mysql.ssl_set(config[:sslkey], config[:sslcert], config[:sslca], config[:sslcapath], config[:sslcipher]) if config[:sslca] || config[:sslkey]
-
-    default_flags = Mysql.const_defined?(:CLIENT_MULTI_RESULTS) ? Mysql::CLIENT_MULTI_RESULTS : 0
-    default_flags |= Mysql::CLIENT_FOUND_ROWS if Mysql.const_defined?(:CLIENT_FOUND_ROWS)
-
-    options = [host, username, password, database, port, socket, default_flags]
-    Skiima::DbAdapters::MysqlAdapter.new(mysql, logger, options, config)
-  end
-
+## encoding: utf-8
+#require 'skiima/db_adapters/base_mysql_adapter'
+#
+#gem 'mysql', '~> 2.9.1'
+#require 'mysql'
+#
+#class Mysql
+#  class Time
+#    ###
+#    # This monkey patch is for test_additional_columns_from_join_table
+#    def to_date
+#      Date.new(year, month, day)
+#    end
+#  end
+#  class Stmt; include Enumerable end
+#  class Result; include Enumerable end
+#end
+#
+#module Skiima
+#  # Establishes a connection to the database that's used by all Active Record objects.
+#  def self.mysql_connection(logger, config) # :nodoc:
+#    config = Skiima.symbolize_keys(config)
+#    host     = config[:host]
+#    port     = config[:port]
+#    socket   = config[:socket]
+#    username = config[:username] ? config[:username].to_s : 'root'
+#    password = config[:password].to_s
+#    database = config[:database]
+#
+#    mysql = Mysql.init
+#    mysql.ssl_set(config[:sslkey], config[:sslcert], config[:sslca], config[:sslcapath], config[:sslcipher]) if config[:sslca] || config[:sslkey]
+#
+#    default_flags = Mysql.const_defined?(:CLIENT_MULTI_RESULTS) ? Mysql::CLIENT_MULTI_RESULTS : 0
+#    default_flags |= Mysql::CLIENT_FOUND_ROWS if Mysql.const_defined?(:CLIENT_FOUND_ROWS)
+#
+#    options = [host, username, password, database, port, socket, default_flags]
+#    Skiima::DbAdapters::MysqlAdapter.new(mysql, logger, options, config)
+#  end
+#
 #  module DbAdapters
 #    class MysqlAdapter < BaseMysqlAdapter
 #      attr_accessor :client_encoding

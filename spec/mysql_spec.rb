@@ -19,7 +19,7 @@ describe "Mysql: " do
   end
 
   describe "Create/Drop Database: " do
-
+    it "skips" do; skip; end
   end  
 
   describe "Create/Drop Tables: " do
