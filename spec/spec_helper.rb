@@ -10,6 +10,18 @@ require "minitest/pride"
 require "mocha"
 require "pry"
 
+# To Test:
+# TODO: finish skiima_spec.rb
+# TODO: finish loader_spec.rb
+# TODO: finish struct_spec.rb
+# TODO: finish config_spec.rb
+# TODO: finish resolver_spec.rb
+
+# Integration:
+# TODO: update mysql_spec.rb
+# TODO: update mysql2_spec.rb
+# TODO: update postgresql_spec.rb
+
 Bundler.require(:active_record)
 
 require "skiima"
