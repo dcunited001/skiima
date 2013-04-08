@@ -42,12 +42,6 @@ describe Skiima do
     it "deprecates?"
   end
 
-  describe "#message" do
-    it "should default to using the locale specified in config block" do
-      Skiima.msg('messages', 'create', 'start').must_equal "Creating objects for @class"
-    end
-  end
-
   # describe "implementation" do
   #   let(:groups) { %w(friend team_member) }
   #                                                                   {}
