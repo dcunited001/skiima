@@ -54,3 +54,19 @@ sqlserver_test:
   username: skiima
   password: test
 
+postgresql_root:
+  adapter: postgresql
+  encoding: utf8
+  database: postgres
+  username:
+  password:
+
+mysql_root:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: mysql
+  pool: 5
+  username:
+  password:
+  socket: /tmp/mysql.sock

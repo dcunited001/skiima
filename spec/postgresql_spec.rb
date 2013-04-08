@@ -4,17 +4,17 @@ require 'helpers/postgresql_spec_helper'
 
 describe "Postgresql: " do
   let(:ski) { Skiima.new(:postgresql_test) }
-  
+
   describe "Connection Setup: " do
     it "should get the version" do
       ensure_closed(ski) do |s|
-        s.connection.version.must_be_instance_of Fixnum
+        s.connector.version.must_be_instance_of Fixnum
       end
     end
 
     it "should get the timezone" do
       ensure_closed(ski) do |s|
-        s.connection.local_tz.must_be_instance_of String
+        s.connector.local_tz.must_be_instance_of String
       end
     end
   end
@@ -29,11 +29,11 @@ describe "Postgresql: " do
     it "should create and drop a table" do
       ensure_closed(ski) do |skiima|
         within_transaction(skiima) do |s|
-          s.connection.table_exists?('test_table').must_equal false
+          s.connector.table_exists?('test_table').must_equal false
           s.up(:test_table)
-          s.connection.table_exists?('test_table').must_equal true
+          s.connector.table_exists?('test_table').must_equal true
           s.down(:test_table)
-          s.connection.table_exists?('test_table').must_equal false
+          s.connector.table_exists?('test_table').must_equal false
         end
       end
     end
@@ -47,11 +47,11 @@ describe "Postgresql: " do
     #schema's cant be rolled back
     it "should create and drop schemas" do
       ensure_closed(ski) do |s|
-        s.connection.schema_exists?('test_schema').must_equal false
+        s.connector.schema_exists?('test_schema').must_equal false
         s.up(:test_schema)
-        s.connection.schema_exists?('test_schema').must_equal true
+        s.connector.schema_exists?('test_schema').must_equal true
         s.down(:test_schema)
-        s.connection.schema_exists?('test_schema').must_equal false
+        s.connector.schema_exists?('test_schema').must_equal false
       end
     end
   end
@@ -60,16 +60,16 @@ describe "Postgresql: " do
     it "should create and drop views" do
       ensure_closed(ski) do |skiima|
         within_transaction(skiima) do |s|
-          s.connection.table_exists?('test_table').must_equal false
-          s.connection.view_exists?('test_view').must_equal false
+          s.connector.table_exists?('test_table').must_equal false
+          s.connector.view_exists?('test_view').must_equal false
 
           s.up(:test_table, :test_view)
-          s.connection.table_exists?('test_table').must_equal true
-          s.connection.view_exists?('test_view').must_equal true
+          s.connector.table_exists?('test_table').must_equal true
+          s.connector.view_exists?('test_view').must_equal true
 
           s.down(:test_table, :test_view)
-          s.connection.table_exists?('test_table').must_equal false
-          s.connection.view_exists?('test_view').must_equal false
+          s.connector.table_exists?('test_table').must_equal false
+          s.connector.view_exists?('test_view').must_equal false
         end
       end
     end
@@ -79,19 +79,19 @@ describe "Postgresql: " do
     it "should create and drop rules" do
       ensure_closed(ski) do |skiima|
         within_transaction(skiima) do |s|
-          s.connection.table_exists?('test_table').must_equal false
-          s.connection.view_exists?('test_view').must_equal false
-          s.connection.rule_exists?('test_rule', :attr => ['test_view']).must_equal false
+          s.connector.table_exists?('test_table').must_equal false
+          s.connector.view_exists?('test_view').must_equal false
+          s.connector.rule_exists?('test_rule', :attr => ['test_view']).must_equal false
 
           s.up(:test_table, :test_view, :test_rule)
-          s.connection.table_exists?('test_table').must_equal true
-          s.connection.view_exists?('test_view').must_equal true
-          s.connection.rule_exists?('test_rule', :attr => ['test_view']).must_equal true
+          s.connector.table_exists?('test_table').must_equal true
+          s.connector.view_exists?('test_view').must_equal true
+          s.connector.rule_exists?('test_rule', :attr => ['test_view']).must_equal true
 
           s.down(:test_table, :test_view, :test_rule)
-          s.connection.table_exists?('test_table').must_equal false
-          s.connection.view_exists?('test_view').must_equal false
-          s.connection.rule_exists?('test_rule', :attr => ['test_view']).must_equal false
+          s.connector.table_exists?('test_table').must_equal false
+          s.connector.view_exists?('test_view').must_equal false
+          s.connector.rule_exists?('test_rule', :attr => ['test_view']).must_equal false
         end
       end
     end
@@ -101,38 +101,59 @@ describe "Postgresql: " do
     it "should create and drop indexes" do
       ensure_closed(ski) do |skiima|
         within_transaction(skiima) do |s|
-          s.connection.table_exists?('test_table').must_equal false
-          s.connection.index_exists?('test_index', :attr => ['test_table']).must_equal false
+          s.connector.table_exists?('test_table').must_equal false
+          s.connector.index_exists?('test_index', :attr => ['test_table']).must_equal false
 
           s.up(:test_table, :test_index)
-          s.connection.table_exists?('test_table').must_equal true
-          s.connection.index_exists?('test_index', :attr => ['test_table']).must_equal true
+          s.connector.table_exists?('test_table').must_equal true
+          s.connector.index_exists?('test_index', :attr => ['test_table']).must_equal true
 
           s.down(:test_table, :test_index)
-          s.connection.table_exists?('test_table').must_equal false
-          s.connection.index_exists?('test_index', :attr => ['test_table']).must_equal false
+          s.connector.table_exists?('test_table').must_equal false
+          s.connector.index_exists?('test_index', :attr => ['test_table']).must_equal false
         end
       end
     end
   end
 
   describe "Create/Drop Users: " do
-    
+
   end
 
   describe "Column Names: " do
     it "should get a list of column names from a table" do
       ensure_closed(ski) do |skiima|
         within_transaction(skiima) do |s|
-          s.connection.table_exists?('test_column_names').must_equal false
+          s.connector.table_exists?('test_column_names').must_equal false
           s.up(:test_column_names)
 
-          s.connection.column_names('test_column_names').must_include 'id', 'first_name'
+          s.connector.column_names('test_column_names').must_include 'id', 'first_name'
           s.down(:test_column_names)
           # { s.connection.column_names('test_column_names') }.must_raise Error
         end
-      end  
+      end
     end
   end
 end
+
+## encoding: utf-8
+#require 'spec_helper'
+#require 'skiima/db_adapters/postgresql_adapter'
+#
+#describe "Skiima::DbAdapters::PostgresqlAdapter" do
+#  let(:db) { Skiima.read_db_yml(Skiima.full_database_path)[:test] }
+#  let(:pg_params) { [db[:host], db[:port], nil, nil, db[:database], db[:username], db[:password]] }
+#  let(:pg_adapter) { Skiima::DbAdapters::PostgresqlAdapter.new(nil, nil, pg_params, db) }
+#
+#  describe "#initialize" do
+#    it 'should set params, attempt to connect, check the version, and get the timezone' do
+#      Skiima::DbAdapters::PostgresqlAdapter.any_instance.expects(:connect)
+#      Skiima::DbAdapters::PostgresqlAdapter.any_instance.expects(:postgresql_version).returns(80300)
+#      Skiima::DbAdapters::PostgresqlAdapter.any_instance.expects(:get_timezone).returns('UTC')
+#
+#      pg_adapter.version.must_equal 80300
+#      pg_adapter.local_tz.must_equal 'UTC'
+#    end
+#  end
+#end
 

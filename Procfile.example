@@ -1,0 +1,2 @@
+postgres: postgres -D /usr/local/var/postgres
+mysql: /usr/local/bin/mysqld

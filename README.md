@@ -1,6 +1,36 @@
 Skiima: an ORM-Agnostic, Rails-Independent alternative to migrations.
 ------------------------
 
+## 0.2.000 Updates:
+
+- Added a modified OpenStruct to manage configuration
+- Moved most classes to separate files
+
+## 0.2.010 Updates:
+
+- Add Skiima::Db::Connector
+- Update Skiima::Db::Resolver
+- Add ActiveRecord::BaseConnector
+- Add PosgresqlConnector
+- Add Postresql Helpers
+- Add MysqlConnector
+- Add Mysql2Connector
+- Add Mysql Helpers
+
+## 0.2.011 Planned:
+
+- Add Appraisal to test Skiima with separate bundles
+- Fix Travis CI Config
+- Add Coveralls?
+- Add Gemnasium?
+
+## 0.3 Planned:
+
+- DataMapper Support
+- Sequel Support
+- Mongo Support?
+- Manage config's for other data providers? (Redis/etc)
+
 #### Goals:
 Skiima is a work in progress with the following goals:
 
@@ -36,10 +66,10 @@ If you have any questions about how things work, look at the tests.  If you have
 
 #### Interface:
 ##### Config Files
-Skiima reads two yaml files: database.yml and depends.yml.  
+Skiima reads two yaml files: database.yml and dependencies.yml.
 
 - By default, `database.yml` goes in your `APP_ROOT/config directory`.
-- And similarly, `depends.yml` goes in `APP_ROOT/db/skiima`.
+- And similarly, `dependencies.yml` goes in `APP_ROOT/db/skiima`.
 
 ##### Groups
 Skiima allows you to create groups of sql scripts to be executed during migrations.  Each group of sql scripts requires its own folder inside `db/skiima`.
@@ -47,15 +77,15 @@ Skiima allows you to create groups of sql scripts to be executed during migratio
 ##### Adapter and Version
 Since different databases have different capabilities and object types, you can trigger different scripts to run per adapter.  Furthermore, you can execute different scripts for different versions of a database.  You can also use this version tag if you want to package different sets of functionality.
 
-##### Depends.yml Format
-In the `depends.yml` configuration, add lines for each script in the format.
+##### Dependencies.yml Format
+In the `dependencies.yml` configuration, add lines for each script in the format.
 
 * `type.name.attr1.attr2`
 
 `attr1` and `attr2` allow you to define the target SQL object and other attributes that need to be passed on a per type basis.  This is only used when Skiima drops your objects without a matching 'drop' script.
 
 ##### Filename Format
-Inside each group folder, create sql files with the following format.  These need to match the `depends.yml` configuration.  
+Inside each group folder, create sql files with the following format.  These need to match the `dependencies.yml` configuration.
 
 * `type.name.adapter.version.sql`
 * `type.name.adapter.version.drop.sql` to override the default drop behavior.
@@ -74,7 +104,7 @@ If you're using Rails, you can add a Skiima.setup block in an intializer file to
     end
 
 ##### Finally, in your Migrations
-Skiima reads the specified groups from depends.yml and compiles a list of scripts to run.  If you're using Rails, substitute `:development` with `Rails.env`
+Skiima reads the specified groups from dependencies.yml and compiles a list of scripts to run.  If you're using Rails, substitute `:development` with `Rails.env`
 
     def up
       Skiima.up(:development, :group_one, :group_n, :vars => {:var_one => 'db_name'})
