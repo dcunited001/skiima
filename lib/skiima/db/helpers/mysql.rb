@@ -5,7 +5,7 @@ module Skiima
         #attr_accessor :local_tz, :version
 
         def supported_objects
-          [:database, :table, :view, :index]
+          [:database, :table, :view, :index, :proc]
         end
 
         def execute(sql, name = nil)
@@ -17,25 +17,25 @@ module Skiima
           results.first
         end
 
-        #def exec_query(sql, name = 'SQL')
-        #  log(sql, name) do
-        #    exec_stmt(sql, name) do |cols, stmt|
-        #      stmt.to_a
-        #    end
-        #  end
-        #end
+        def exec_query(sql, name = 'SQL')
+          log(sql, name) do
+            exec_stmt(sql, name) do |cols, stmt|
+              stmt.to_a
+            end
+          end
+        end
 
-        # override?
-        #def tables(name = nil, database = nil, like = nil)
-        #  sql = "SHOW FULL TABLES "
-        #  sql << "IN #{database} " if database
-        #  sql << "WHERE table_type = 'BASE TABLE' "
-        #  sql << "LIKE '#{like}' " if like
-        #
-        #  execute_and_free(sql, 'SCHEMA') do |result|
-        #    result.collect { |field| field.first }
-        #  end
-        #end
+        #override?
+        def tables(name = nil, database = nil, like = nil)
+          sql = "SHOW FULL TABLES "
+          sql << "IN #{database} " if database
+          sql << "WHERE table_type = 'BASE TABLE' "
+          sql << "LIKE '#{like}' " if like
+
+          execute_and_free(sql, 'SCHEMA') do |result|
+            result.collect { |field| field.first }
+          end
+        end
 
         def views(name = nil, database = nil, like = nil)
           sql = "SHOW FULL TABLES "
@@ -86,6 +86,11 @@ module Skiima
 
         def column_names(table_name)
           columns(table_name).map(&:name)
+        end
+
+        # schema matchers
+        def object_exists?(type, name, opts = {})
+          send("#{type}_exists?", name, opts) if supported_objects.include? type.to_sym
         end
 
         def database_exists?(name)
@@ -156,6 +161,12 @@ module Skiima
           procs(name, schema, proc).any?
         end
 
+        # queries
+        def drop(type, name, opts = {})
+          #binding.pry if type == 'proc'
+          send("drop_#{type}", name, opts) if supported_objects.include? type.to_sym
+        end
+
         def drop_database(name, opts = {})
           "DROP DATABASE IF EXISTS #{name}"
         end
@@ -166,6 +177,10 @@ module Skiima
 
         def drop_view(name, opts = {})
           "DROP VIEW IF EXISTS #{name}"
+        end
+
+        def drop_proc(name, opts = {})
+          "DROP PROCEDURE IF EXISTS #{name}"
         end
 
         def drop_index(name, opts = {})
