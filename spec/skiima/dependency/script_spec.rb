@@ -29,7 +29,9 @@ describe Skiima::Dependency::Script do
   end
 
   describe "#down_filename" do
-    it 'returns the filename to look for'
+    it 'returns the filename to look for' do
+      subject.down_filename.must_equal "#{subject.type}.#{subject.name}.#{adapter}.#{version}.drop.sql"
+    end
   end
 
   describe "down_script?" do
