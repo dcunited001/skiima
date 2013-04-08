@@ -47,3 +47,23 @@ def within_transaction(s, &block)
 ensure
   s.connector.rollback_db_transaction
 end
+
+# minitest config for shared examples
+MiniTest::Spec.class_eval do
+  def self.shared_examples
+    @shared_examples ||= {}
+  end
+end
+
+module MiniTest::Spec::SharedExamples
+  def shared_examples_for(desc, &block)
+    MiniTest::Spec.shared_examples[desc] = block
+  end
+
+  def it_behaves_like(desc)
+    self.instance_eval(&MiniTest::Spec.shared_examples[desc])
+  end
+end
+
+Object.class_eval { include(MiniTest::Spec::SharedExamples) }
+require 'shared_examples/config_shared_example'
