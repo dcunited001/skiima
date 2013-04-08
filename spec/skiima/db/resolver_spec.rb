@@ -11,8 +11,13 @@ describe Skiima::Db::Resolver do
       subject.orm_module.must_equal 'active_record'
     end
 
-    it "should load the DB Connector" do
+    it "should load the DB Connector Class" do
       subject.connector_klass.must_equal Skiima::Db::Connector::ActiveRecord::PostgresqlConnector
+    end
+
+    it "should merge db defaults with the db config" do
+      subject.db[:orm].must_equal 'active_record'
+      subject.db[:adapter].must_equal 'postgresql'
     end
   end
 
@@ -36,6 +41,7 @@ describe Skiima::Db::Resolver do
       proc{ subject }.must_raise(LoadError)
     end
   end
+
 end
 
   # test this?
