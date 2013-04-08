@@ -48,8 +48,8 @@ test_rule:
 test_proc:
   mysql:
     current:
-      - proc.test_proc.test_proc
-      - proc.test_proc.test_proc_drop
+      - proc.test_proc
+      - proc.test_proc_drop
 blank_group:
   mysql:
   postgresql:
