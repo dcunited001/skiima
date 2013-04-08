@@ -1,9 +1,7 @@
 # encoding: utf-8
-# encoding: utf-8
 require 'skiima/db/helpers/mysql' unless defined? Skiima::Db::Helpers::Mysql
 require 'skiima/db/connector/active_record/base_connector' unless defined? Skiima::Db::Connector::ActiveRecord::BaseConnector
 require 'active_record/connection_adapters/mysql2_adapter' unless defined? ActiveRecord::ConnectionAdapters::Mysql2Adapter
-
 
 module Skiima
   module Db
