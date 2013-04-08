@@ -17,13 +17,33 @@ module Skiima
 
       def read_content(direction, root)
         @content = case
-                     when (direction == :up) then File.open(File.join(root, group, filename)).read
-                     when (direction == :down && down_script?) then File.open(File.join(root, group, down_filename)).read
-                   end
+          when (direction == :up) then read_upfile(root)
+          when (direction == :down && down_script?(root)) then read_downfile(root)
+        end
       end
 
       def interpolate_sql(char, vars = {})
         @sql = Skiima.interpolate_sql(char, @content, vars)
+      end
+
+      def down_filename
+        filename.sub('.sql', '.drop.sql')
+      end
+
+      def read_upfile(root)
+        File.open(full_filename(root)).read
+      end
+
+      def read_downfile(root)
+        File.open(full_down_filename(root)).read
+      end
+
+      def full_filename(root)
+        File.join(root, group, filename)
+      end
+
+      def full_down_filename(root)
+        File.join(root, group, down_filename)
       end
 
       private
@@ -34,12 +54,8 @@ module Skiima
         @attr = scr_name
       end
 
-      def down_filename
-        filename.sub('.sql', '.drop.sql')
-      end
-
-      def down_script?
-        File.exist?(down_filename)
+      def down_script?(root)
+        File.exist?(full_down_filename(root))
       end
     end
 
