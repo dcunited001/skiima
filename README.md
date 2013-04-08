@@ -96,22 +96,26 @@ You can interpolate variables in your SQL Scripts and then pass in values at run
 ##### Module Initialization
 If you're using Rails, you can add a Skiima.setup block in an intializer file to set defaults.  There are other ways to integrate Skiima into your project as well.
 
-    Skiima.setup do |config|
-      config.root_path = Rails.root # changing
-      config.config_path = 'config'
-      config.scripts_path = 'db/skiima'
-      config.locale = :en
-    end
+```ruby
+Skiima.setup do |config|
+  config.root_path = Rails.root # changing
+  config.config_path = 'config'
+  config.scripts_path = 'db/skiima'
+  config.locale = :en
+end
+```
 
 ##### Finally, in your Migrations
 Skiima reads the specified groups from dependencies.yml and compiles a list of scripts to run.  If you're using Rails, substitute `:development` with `Rails.env`
 
-    def up
-      Skiima.up(:development, :group_one, :group_n, :vars => {:var_one => 'db_name'})
-    end
-    
-    def down
-      Skiima.down(:development, :group_one, :group_n, :vars => {:var_one => 'db_name'})
-    end
+```ruby
+def up
+  Skiima.up(:development, :group_one, :group_n, :vars => {:var_one => 'db_name'})
+end
+
+def down
+  Skiima.down(:development, :group_one, :group_n, :vars => {:var_one => 'db_name'})
+end
+```
 
 #### yes, i know i am shamelessly biting activerecord code.  
