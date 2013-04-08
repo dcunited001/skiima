@@ -5,6 +5,7 @@
 Gemfile.lock
 pkg/*
 .guard_history
+Procfile
 
 ## Rubymine
 .idea/*
@@ -20,3 +21,6 @@ Desktop DF
 
 ## Spec Logging
 spec/test.log
+
+## Config
+spec/config/database.yml

@@ -10,9 +10,15 @@ group :development do
   gem 'pry'
   gem 'rake'
 
+  gem 'foreman', '~> 0.62.0'
   gem 'pg', '~> 0.14.1'
   gem 'mysql', '~> 2.9.1'
   gem 'mysql2', '~> 0.3.11'
+end
+
+group :active_record do
+  gem 'activerecord', '>= 3.2', '< 4.1'
+  gem 'activesupport', '>= 3.2', '< 4.1'
 end
 
 if Config::CONFIG['target_os'] =~ /darwin/i
