@@ -9,7 +9,10 @@ module Skiima
       module ActiveRecord
 
         class MysqlConnector < Skiima::Db::Connector::ActiveRecord::BaseConnector
-          delegate [:table_exists?, :index_exists?, :proc_exists?,
+          delegate [:tables, :indexes, :procs, :views, :schemas,
+                    :drop, :drop_table, :drop_proc, :drop_view,
+                    :drop_index, :drop_schema, :column_names,
+                    :table_exists?, :index_exists?, :proc_exists?,
                     :view_exists?, :schema_exists?] => :adapter
 
           class << self
