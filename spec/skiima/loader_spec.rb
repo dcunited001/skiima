@@ -4,6 +4,8 @@ require 'spec_helper'
 describe Skiima::Loader do
   subject { Skiima::Loader.new(:postgresql_test) }
 
+  it_behaves_like "a skiima config"
+
   it { subject.must_respond_to :env }
   it { subject.must_respond_to :db }
   it { subject.must_respond_to :connection }

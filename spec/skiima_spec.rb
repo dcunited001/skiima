@@ -4,6 +4,8 @@ require 'spec_helper'
 describe Skiima do
   subject { Skiima }
 
+  it_behaves_like "a skiima config"
+
   it { subject.must_respond_to :config }
   it { subject.must_respond_to :defaults }
 
