@@ -5,6 +5,15 @@ module Skiima
         attr_accessor :local_tz
         #attr_accessor :version
 
+        def execute(sql, name = nil)
+          # relying on formatting inside the file is precisely what i wanted to avoid...
+          results = sql.split(/^--={4,}/).map do |line|
+            super(line)
+          end
+
+          results.first
+        end
+
         # skiima
         def supported_objects
           [:database, :schema, :table, :view, :rule, :index]
@@ -136,7 +145,6 @@ module Skiima
           "DROP INDEX IF EXISTS #{name}"
         end
 
-
         # in original? why?
         #necessary 2 override?
         #def translate_exception(e, message)
@@ -206,7 +214,6 @@ module Skiima
         #  #configure the connection to return TIMESTAMP WITH ZONE types in UTC.
         #  execute("SET time zone '#{@local_tz}'", 'SCHEMA') if @local_tz
         #end
-
 
       end
     end

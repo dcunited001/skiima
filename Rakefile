@@ -27,20 +27,11 @@ namespace :db do
         end
 
         env = :postgresql_root
+        test_env = :postgresql_test
         db = Skiima.read_db_yml(Skiima.full_database_path)
-        database = db[:postgresql_test]['database']
-        vars = { testuser: 'skiima', testpass: 'test'}
+        vars = { database: db[test_env]['database'], testuser: 'skiima', testpass: 'test'}
 
-        # can't be executed in multiline statement?
-        #   break up into multiple sql statements?
-        # Skiima.up(env, :init_test_db, vars: vars)
-
-        ski = Skiima.new(env, vars: vars)
-        ski.connector.execute("DROP DATABASE IF EXISTS #{database};")
-        ski.connector.execute("DROP ROLE IF EXISTS #{vars[:testuser]};")
-        ski.connector.execute("CREATE DATABASE #{database};")
-        ski.connector.execute("CREATE ROLE #{vars[:testuser]} WITH PASSWORD '#{vars[:testpass]}' LOGIN;")
-        ski.connector.execute("GRANT ALL PRIVILEGES ON DATABASE #{database} TO #{vars[:testuser]};")
+        Skiima.up(env, :init_test_db, vars: vars)
       end
 
       task :mysql do
@@ -52,16 +43,11 @@ namespace :db do
         end
 
         env = :mysql_root
+        test_env = :mysql_test
         db = Skiima.read_db_yml(Skiima.full_database_path)
-        database = db[:mysql_test]['database']
-        vars = { testuser: 'skiima', testpass: 'test'}
+        vars = { database: db[test_env]['database'], testuser: 'skiima', testpass: 'test'}
 
-        ski = Skiima.new(env, vars: vars)
-        ski.connector.execute("DROP DATABASE IF EXISTS #{database};")
-        ski.connector.execute("DROP USER '#{vars[:testuser]}'@'localhost';")
-        ski.connector.execute("CREATE DATABASE #{database};")
-        ski.connector.execute("CREATE USER '#{vars[:testuser]}'@'localhost' IDENTIFIED BY '#{vars[:testpass]}';")
-        ski.connector.execute("GRANT ALL PRIVILEGES ON #{database}.* TO '#{vars[:testuser]}'@'localhost';")
+        Skiima.up(env, :init_test_db, vars: vars)
       end
 
     end
