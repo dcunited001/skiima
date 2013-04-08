@@ -163,7 +163,6 @@ module Skiima
 
         # queries
         def drop(type, name, opts = {})
-          #binding.pry if type == 'proc'
           send("drop_#{type}", name, opts) if supported_objects.include? type.to_sym
         end
 

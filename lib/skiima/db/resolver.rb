@@ -32,7 +32,6 @@ module Skiima
       end
 
       def load_db_connector
-        #require "skiima/db/connector/#{db[:orm]}/postgresql_connector"
         require "skiima/db/connector/#{db[:orm]}/#{db[:adapter]}_connector"
         @connector_klass = get_db_connector_klass
       rescue => e
@@ -47,7 +46,6 @@ module Skiima
 
       def get_db_connector_klass
         #avoiding inflections
-        #binding.pry if db[:adapter] == 'postgresql'
         @connector_klass =
           case (@orm_module = db[:orm])
           when 'active_record'

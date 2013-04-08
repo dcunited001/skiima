@@ -8,8 +8,6 @@ require 'erubis'
 require 'ostruct'
 require 'forwardable'
 
-require 'pry'
-
 require 'skiima/config'
 require 'skiima/config/struct'
 require 'skiima/i18n'
