@@ -35,15 +35,11 @@ module Skiima
     end
 
     def read_yml_or_throw(file, errclass, errmsg)
-      yml = begin
-        input = File.read(file)
-        eruby = Erubis::Eruby.new(input)
-        symbolize_keys(YAML::load(eruby.result(binding()))) || {}
-      rescue => ex
-        raise errclass, errmsg
-      end
-
-      yml
+      input = File.read(file)
+      eruby = Erubis::Eruby.new(input)
+      symbolize_keys(YAML::load(eruby.result(binding()))) || {}
+    rescue => ex
+      raise errclass, errmsg
     end
 
     def symbolize_keys(hash)
@@ -58,11 +54,3 @@ module Skiima
     end
   end
 end
-
-#class Struct < OpenStruct
-#  attr_accessor :struct
-#
-#  def initialize(opts = {})
-#    @struct = OpenStruct.new(opts)
-#  end
-#end

@@ -11,8 +11,6 @@ describe Skiima::Loader do
   it { subject.must_respond_to :connection }
   it { subject.must_respond_to :scripts }
   it { subject.must_respond_to :logger }
-  it { subject.must_respond_to :config }
-  it { subject.must_respond_to :defaults }
 
   describe "#default" do
     it "must return a config struct with the defaults set for this Skiima::Loader"
