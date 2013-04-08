@@ -8,8 +8,16 @@ describe Skiima do
   it { subject.must_respond_to :defaults }
 
   describe "#setup" do
-    it "must set the properties in the config block"
-    it "must set the translation repository"
+    it "must set the properties in the config block" do
+      Skiima.root_path.must_equal SKIIMA_ROOT
+      Skiima.config_path.must_equal 'config'
+      Skiima.database_yml.must_equal 'database.yml'
+    end
+
+    it "must set the translation repository" do
+      Skiima.text_domain.must_equal 'skiima'
+      Skiima.locale.must_equal 'en'
+    end
   end
 
   describe "#defaults" do
