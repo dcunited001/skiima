@@ -14,18 +14,21 @@ end
 
 task :default => :test
 
-namespace :db do
-  namespace :test do
-    namespace :prepare do
+namespace :skiima do
 
-      task :postgresql do
-        Skiima.setup do |config|
-          config.root_path = SPEC_ROOT
-          config.config_path = 'config'
-          config.scripts_path = 'db/skiima'
-          config.locale = :en
-        end
+  task :setup do
+    Skiima.setup do |config|
+      config.root_path = SPEC_ROOT
+      config.config_path = 'config'
+      config.scripts_path = 'db/skiima'
+      config.locale = :en
+    end
+  end
 
+  namespace :setup do
+    namespace :db do
+
+      task :postgresql => :'skiima:setup' do
         env = :postgresql_root
         test_env = :postgresql_test
         db = Skiima.read_db_yml(Skiima.full_database_path)
@@ -34,14 +37,7 @@ namespace :db do
         Skiima.up(env, :init_test_db, vars: vars)
       end
 
-      task :mysql do
-        Skiima.setup do |config|
-          config.root_path = SPEC_ROOT
-          config.config_path = 'config'
-          config.scripts_path = 'db/skiima'
-          config.locale = :en
-        end
-
+      task :mysql => :'skiima:setup' do
         env = :mysql_root
         test_env = :mysql_test
         db = Skiima.read_db_yml(Skiima.full_database_path)
