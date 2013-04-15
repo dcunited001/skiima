@@ -78,12 +78,6 @@ module Skiima
     end
   end
 
-  private
-
-  def self.method_missing(method, *args, &block)
-    config.respond_to?(method) ? config.send(method, *args) : super
-  end
-
 end
 
 module Skiima

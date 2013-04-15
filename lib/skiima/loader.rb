@@ -89,10 +89,6 @@ module Skiima
       { :database => db['database'] }.merge(config[:vars] || {})
     end
 
-    def method_missing(method, *args, &block)
-      config.respond_to?(method) ? config.send(method, *args) : super
-    end
-
     def get_config(opts)
       @config = config.merge(opts)
     end

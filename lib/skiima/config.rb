@@ -52,5 +52,9 @@ module Skiima
     def interpolate_sql(char, sql, vars = {})
       vars.inject(sql) { |m,(k,v)| m.gsub("#{char}#{k.to_s}", v) }
     end
+
+    def method_missing(method, *args, &block)
+      config.respond_to?(method) ? config.send(method, *args) : super
+    end
   end
 end
