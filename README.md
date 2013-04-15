@@ -1,4 +1,7 @@
 Skiima: an ORM-Agnostic, Rails-Independent alternative to migrations.
+
+[![Build Status](https://travis-ci.org/dcunited001/skiima.png?branch=master)](https://travis-ci.org/dcunited001/skiima)
+
 ------------------------
 
 ## 0.2.000 Updates:
@@ -38,7 +41,7 @@ Skiima is a work in progress with the following goals:
 * Embeddable in gems to create DB independent extensions.
 * Avoid any unnecessary dependencies or complexity.
 
-I was working on another project and added some cool features that relied on postgres views, rules, etc.  And basically, I needed a place to put these scripts and a way to execute them in a specified order.  
+I was working on another project and added some cool features that relied on postgres views, rules, etc.  And basically, I needed a place to put these scripts and a way to execute them in a specified order.
 
 There are alot of cool tricks to use in ActiveRecord with sql objects other than tables.  Not to mention there are performance benefits with the right schema.  Not everything needs to happen at the application layer.
 
@@ -109,9 +112,9 @@ Skiima reads the specified groups from dependencies.yml and compiles a list of s
     def up
       Skiima.up(:development, :group_one, :group_n, :vars => {:var_one => 'db_name'})
     end
-    
+
     def down
       Skiima.down(:development, :group_one, :group_n, :vars => {:var_one => 'db_name'})
     end
 
-#### yes, i know i am shamelessly biting activerecord code.  
+#### yes, i know i am shamelessly biting activerecord code.

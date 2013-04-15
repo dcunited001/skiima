@@ -2,7 +2,15 @@ language: ruby
 rvm:
   - 1.9.2
   - 1.9.3
+  - 2.0.0
   - jruby
   - rbx-19mode
-# uncomment this line if your project needs to run something other than `rake`:
-# script: bundle exec rspec spec
+services:
+ - mysql
+ - postgresql
+before_script:
+  - cp spec/config/database.yml.travis spec/config/database.yml
+  - mysql -e "create user 'skiima'@'localhost'"
+  - rake skiima:setup:db:postgresql
+  - rake skiima:setup:db:mysql
+#script: rake

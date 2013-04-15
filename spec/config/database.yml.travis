@@ -1,0 +1,69 @@
+---
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: skiima_production
+  username: skiima
+  password: test
+
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: skiima_development
+  username: skiima
+  password: test
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: skiima_test
+  username: skiima
+  password: test
+
+postgresql_test:
+  adapter: postgresql
+  encoding: utf8
+  database: postgresql_test
+  username: skiima
+  password: test
+
+mysql_test:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: mysql_test
+  pool: 5
+  username: skiima
+  password: test
+
+mysql2_test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: mysql_test
+  pool: 5
+  username: skiima
+  password: test
+
+sqlserver_test:
+  adapter: sqlserver
+  encoding: utf8
+  database: skiima_test
+  username: skiima
+  password: test
+
+postgresql_root:
+  adapter: postgresql
+  encoding: utf8
+  database: postgres
+  username: postgres
+  password:
+
+mysql_root:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: mysql
+  pool: 5
+  username: root
+  password:
