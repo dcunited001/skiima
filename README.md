@@ -212,16 +212,19 @@ Skiima reads the specified groups from dependencies.yml and compiles a list of s
 - Add Mysql2Connector
 - Add Mysql Helpers
 
-## 0.2.011 Planned:
+## 0.2.011 Updates:
 
-- Add Appraisal to test Skiima with separate bundles
-- Fix Travis CI Config
-- Add Coveralls?
-- Add Gemnasium?
+- Add Travis CI Config
+- Add Railties tasks
+- Updated dependencies.yml to allow for dependency groups
+- Updated Readme with examples
 
 ## 0.2.100 Planned:
 
 - Add JRuby Support
+- Add Appraisal to test Skiima with separate bundles
+- Add Coveralls?
+- Add Gemnasium?
 
 ## 0.3 Planned:
 
