@@ -36,6 +36,8 @@ module Skiima
     set_translation_repository
   end
 
+  require 'skiima/railtie' if defined?(Rails) && Rails::VERSION::MAJOR >= 3
+
   def self.defaults
     { root_path: 'specify/in/config/block',
       config_path: 'config',
