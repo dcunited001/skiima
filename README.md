@@ -27,6 +27,10 @@ Skiima: an ORM-Agnostic, Rails-Independent alternative to migrations.
 - Add Coveralls?
 - Add Gemnasium?
 
+## 0.2.100 Planned:
+
+- Add JRuby Support
+
 ## 0.3 Planned:
 
 - DataMapper Support
