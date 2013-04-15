@@ -13,6 +13,11 @@ module Skiima
                     :table_exists?, :index_exists?, :rule_exists?,
                     :view_exists?, :schema_exists?] => :adapter
 
+          def initialize(adapter, logger, config = {})
+            super
+            check_psql_version
+          end
+
           class << self
             delegate postgresql_connection: :active_record_resolver_klass
 

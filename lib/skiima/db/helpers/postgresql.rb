@@ -3,7 +3,7 @@ module Skiima
     module Helpers
       module Postgresql
         attr_accessor :local_tz
-        #attr_accessor :version
+        attr_accessor :version
 
         def execute(sql, name = nil)
           # relying on formatting inside the file is precisely what i wanted to avoid...
