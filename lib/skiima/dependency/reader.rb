@@ -32,12 +32,22 @@ module Skiima
       end
 
       def get_load_order(*groups)
-        groups.pop if groups.last.is_a? Hash
+        opts = groups.last.is_a?(Hash) ? groups.pop : {}
         @scripts = groups.inject([]) do |memo, g|
-          grp = Skiima.symbolize_keys(get_group(g))
-          grp = Skiima.symbolize_keys(get_adapter(grp))
-          memo = memo + get_scripts(g, grp)
+          grp = get_group(g)
+          scripts = if grp.is_a?(Hash) || (opts[:node] == :internal)
+            get_scripts(g, Skiima.symbolize_keys(read_script_group(grp)))
+          else
+            get_load_order(*(grp.map(&:to_sym)), node: :internal)
+          end
+          memo + scripts
         end
+      end
+
+      private
+
+      def read_script_group(leaf_node)
+        get_adapter(Skiima.symbolize_keys(leaf_node))
       end
     end
 

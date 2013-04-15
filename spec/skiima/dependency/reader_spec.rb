@@ -39,4 +39,14 @@ describe Skiima::Dependency::Reader do
       scripts.first.name.must_equal('only_pg')
     end
   end
+
+  describe "Dependency Groups:" do
+    let(:dependency_groups) { dependencies[:test_script_groups].map(&:to_sym) }
+
+    it "should load the scripts for each dependency group, if the first level is an array" do
+      scripts = subject.get_load_order(:test_script_groups)
+      scripts.first.name.must_equal('test_table')
+      scripts.last.name.must_equal('test_schema')
+    end
+  end
 end

@@ -59,3 +59,8 @@ only_pg:
     current:
       - table.only_pg
       - view.pg_only
+test_script_groups:
+  - test_table
+  - test_column_names
+  - test_index
+  - test_schema
