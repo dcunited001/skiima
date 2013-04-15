@@ -24,3 +24,6 @@ spec/test.log
 
 ## Config
 spec/config/database.yml
+
+## Notes
+NOTES.md
