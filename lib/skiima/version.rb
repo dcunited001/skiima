@@ -1,4 +1,4 @@
 # encoding: utf-8
 module Skiima
-  VERSION = "0.2.011"
+  VERSION = "0.2.2"
 end

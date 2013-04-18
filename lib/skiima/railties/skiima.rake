@@ -14,9 +14,9 @@ namespace :skiima do
     Skiima.down(args.skiima_env.to_sym, args.group.to_sym)
   end
 
-  namespace :test, [:skiima_env, :group] do
+  namespace :test do
     desc "Runs Skiima.up for :test group in dependencies.yml"
-    task :up do
+    task :up, [:skiima_env, :group] do
       args.with_defaults(:skiima_env => 'test', :group => 'test')
       Skiima.up(args.skiima_env.to_sym, args.group.to_sym)
     end
