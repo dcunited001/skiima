@@ -64,3 +64,25 @@ test_script_groups:
   - test_column_names
   - test_index
   - test_schema
+
+
+# load/drop these script groups with:
+#   `rake skiima:test:up` & `rake skiima:test:down`
+# List migrations you have already squashed
+# - IE migrations that you removed to rely on schema.rb
+#default:
+#- script_group_a
+#- script_group_b
+#- script_group_c
+
+# load/drop these script groups with:
+#   `rake skiima:test:up` & `rake skiima:test:down`
+# For tests/CI!
+# List migrations that need to be run after a blank db is migrated
+# - IE migrations that you squashed, if you are migrating from scratch on CI
+# - If relying on CI for 
+#test:
+#- script_group_a
+#- script_group_b
+#- script_group_c
+

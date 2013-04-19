@@ -26,7 +26,7 @@ Bundler.require(:active_record)
 
 require "skiima"
 
-SKIIMA_ROOT = File.dirname(__FILE__)
+SKIIMA_ROOT = File.expand_path('./spec')
 
 Skiima.setup do |config|
   config.root_path = SKIIMA_ROOT

@@ -32,20 +32,20 @@ module Skiima
   end
 
   def self.setup
-    yield config
+    yield config if config && block_given?
     set_translation_repository
   end
 
   require 'skiima/railtie' if defined?(Rails) && Rails::VERSION::MAJOR >= 3
 
   def self.defaults
-    { root_path: 'specify/in/config/block',
+    { root_path: File.expand_path('.'),
       config_path: 'config',
       database_yml: 'database.yml',
       scripts_path: 'db/skiima',
       dependencies_yml: 'dependencies.yml',
       interpolator: '&',
-      locale: 'en',
+      locale: :en,
       logging_out: 'STDOUT',
       logging_level: '3' }
   end

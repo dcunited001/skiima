@@ -1,7 +1,10 @@
 # encoding: utf-8
-
 module Skiima
   module I18n
+
+    def locale
+      @config[:locale] ||= :en
+    end
 
     def default_locale
       ::Skiima.locale

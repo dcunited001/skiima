@@ -16,9 +16,10 @@ task :default => :test
 
 namespace :skiima do
 
+  desc "Run Skiima#setup as precursor to rake"
   task :setup do
     Skiima.setup do |config|
-      config.root_path = SPEC_ROOT
+      config.root_path = File.join(Skiima.root_path, 'spec')
       config.config_path = 'config'
       config.scripts_path = 'db/skiima'
       config.locale = :en
@@ -28,6 +29,7 @@ namespace :skiima do
   namespace :setup do
     namespace :db do
 
+      desc "Setup postgresql test databases to run specs"
       task :postgresql => :'skiima:setup' do
         env = :postgresql_root
         test_env = :postgresql_test
@@ -37,6 +39,7 @@ namespace :skiima do
         Skiima.up(env, :init_test_db, vars: vars)
       end
 
+      desc "Setup postgresql test databases to run specs"
       task :mysql => :'skiima:setup' do
         env = :mysql_root
         test_env = :mysql_test

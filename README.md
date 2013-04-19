@@ -76,11 +76,28 @@ script_group_name:
   mysql:
     current:
       - view.script_name
-default:
-test:
-  - script_group_name
 dependency_group_name:
   - script_group_name
+
+# load/drop these script groups with:
+#   `rake skiima:up` & `rake skiima:down`
+# List migrations you have already squashed
+# - IE migrations that you removed to rely on schema.rb
+default:
+- script_group_a
+- script_group_b
+- script_group_c
+
+# load/drop these script groups with:
+#   `rake skiima:test:up` & `rake skiima:test:down`
+# For tests/CI!
+# List migrations that need to be run after a blank db is migrated
+# - IE migrations that you squashed, if you are migrating from scratch on CI
+# - If relying on db/schema.rb for CI, then list the groups you need for tests
+test:
+- script_group_a
+- script_group_b
+- script_group_c
 
 ```
 
