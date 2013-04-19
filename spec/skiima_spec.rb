@@ -18,7 +18,7 @@ describe Skiima do
 
     it "must set the translation repository" do
       Skiima.text_domain.must_equal 'skiima'
-      Skiima.locale.must_equal 'en'
+      Skiima.locale.must_equal :en
     end
   end
 

@@ -20,7 +20,7 @@ module Skiima
     def set_translation_repository
       FastGettext.add_text_domain('skiima', :path => File.join(File.dirname(__FILE__), 'skiima', 'locales'), :type => :yaml)
       Skiima.text_domain = 'skiima'
-      Skiima.locale = locale.to_s
+      Skiima.locale = locale
     end
 
   end
