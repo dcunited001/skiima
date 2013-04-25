@@ -31,7 +31,7 @@ namespace :skiima do
     end
 
     desc "Runs Skiima.down for :test group in dependencies.yml"
-    task :test, [:group, :skiima_env] => :setup do |t,args|
+    task :down, [:group, :skiima_env] => :setup do |t,args|
       args.with_defaults(:skiima_env => 'test', :group => 'test')
       Skiima.down(args.skiima_env.to_sym, args.group.to_sym)
     end
