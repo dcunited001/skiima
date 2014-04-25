@@ -5,9 +5,11 @@ rvm:
   - 2.1.0
 #  - rbx-19mode
 #  - jruby
+gemfile:
+  - gemfiles/activerecord_3.2.gemfile
 services:
- - mysql
- - postgresql
+  - mysql
+  - postgresql
 before_script:
   - cp spec/config/database.yml.travis spec/config/database.yml
   - mysql -e "create user 'skiima'@'localhost'"
