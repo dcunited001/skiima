@@ -129,12 +129,15 @@ end
 1. Copy database.yml.example & set up users/passwords for your system
   - configure an existing user/password for postgresql_root & mysql_root
   - this user creates a user for the test databases in the rake setup tasks
-1. Bundle Install
+1. `bundle install`
+1. `appraisal install`
 1. Run test setup tasks
-  - `bundle exec rake skiima:setup:db:postgresql`
-  - `bundle exec rake skiima:setup:db:mysql`
+  - `rake skiima:setup:db:postgresql`
+  - `rake skiima:setup:db:mysql`
     - you may need to remove the `DROP USER` command in `spec/db/skiima/init_test_db/database.skiima_test.mysql.current.sql`
-1. `rake`
+1. `appraisal activerecord-3.2 rake`
+  - to test with activerecord-4.0, use that appraisal set
+  - or `appraisal rake` to run them with all appraisal sets
 
 ## Skiima Goals:
 * Provide a better way to integrate views and functions into Ruby applications.
