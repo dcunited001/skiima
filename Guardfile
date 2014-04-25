@@ -2,7 +2,7 @@ interactor guard_rc: '~/.my_guard-rc', history_file: '.guard_history'
 scope groups: [:minitest]
 
 group :minitest do
-  guard :minitest, :notify => true do
+  guard :minitest do
     # with Minitest::Unit
     # watch(%r|^test/test_(.*)\.rb|)
     # watch(%r|^lib/(.*)([^/]+)\.rb|)     { |m| "test/#{m[1]}test_#{m[2]}.rb" }

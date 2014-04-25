@@ -23,10 +23,20 @@ Gem::Specification.new do |s|
   s.add_dependency "fast_gettext", '~> 0.6.0'
   s.add_dependency "erubis", '~> 2.7.0'
 
+  s.add_development_dependency "appraisal", '~> 1.0.0'
   s.add_development_dependency "bundler", '>= 1.3.3'
+
   s.add_development_dependency "minitest", '~> 4.6.2'
   s.add_development_dependency "minitest-matchers", '~> 1.2.0'
   s.add_development_dependency "mocha", '~> 0.13.2'
+
+  s.add_development_dependency "pry"
+  s.add_development_dependency 'rake', '~> 10.1'
+
+  s.add_development_dependency 'pg', '~> 0.14.1'
+  s.add_development_dependency 'mysql', '~> 2.9.1'
+  s.add_development_dependency 'mysql2', '~> 0.3.11'
+
 end
 
 # Logging

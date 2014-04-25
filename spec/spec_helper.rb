@@ -7,7 +7,7 @@ require "minitest/spec"
 require "minitest/autorun"
 require "minitest/matchers"
 require "minitest/pride"
-require "mocha"
+require "mocha/setup"
 require "pry"
 
 # To Test:
