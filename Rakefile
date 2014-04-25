@@ -1,7 +1,8 @@
 # encoding: utf-8
 require 'rubygems'
-require 'rake/testtask'
+require 'bundler/setup'
 require 'bundler/gem_tasks'
+require 'rake/testtask'
 require 'skiima'
 
 SPEC_ROOT = File.join(File.dirname(__FILE__), 'spec')
