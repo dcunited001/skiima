@@ -125,11 +125,15 @@ end
 
 ## Running Tests
 
-1. Setup Mysql & Postgres.  Copy database.yml.example & set up users/passwords for your system
+1. Setup Mysql & Postgres. I recommend copying Procfile.example and using foreman.
+1. Copy database.yml.example & set up users/passwords for your system
+  - configure an existing user/password for postgresql_root & mysql_root
+  - this user creates a user for the test databases in the rake setup tasks
 1. Bundle Install
 1. Run test setup tasks
-  - bundle exec rake skiima:setup:db:postgresql
-  - bundle exec rake skiima:setup:db:mysql
+  - `bundle exec rake skiima:setup:db:postgresql`
+  - `bundle exec rake skiima:setup:db:mysql`
+    - you may need to remove the `DROP USER` command in `spec/db/skiima/init_test_db/database.skiima_test.mysql.current.sql`
 1. `rake`
 
 ## Skiima Goals:
