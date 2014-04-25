@@ -17,8 +17,8 @@ group :development do
 end
 
 group :active_record do
-  gem 'activerecord', '>= 3.2', '< 4.1'
-  gem 'activesupport', '>= 3.2', '< 4.1'
+  gem 'activerecord', '~> 3.2'
+  gem 'activesupport', '~> 3.2'
 end
 
 if Config::CONFIG['target_os'] =~ /darwin/i
