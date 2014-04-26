@@ -21,8 +21,7 @@ module Skiima
           class << self
             def active_record_resolver_klass
               case ::ActiveRecord::VERSION::MAJOR
-                when 4 then ::ActiveRecord::ConnectionHandling
-                when 3 then ::ActiveRecord::Base
+                when 3,4 then ::ActiveRecord::Base
               end
             end
           end
