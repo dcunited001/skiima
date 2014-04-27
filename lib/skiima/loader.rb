@@ -18,7 +18,7 @@ module Skiima
 
     def initialize(env, opts = {})
       @env = env
-      merge_db_config(opts.delete('db') || {})
+      merge_db_config(opts.delete(:db) || {})
       get_config(opts)
       set_vars
       create_logger
