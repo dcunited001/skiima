@@ -47,7 +47,8 @@ module Skiima
       interpolator: '&',
       locale: :en,
       logging_out: 'STDOUT',
-      logging_level: '3' }
+      logging_level: '3',
+      vars: {} }
   end
 
   def self.up(env, *args)

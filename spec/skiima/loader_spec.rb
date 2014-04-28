@@ -36,7 +36,9 @@ describe Skiima::Loader do
   end
 
   describe "#interpolation_vars" do
-
+    it 'always includes the current database'
+    it 'retrieves defaults in Skiima#setup'
+    it 'can override the defaults in Skiima#setup'
   end
 
   describe "#log_message" do

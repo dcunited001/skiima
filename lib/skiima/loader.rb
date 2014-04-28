@@ -86,7 +86,9 @@ module Skiima
     end
 
     def interpolation_vars
-      { :database => db['database'] }.merge(config[:vars] || {})
+      { :database => db['database'] }.
+          merge(defaults[:vars]).
+          merge(config[:vars] || {})
     end
 
     def get_config(opts)
