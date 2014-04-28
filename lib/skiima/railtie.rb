@@ -1,6 +1,3 @@
-require "skiima"
-require "rails"
-
 module Skiima
   class Railtie < Rails::Railtie
     rake_tasks do

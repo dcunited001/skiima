@@ -1,5 +1,3 @@
-require "skiima"
-
 namespace :skiima do
 
   desc "Run Skiima#setup as precursor to rake"
